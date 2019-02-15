@@ -5,13 +5,39 @@ const metadata = {
 
 export const request = ({
 	url,
-	config = {
+	params = {},
+}) => {
+	let config = {
 		method: 'GET',
-	},
-}) => fetch(url, config)
-	.then(response => response.json())
-	.catch((errro) => { throw errro; });
+	};
+	let { body, ...rest } = params;
+
+	if (body) {
+		body = JSON.stringify(body);
+		config = {
+			...config,
+			body,
+		};
+	}
+
+	config = {
+		...config,
+		...rest,
+	};
+
+	return fetch(url, config)
+		.then(response => response.json())
+		.catch((errro) => { throw errro; })
+};
 
 export const getBeverages = ({ id }) => request({
 	url: id ? `${metadata.devBaseUrl}beverages/${id}` : `${metadata.devBaseUrl}beverages`,
+});
+
+export const deleteBeverages = ({ beverageId }) => request({
+	url: `${metadata.devBaseUrl}beverages`,
+	params: {
+		method: 'DELETE',
+		body: { beverageId },
+	},
 });

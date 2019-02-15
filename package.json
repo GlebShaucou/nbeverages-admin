@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "deep-equal": "^1.0.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",

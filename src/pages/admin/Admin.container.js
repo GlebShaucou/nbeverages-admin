@@ -13,6 +13,9 @@ const mapDispatchToProps = dispatch => ({
 	loadData: () => {
 		dispatch(beverageActions.fetchBeverages({ id: undefined }));
 	},
+	removeItem: ({ beverageId }) => {
+		dispatch(beverageActions.deleteBeverage({ beverageId }));
+	},
 });
 
 export default connect(

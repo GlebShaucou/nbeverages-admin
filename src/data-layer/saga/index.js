@@ -18,6 +18,17 @@ const {
 	watchedActionType: beverageActions.FETCH_BEVERAGES,
 });
 
+const {
+	watcherSagaGenerator: watchDeleteBeverages,
+} = makeRequestSaga({
+	request: requests.deleteBeverages,
+	onSuccessAction: beverageActions.deleteBeverageSucceded,
+	onFailureAction: beverageActions.deleteBeverageFailed,
+}, {
+	watchedActionType: beverageActions.DELETE_BEVERAGE,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
+	yield fork(watchDeleteBeverages);
 }
