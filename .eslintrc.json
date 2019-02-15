@@ -6,8 +6,10 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": [1],
-        "react/jsx-indent": [2, "tab"],
+        "react/jsx-indent": [2, "tab", { "checkAttributes": true }],
         "react/jsx-indent-props": [2, "tab"],
-        "indent": ["error", "tab"]
+        "indent": [2, "tab"],
+        "no-tabs": ["error", { "allowIndentationTabs": true }],
+        "react/jsx-one-expression-per-line": 0
     }
 }

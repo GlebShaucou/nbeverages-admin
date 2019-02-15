@@ -1,3 +1,9 @@
 .custom-input {
+    display: block;
+    padding: 3px 0;
+}
 
+.custom-input__label {
+    display: inline-block;
+    min-width: 100px;
 }
