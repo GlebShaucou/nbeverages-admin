@@ -36,7 +36,7 @@ export default class AdminPage extends Component {
 								<span>{item.currency}</span>
 								<Button
 									caption="Delete"
-									onClick={() => { removeItem(item._id); }}
+									onClick={() => { removeItem({ beverageId: item._id }); }}
 								/>
 							</li>
 						))}
@@ -52,7 +52,6 @@ AdminPage.propTypes = {
 	newItem: PropTypes.array,
 	loadData: PropTypes.func,
 	removeItem: PropTypes.func,
-	updateIsNeeded: PropTypes.bool,
 };
 
 AdminPage.defaultProps = {
@@ -60,5 +59,4 @@ AdminPage.defaultProps = {
 	newItem: [],
 	loadData: () => {},
 	removeItem: () => {},
-	updateIsNeeded: false,
 };
