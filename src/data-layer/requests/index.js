@@ -9,6 +9,9 @@ export const request = ({
 }) => {
 	let config = {
 		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	};
 	let { body, ...rest } = params;
 
