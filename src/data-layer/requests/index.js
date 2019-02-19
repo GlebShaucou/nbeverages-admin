@@ -30,7 +30,16 @@ export const request = ({
 
 	return fetch(url, config)
 		.then(response => response.json())
-		.catch((errro) => { throw errro; })
+		.then((data) => {
+			const { error } = data;
+
+			if (error) {
+				throw error;
+			}
+
+			return data;
+		})
+		.catch((error) => { throw error; });
 };
 
 export const getBeverages = ({ id }) => request({
@@ -42,5 +51,13 @@ export const deleteBeverages = ({ beverageId }) => request({
 	params: {
 		method: 'DELETE',
 		body: { beverageId },
+	},
+});
+
+export const createBeverage = beverage => request({
+	url: `${metadata.devBaseUrl}beverages`,
+	params: {
+		method: 'POST',
+		body: { ...beverage },
 	},
 });

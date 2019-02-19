@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => ({
 	removeItem: ({ beverageId }) => {
 		dispatch(beverageActions.deleteBeverage({ beverageId }));
 	},
+	addItem: (beverage) => {
+		dispatch(beverageActions.addNewBeverage(beverage));
+	},
 });
 
 export default connect(

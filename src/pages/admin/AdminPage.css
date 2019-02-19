@@ -1,8 +1,23 @@
-.page-component--admin {
-
-}
+.page-component--admin {}
 
 .admin-page__edit-section {
     padding: 10px;
     border-bottom: 1px solid #d2d2d2;
+}
+
+.admin-page__list-of-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 5px;
+}
+
+.list-of-items__item {
+    width: 25%;
+    list-style-type: none;
+}
+
+.item-attr--image {
+    width: 100px;
+    height: 80px;
 }

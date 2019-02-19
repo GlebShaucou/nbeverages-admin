@@ -1,0 +1,12 @@
+.new-beverage-form {
+    width: 100%;
+}
+
+.new-beverage-form__element {
+    /*padding: 3px 0;*/
+}
+
+.new-beverage-form__label {
+    /*display: inline-block;*/
+    /*width: 100px;*/
+}

@@ -1,0 +1,10 @@
+.notification-container {
+    color: #f08080;
+}
+
+.notification-container__errors-header {
+    margin: 0;
+    padding: 0;
+}
+
+.notification-container__error {}

@@ -15,3 +15,11 @@ export const DELETE_BEVERAGE_FAILED = 'DELETE_BEVERAGE_FAILED';
 export const deleteBeverage = makeActionCreator(DELETE_BEVERAGE, 'query');
 export const deleteBeverageSucceded = makeActionCreator(DELETE_BEVERAGE_SUCCEDED, 'response');
 export const deleteBeverageFailed = makeActionCreator(DELETE_BEVERAGE_FAILED, 'error');
+
+export const ADD_NEW_BEVERAGE = 'ADD_NEW_BEVERAGE';
+export const ADD_NEW_BEVERAGE_SUCCEDED = 'ADD_NEW_BEVERAGE_SUCCEDED';
+export const ADD_NEW_BEVERAGE_FAILED = 'ADD_NEW_BEVERAGE_FAILED';
+
+export const addNewBeverage = makeActionCreator(ADD_NEW_BEVERAGE, 'query');
+export const addNewBeverageSucceeded = makeActionCreator(ADD_NEW_BEVERAGE_SUCCEDED, 'response');
+export const addNewBeverageFailed = makeActionCreator(ADD_NEW_BEVERAGE_FAILED, 'error');
