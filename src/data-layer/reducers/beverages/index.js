@@ -52,6 +52,7 @@ export default (state = initialState, action) => {
 	case beverageActions.FETCH_BEVERAGES:
 	case beverageActions.DELETE_BEVERAGE:
 	case beverageActions.ADD_NEW_BEVERAGE:
+	case beverageActions.UPDATE_BEVERAGE:
 		return {
 			...state,
 			isFetching: true,
@@ -59,6 +60,7 @@ export default (state = initialState, action) => {
 	case beverageActions.FETCH_BEVERAGES_FAILED:
 	case beverageActions.DELETE_BEVERAGE_FAILED:
 	case beverageActions.ADD_NEW_BEVERAGE_FAILED:
+	case beverageActions.UPDATE_BEVERAGE_FAILED:
 		return {
 			...state,
 			isFetching: false,
@@ -67,6 +69,7 @@ export default (state = initialState, action) => {
 	case beverageActions.FETCH_BEVERAGES_SUCCEDED:
 	case beverageActions.DELETE_BEVERAGE_SUCCEDED:
 	case beverageActions.ADD_NEW_BEVERAGE_SUCCEDED:
+	case beverageActions.UPDATE_BEVERAGE_SUCCEDED:
 		({ response } = action);
 		return {
 			...state,

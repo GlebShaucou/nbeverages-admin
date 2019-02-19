@@ -20,10 +20,10 @@ export default class AdminPage extends Component {
 		addItem(beverage);
 	};
 
-	onUpdateBeverage = (beverage) => {
+	onUpdateBeverage = beverageId => (beverage) => {
 		const { updateItem } = this.props;
 
-		updateItem(beverage);
+		updateItem({ ...beverage, beverageId });
 	};
 
 	onRemoveItem = beverageId => () => {
@@ -73,7 +73,7 @@ export default class AdminPage extends Component {
 			<li className="list-of-items__item" key={itemId}>
 				<NewItemForm
 					{...newItem}
-					onSubmit={this.onUpdateBeverage}
+					onSubmit={this.onUpdateBeverage(itemId)}
 					onReset={this.onUpdateItem(itemId)}
 					values={item}
 					buttonSubmit={{
@@ -81,7 +81,7 @@ export default class AdminPage extends Component {
 						visible: true,
 					}}
 					buttonReset={{
-						caption: 'Cancel',
+						caption: 'Close',
 						visible: true,
 					}}
 				/>
@@ -119,6 +119,7 @@ export default class AdminPage extends Component {
 						{...newItem}
 						buttonSubmit={{
 							caption: 'Add',
+							visible: true,
 						}}
 					/>
 				</div>

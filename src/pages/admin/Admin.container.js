@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => ({
 	addItem: (beverage) => {
 		dispatch(beverageActions.addNewBeverage(beverage));
 	},
+	updateItem: (beverage) => {
+		dispatch(beverageActions.updateBeverage(beverage));
+	},
 });
 
 export default connect(

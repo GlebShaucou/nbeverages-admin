@@ -38,8 +38,19 @@ const {
 	watchedActionType: beverageActions.ADD_NEW_BEVERAGE,
 });
 
+const {
+	watcherSagaGenerator: watchUpdateBeverage,
+} = makeRequestSaga({
+	request: requests.updateBeverage,
+	onSuccessAction: beverageActions.updateBeverageSucceeded,
+	onFailureAction: beverageActions.updateBeverageFailed,
+}, {
+	watchedActionType: beverageActions.UPDATE_BEVERAGE,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
 	yield fork(watchAddBeverage);
+	yield fork(watchUpdateBeverage);
 }

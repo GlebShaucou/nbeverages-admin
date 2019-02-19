@@ -61,3 +61,11 @@ export const createBeverage = beverage => request({
 		body: { ...beverage },
 	},
 });
+
+export const updateBeverage = beverage => request({
+	url: `${metadata.devBaseUrl}beverages`,
+	params: {
+		method: 'PUT',
+		body: { ...beverage },
+	},
+});

@@ -23,3 +23,11 @@ export const ADD_NEW_BEVERAGE_FAILED = 'ADD_NEW_BEVERAGE_FAILED';
 export const addNewBeverage = makeActionCreator(ADD_NEW_BEVERAGE, 'query');
 export const addNewBeverageSucceeded = makeActionCreator(ADD_NEW_BEVERAGE_SUCCEDED, 'response');
 export const addNewBeverageFailed = makeActionCreator(ADD_NEW_BEVERAGE_FAILED, 'error');
+
+export const UPDATE_BEVERAGE = 'UPDATE_BEVERAGE';
+export const UPDATE_BEVERAGE_SUCCEDED = 'UPDATE_BEVERAGE_SUCCEDED';
+export const UPDATE_BEVERAGE_FAILED = 'UPDATE_BEVERAGE_FAILED';
+
+export const updateBeverage = makeActionCreator(UPDATE_BEVERAGE, 'query');
+export const updateBeverageSucceeded = makeActionCreator(UPDATE_BEVERAGE_SUCCEDED, 'response');
+export const updateBeverageFailed = makeActionCreator(UPDATE_BEVERAGE_FAILED, 'error');
