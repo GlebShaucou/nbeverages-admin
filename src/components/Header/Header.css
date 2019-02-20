@@ -24,3 +24,12 @@
     font-weight: 700;
     color: #ffffff;
 }
+
+.logo-container {
+    display: inline-block;
+}
+
+.logo-img {
+    /*width: 100px;*/
+    /*height: 50px;*/
+}

@@ -2,8 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-const Header = (props) => {
+import logoImg from './img/logo.png';
+
+const Header = () => {
+	const Logo = () => (
+		<div className="logo-container">
+			<img className="logo-img" src={logoImg} alt="logo" />
+		</div>
+	);
+
 	const links = [
+		{
+			path: '/',
+			name: <Logo />,
+			exact: true,
+		},
 		{
 			path: '/',
 			name: 'Home',
@@ -26,8 +39,9 @@ const Header = (props) => {
 	return (
 		<div className="application-header">
 			<div className="application-header__navigation-menu">
-				{links.map(link => (
+				{links.map((link, index) => (
 					<NavLink
+						key={`${link.path}-${index}`}
 						to={link.path}
 						className="navigation-menu__link"
 						activeClassName="navigation-menu__link--active"

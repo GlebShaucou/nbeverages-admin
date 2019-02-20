@@ -12,6 +12,11 @@ body {
     padding: 0;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 .page-component {
     max-width: 1320px;
     margin: 0 auto;

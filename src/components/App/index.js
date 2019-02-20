@@ -1,3 +1,5 @@
-import App from './App';
+import AppComponent from './App.container';
 
-export default App;
+import './App.css';
+
+export default AppComponent;

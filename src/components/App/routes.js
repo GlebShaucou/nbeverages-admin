@@ -14,8 +14,13 @@ export default [
 		component: CatalogPage,
 	},
 	{
+		path: '/home',
+		exact: true,
+		component: null,
+	},
+	{
 		path: '/',
 		exact: true,
-		component: CatalogPage,
+		component: null,
 	},
 ];
