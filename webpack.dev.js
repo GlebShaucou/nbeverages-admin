@@ -12,13 +12,7 @@ module.exports = merge(common, {
 		port: devServerPort,
 		hot: true,
 	},
-	optimization: {
-		usedExports: true,
-		splitChunks: {
-			chunks: 'all'
-		}
-	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
 	],
 });

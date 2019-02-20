@@ -4,17 +4,17 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/index.js'
+		app: './src/index.js',
 	},
 	output: {
 		filename: '[name].[hash].js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'dist'),
 	},
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
 			title: 'nbeverages admin page',
-			template: 'src/index.html'
+			template: 'src/index.html',
 		}),
 	],
 	module: {
@@ -23,26 +23,26 @@ module.exports = {
 				test: /\.css$/,
 				use: [
 					'style-loader',
-					'css-loader'
-				]
+					'css-loader',
+				],
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				use: [
-					'file-loader'
-				]
+					'file-loader',
+				],
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				use: [
-					'file-loader'
-				]
+					'file-loader',
+				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
-			}
-		]
-	}
+				loader: 'babel-loader',
+			},
+		],
+	},
 };

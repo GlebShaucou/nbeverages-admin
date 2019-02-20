@@ -1,7 +1,9 @@
 /* global fetch */
 const metadata = {
 	devBaseUrl: 'http://localhost:3003/',
+	proBaseUrl: 'https://nbeverages-backend.herokuapp.com/',
 };
+const baseUri = process.env.NODE_ENV === 'development' ? metadata.devBaseUrl : metadata.proBaseUrl;
 
 export const request = ({
 	url,
@@ -43,11 +45,11 @@ export const request = ({
 };
 
 export const getBeverages = ({ id }) => request({
-	url: id ? `${metadata.devBaseUrl}beverages/${id}` : `${metadata.devBaseUrl}beverages`,
+	url: `${baseUri}beverages${id ? `/${id}` : ''}`,
 });
 
 export const deleteBeverages = ({ beverageId }) => request({
-	url: `${metadata.devBaseUrl}beverages`,
+	url: `${baseUri}beverages`,
 	params: {
 		method: 'DELETE',
 		body: { beverageId },
@@ -55,7 +57,7 @@ export const deleteBeverages = ({ beverageId }) => request({
 });
 
 export const createBeverage = beverage => request({
-	url: `${metadata.devBaseUrl}beverages`,
+	url: `${baseUri}beverages`,
 	params: {
 		method: 'POST',
 		body: { ...beverage },
@@ -63,7 +65,7 @@ export const createBeverage = beverage => request({
 });
 
 export const updateBeverage = beverage => request({
-	url: `${metadata.devBaseUrl}beverages`,
+	url: `${baseUri}beverages`,
 	params: {
 		method: 'PUT',
 		body: { ...beverage },
