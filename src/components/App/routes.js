@@ -1,8 +1,15 @@
-import { AdminPage } from '../../pages';
+import {
+	AdminPage,
+	CatalogPage,
+} from '../../pages';
 
 export default [
 	{
-		path: '/',
+		path: '/secret-section',
 		component: AdminPage,
+	},
+	{
+		path: '/',
+		component: CatalogPage,
 	},
 ];

@@ -1,0 +1,9 @@
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.catalog__item {
+    padding: 5px;
+    list-style-type: none;
+}

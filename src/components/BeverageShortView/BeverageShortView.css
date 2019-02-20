@@ -1,0 +1,62 @@
+.beverage-short-view {
+    padding: 5px;
+    border: 1px solid #bbbbbb;
+}
+
+.beverage-short-view__main {
+    display: flex;
+}
+
+.beverage-short-view__description {
+    padding: 5px 0;
+    font-size: 1.5rem;
+}
+
+.beverage-short-view__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    padding: 10px 0;
+}
+
+.beverage-short-view__image-container {
+
+}
+
+.beverage-short-view__main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 2rem;
+}
+
+.main-info__name {
+    padding: 10px 0;
+    font-size: 2.3rem;
+}
+
+.main-info__type {
+    padding: 10px 0;
+}
+
+.main-info__category {
+    padding: 10px 0;
+}
+
+.bsv-footer__quantity {
+
+}
+
+.bsv-footer__price {
+
+}
+
+.bsv-footer__buttons {
+
+}
+
+.bsv-image {
+    width: 200px;
+    height: 180px;
+}
