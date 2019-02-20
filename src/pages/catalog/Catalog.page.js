@@ -8,6 +8,8 @@ export default class CatalogPage extends Component {
 		const { loadData } = this.props;
 
 		loadData();
+
+		document.title = 'Beverages Catalog | Natural Beverages';
 	}
 
 	render() {

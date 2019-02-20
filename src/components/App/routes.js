@@ -9,7 +9,13 @@ export default [
 		component: AdminPage,
 	},
 	{
+		path: '/catalog',
+		exact: true,
+		component: CatalogPage,
+	},
+	{
 		path: '/',
+		exact: true,
 		component: CatalogPage,
 	},
 ];

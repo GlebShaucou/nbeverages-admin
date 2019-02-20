@@ -28,9 +28,14 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|svg|jpg|gif|ico)$/,
 				use: [
-					'file-loader',
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+						},
+					},
 				],
 			},
 			{

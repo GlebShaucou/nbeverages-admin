@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 
+import './assets';
+
 import { App } from './components';
 import configureStore from './data-layer/store';
 import rootSaga from './data-layer/saga';

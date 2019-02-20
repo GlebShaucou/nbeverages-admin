@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import NotificationContainer from '../NotificationContainer';
+import Header from '../Header';
 
-export default class App extends Component {
-	render() {
-		return (
-			<div className="application">
-				<NotificationContainer />
-				<BrowserRouter>
-					<Switch>
-						{routes.map(route => (
-							<Route key={route} {...route} />
-						))}
-					</Switch>
-				</BrowserRouter>
+const App = () => (
+	<div className="application">
+		<NotificationContainer />
+		<BrowserRouter>
+			<div className="application__router">
+				<Header />
+				<Switch>
+					{routes.map(route => (
+						<Route key={route} {...route} />
+					))}
+				</Switch>
 			</div>
-		);
-	}
-}
+		</BrowserRouter>
+	</div>
+);
+
+export default App;

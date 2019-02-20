@@ -12,6 +12,8 @@ export default class AdminPage extends Component {
 		const { loadData } = this.props;
 
 		loadData();
+
+		document.title = 'Administration section | Natural Beverages';
 	}
 
 	onAddBeverage = (beverage) => {

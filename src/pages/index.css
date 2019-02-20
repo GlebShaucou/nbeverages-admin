@@ -1,5 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
+    font-family: 'Source Serif Pro', serif;
     font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 .page-component {

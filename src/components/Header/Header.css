@@ -1,0 +1,26 @@
+.application-header {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #80ab99;
+}
+
+.application-header__navigation-menu {
+    width: 1320px;
+    margin: 0  auto;
+}
+
+.navigation-menu__link {
+    font-size: 2rem;
+    text-decoration: none;
+    margin-right: 15px;
+    color: #472e29;
+}
+
+.navigation-menu__link:hover {
+    color: #ffffff;
+}
+
+.navigation-menu__link--active {
+    font-weight: 700;
+    color: #ffffff;
+}
