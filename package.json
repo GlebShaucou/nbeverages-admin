@@ -1,7 +1,7 @@
 {
   "name": "nbeverages-admin",
   "version": "1.0.0",
-  "description": "nbeverages-admin",
+  "description": "nbeverages",
   "private": true,
   "scripts": {
     "start": "serve -s build",
