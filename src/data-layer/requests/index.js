@@ -1,7 +1,7 @@
 /* global fetch */
 const metadata = {
-	devBaseUrl: 'http://localhost:3003/',
-	proBaseUrl: 'https://nbeverages-backend.herokuapp.com/',
+	devBaseUrl: 'http://localhost:3003/api/',
+	proBaseUrl: 'https://nbeverages-backend.herokuapp.com/api/',
 };
 const baseUri = process.env.NODE_ENV === 'development' ? metadata.devBaseUrl : metadata.proBaseUrl;
 
@@ -69,5 +69,13 @@ export const updateBeverage = beverage => request({
 	params: {
 		method: 'PUT',
 		body: { ...beverage },
+	},
+});
+
+export const login = user => request({
+	url: `${baseUri}users/login`,
+	params: {
+		method: 'POST',
+		body: { user },
 	},
 });

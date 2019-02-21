@@ -31,6 +31,10 @@ const Header = () => {
 			name: 'Contact Us',
 		},
 		{
+			path: '/login',
+			name: 'Login',
+		},
+		{
 			path: '/secret-section',
 			name: 'Admin',
 		},

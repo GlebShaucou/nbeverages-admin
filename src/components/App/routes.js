@@ -1,39 +1,38 @@
-import {
-	AdminPage,
-	CatalogPage,
-	MainPage,
-	NotFoundPage,
-	ContactPage,
-} from '../../pages';
+import * as pages from '../../pages';
 
 export default [
 	{
 		path: '/secret-section',
 		exact: true,
-		component: AdminPage,
+		component: pages.AdminPage,
 	},
 	{
 		path: '/catalog',
 		exact: true,
-		component: CatalogPage,
+		component: pages.CatalogPage,
 	},
 	{
 		path: '/home',
 		exact: true,
-		component: MainPage,
+		component: pages.MainPage,
 	},
 	{
 		path: '/contact',
 		exact: true,
-		component: ContactPage,
+		component: pages.ContactPage,
+	},
+	{
+		path: '/login',
+		exact: true,
+		component: pages.LoginPage,
 	},
 	{
 		path: '/',
 		exact: true,
-		component: MainPage,
+		component: pages.MainPage,
 	},
 	{
 		path: '/',
-		component: NotFoundPage,
+		component: pages.NotFoundPage,
 	},
 ];

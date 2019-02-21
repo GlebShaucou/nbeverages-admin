@@ -1,4 +1,4 @@
-import ContactPage from './Contact';
+import ContactPage from './Contact.page';
 
 import './Contact.css';
 
