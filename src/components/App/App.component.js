@@ -6,6 +6,7 @@ import routes from './routes';
 import NotificationContainer from '../NotificationContainer';
 import Header from '../Header';
 import Spinner from '../Spinner';
+import Footer from '../Footer';
 
 const AppComponent = (props) => {
 	const { isFetching } = props;
@@ -23,6 +24,7 @@ const AppComponent = (props) => {
 				{isFetching && (
 					<Spinner />
 				)}
+				<Footer />
 			</div>
 		</BrowserRouter>
 	);

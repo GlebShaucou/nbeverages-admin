@@ -1,0 +1,12 @@
+.application-footer {
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.footer {
+    width: 1320px;
+    margin: 0 auto;
+    padding: 10px 0;
+    font-size: 1.5rem;
+}
