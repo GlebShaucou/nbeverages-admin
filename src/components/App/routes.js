@@ -1,11 +1,15 @@
 import {
 	AdminPage,
 	CatalogPage,
+	MainPage,
+	NotFoundPage,
+	ContactPage,
 } from '../../pages';
 
 export default [
 	{
 		path: '/secret-section',
+		exact: true,
 		component: AdminPage,
 	},
 	{
@@ -16,11 +20,20 @@ export default [
 	{
 		path: '/home',
 		exact: true,
-		component: null,
+		component: MainPage,
+	},
+	{
+		path: '/contact',
+		exact: true,
+		component: ContactPage,
 	},
 	{
 		path: '/',
 		exact: true,
-		component: null,
+		component: MainPage,
+	},
+	{
+		path: '/',
+		component: NotFoundPage,
 	},
 ];
