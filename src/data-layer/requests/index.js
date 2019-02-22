@@ -8,11 +8,13 @@ const baseUri = process.env.NODE_ENV === 'development' ? metadata.devBaseUrl : m
 export const request = ({
 	url,
 	params = {},
+	headers = {},
 }) => {
 	let config = {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			...headers,
 		},
 	};
 	let { body, ...rest } = params;
@@ -72,7 +74,7 @@ export const updateBeverage = beverage => request({
 	},
 });
 
-export const login = user => request({
+export const userLogin = user => request({
 	url: `${baseUri}users/login`,
 	params: {
 		method: 'POST',

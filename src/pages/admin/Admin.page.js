@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { NewItemForm, Button } from '../../components';
 
@@ -111,7 +112,13 @@ export default class AdminPage extends Component {
 	}
 
 	render() {
-		const { newItem } = this.props;
+		const { newItem, user } = this.props;
+
+		if (!user) {
+			return (
+				<Redirect to="/login" />
+			);
+		}
 
 		return (
 			<div className="page-component page-component--admin">
@@ -136,6 +143,7 @@ export default class AdminPage extends Component {
 AdminPage.propTypes = {
 	items: PropTypes.array,
 	newItem: PropTypes.object,
+	user: PropTypes.object,
 	loadData: PropTypes.func,
 	removeItem: PropTypes.func,
 	addItem: PropTypes.func,
@@ -145,6 +153,7 @@ AdminPage.propTypes = {
 AdminPage.defaultProps = {
 	items: [],
 	newItem: {},
+	user: null,
 	loadData: () => {},
 	removeItem: () => {},
 	addItem: () => {},

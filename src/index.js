@@ -10,6 +10,12 @@ import './assets';
 import { App } from './components';
 import configureStore from './data-layer/store';
 import rootSaga from './data-layer/saga';
+import localStorage from './data-layer/localStorage';
+import * as constants from './constants';
+import * as utils from './utils';
+import actions from './data-layer/actions';
+
+const { userActions } = actions;
 
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
@@ -17,6 +23,21 @@ const store = configureStore({
 });
 
 sagaMiddleware.run(rootSaga);
+
+const token = localStorage.getItem(constants.NBEVERAGES_TOKEN);
+
+if (token) {
+	const decoded = utils.decodeJwtToken(token);
+	const currentTime = Date.now() / 1000;
+
+	if (decoded.exp < currentTime) {
+		localStorage.clear();
+	} else {
+		store.dispatch(
+			userActions.userLoginSucceded({ user: { ...decoded } }),
+		);
+	}
+}
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { Input, Button } from '../../components';
 
@@ -11,6 +12,10 @@ export default class LoginPage extends Component {
 
 	onLogin = (e) => {
 		e.preventDefault();
+
+		const { onLogin } = this.props;
+
+		onLogin({ ...this.state });
 	};
 
 	onInputChange = ({ target }) => {
@@ -24,6 +29,13 @@ export default class LoginPage extends Component {
 			email,
 			password,
 		} = this.state;
+		const { user } = this.props;
+
+		if (user) {
+			return (
+				<Redirect to="/" />
+			);
+		}
 
 		return (
 			<div className="page-component page-component--login">
@@ -61,6 +73,12 @@ export default class LoginPage extends Component {
 	}
 }
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+	onLogin: PropTypes.func,
+	user: PropTypes.object,
+};
 
-LoginPage.defaultProps = {};
+LoginPage.defaultProps = {
+	onLogin: () => {},
+	user: null,
+};

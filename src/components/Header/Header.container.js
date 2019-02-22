@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import App from './App.component';
+import Header from './Header.component';
 
 const mapStateToProps = state => ({
-	isFetching: state.isFetching,
+	user: state.user,
 });
 
 export default connect(
 	mapStateToProps,
-)(App);
+)(Header);

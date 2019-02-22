@@ -1,0 +1,1 @@
+export const NBEVERAGES_TOKEN = 'NBEVERAGES_TOKEN';

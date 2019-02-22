@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 import logoImg from './img/rsz_logo.png';
 
-const Header = () => {
+const Header = (props) => {
+	const { user } = props;
+
 	const Logo = () => (
 		<div className="logo-container">
 			<img className="logo-img" src={logoImg} alt="logo" />
@@ -30,15 +32,19 @@ const Header = () => {
 			path: '/contact',
 			name: 'Contact Us',
 		},
-		{
-			path: '/login',
-			name: 'Login',
-		},
-		{
+	];
+
+	if (user) {
+		links.push({
 			path: '/secret-section',
 			name: 'Admin',
-		},
-	];
+		});
+	} else {
+		links.push({
+			path: '/login',
+			name: 'Login',
+		});
+	}
 
 	return (
 		<div className="application-header">
@@ -59,8 +65,12 @@ const Header = () => {
 	);
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+	user: PropTypes.object,
+};
 
-Header.defaultProps = {};
+Header.defaultProps = {
+	user: null,
+};
 
 export default Header;

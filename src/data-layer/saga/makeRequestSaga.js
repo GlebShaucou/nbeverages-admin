@@ -5,14 +5,21 @@ import {
 } from 'redux-saga/effects';
 
 export default function makeSimpleSaga({
-	request, onSuccessAction, onFailureAction,
+	request,
+	onSuccessAction,
+	onFailureAction,
+	handleResponse,
 }, {
 	watchedActionType, sagaHelperEffect = takeLatest,
 }) {
 	const workerSagaGenerator = function* workerSaga(action) {
 		try {
 			const { query } = action;
-			const response = yield call(request, query);
+			let response = yield call(request, query);
+
+			if (typeof handleResponse === 'function') {
+				response = handleResponse(response);
+			}
 
 			yield put(onSuccessAction(response, query));
 		} catch (error) {

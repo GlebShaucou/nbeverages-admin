@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import NotificationContainer from '../NotificationContainer';
-import Header from '../Header';
+import HeaderComponent from '../Header';
 import Spinner from '../Spinner';
 import Footer from '../Footer';
 
@@ -14,7 +14,7 @@ const AppComponent = (props) => {
 	return (
 		<BrowserRouter>
 			<div className="application">
-				<Header />
+				<HeaderComponent />
 				<NotificationContainer />
 				<Switch>
 					{routes.map(route => (

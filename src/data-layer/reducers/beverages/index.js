@@ -41,31 +41,12 @@ const initialState = {
 	newItem: {
 		schema: [...beverageSchema],
 	},
-	isFetching: false,
-	error: '',
 };
 
 export default (state = initialState, action) => {
 	let response;
 
 	switch (action.type) {
-	case beverageActions.FETCH_BEVERAGES:
-	case beverageActions.DELETE_BEVERAGE:
-	case beverageActions.ADD_NEW_BEVERAGE:
-	case beverageActions.UPDATE_BEVERAGE:
-		return {
-			...state,
-			isFetching: true,
-		};
-	case beverageActions.FETCH_BEVERAGES_FAILED:
-	case beverageActions.DELETE_BEVERAGE_FAILED:
-	case beverageActions.ADD_NEW_BEVERAGE_FAILED:
-	case beverageActions.UPDATE_BEVERAGE_FAILED:
-		return {
-			...state,
-			isFetching: false,
-			error: action.error,
-		};
 	case beverageActions.FETCH_BEVERAGES_SUCCEDED:
 	case beverageActions.DELETE_BEVERAGE_SUCCEDED:
 	case beverageActions.ADD_NEW_BEVERAGE_SUCCEDED:
@@ -73,9 +54,7 @@ export default (state = initialState, action) => {
 		({ response } = action);
 		return {
 			...state,
-			isFetching: false,
 			items: [...response.beverages],
-			error: response.error,
 		};
 	default:
 		return state;

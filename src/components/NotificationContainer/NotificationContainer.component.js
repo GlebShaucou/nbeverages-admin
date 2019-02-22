@@ -13,7 +13,7 @@ const NotificationContainer = (props) => {
 			<h4 className="notification-container__errors-header">Errors:</h4>
 			{errors.map(error => (
 				<span key={error} className="notification-container__error">
-					{error}
+					{JSON.stringify(error)}
 				</span>
 			))}
 		</div>

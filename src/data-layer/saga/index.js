@@ -5,8 +5,15 @@ import {
 import makeRequestSaga from './makeRequestSaga';
 import * as requests from '../requests';
 import actions from '../actions';
+import localStorage from '../localStorage';
 
-const { beverageActions } = actions;
+import * as utils from '../../utils';
+import * as constants from '../../constants';
+
+const {
+	beverageActions,
+	userActions,
+} = actions;
 
 const {
 	watcherSagaGenerator: watchFetchBeverages,
@@ -48,9 +55,33 @@ const {
 	watchedActionType: beverageActions.UPDATE_BEVERAGE,
 });
 
+const handleLoginResponse = (response) => {
+	const { token } = response;
+
+	localStorage.setItem(constants.NBEVERAGES_TOKEN, token);
+
+	const decoded = utils.decodeJwtToken(token);
+
+	return {
+		user: { ...decoded },
+	};
+};
+
+const {
+	watcherSagaGenerator: watchUserLogin,
+} = makeRequestSaga({
+	request: requests.userLogin,
+	onSuccessAction: userActions.userLoginSucceded,
+	onFailureAction: userActions.userLoginFailed,
+	handleResponse: handleLoginResponse,
+}, {
+	watchedActionType: userActions.USER_LOGIN,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
 	yield fork(watchAddBeverage);
 	yield fork(watchUpdateBeverage);
+	yield fork(watchUserLogin);
 }

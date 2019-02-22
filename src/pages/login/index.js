@@ -1,4 +1,4 @@
-import LoginPage from './Login.page';
+import LoginPage from './Login.container';
 
 import './Login.css';
 
