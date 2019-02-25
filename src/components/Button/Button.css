@@ -1,3 +1,12 @@
 .custom-button-wrapper {
     display: inline-block;
 }
+
+.custom-button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #993233;
+    cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.page-component--main {
+
+}
+
+.welcome-message-section {
+
+}
+
+.promo-section {
+    display: flex;
+}
+
+.welcome-message__image {
+    width: 100%;
+}
+
+.promo__left-image {
+
+}
+
+.promo__right-image {
+
+}
+
+.promo__left-section {
+    position: relative;
+    width: 60%;
+    padding: 50px ;
+}
+
+.promo__right-section {
+    position: relative;
+    width: 40%;
+    padding: 50px 50px 0 0;
+}

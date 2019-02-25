@@ -1,28 +1,30 @@
 .application-header {
     width: 100%;
     padding: 10px 0;
-    background-color: #cfedea;
+}
+
+.application-header__container {
+    width: 1320px;
+    margin: 0  auto;
 }
 
 .application-header__navigation-menu {
-    width: 1320px;
-    margin: 0  auto;
+
 }
 
 .navigation-menu__link {
     font-size: 2rem;
     text-decoration: none;
     margin-right: 15px;
-    /*color: #528076;*/
+    color: #993233;
 }
 
 .navigation-menu__link:hover {
-    /*color: #528076;*/
+
 }
 
 .navigation-menu__link--active {
     font-weight: 700;
-    /*color: #528076;*/
 }
 
 .logo-container {
@@ -30,6 +32,43 @@
 }
 
 .logo-img {
-    /*width: 100px;*/
-    /*height: 50px;*/
+    width: 200px;
+    height: 200px;
+}
+
+.application-header__logo-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.work-info__admin-section {
+    padding: 10px 0;
+}
+
+.work-info__cart {
+    text-align: right;
+}
+
+.logout-button {
+    color: #993233;
+    background-color: #ffffff;
+    font-size: 1.7rem;
+    padding: 0;
+}
+
+.navigation-menu__link--admin {
+    padding: 0;
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+.admin-section {
+    font-size: 1.7rem;
+    color: #993233;
+}
+
+.work-info__admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

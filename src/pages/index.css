@@ -17,6 +17,14 @@ ul {
     padding: 0;
 }
 
+button {
+    font-family: 'Source Serif Pro', serif;
+}
+
+img {
+    width: 100%;
+}
+
 .page-component {
     max-width: 1320px;
     margin: 0 auto;

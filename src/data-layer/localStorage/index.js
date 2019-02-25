@@ -7,7 +7,7 @@ const getItem = (key) => {
 
 		return serilizedState === null ? undefined : JSON.parse(serilizedState);
 	} catch (e) {
-		return undefined;
+		throw e;
 	}
 };
 
@@ -15,7 +15,7 @@ const setItem = (key, value) => {
 	try {
 		localStorage.setItem(key, JSON.stringify(value));
 	} catch (e) {
-		console.error(e);
+		throw e;
 	}
 };
 

@@ -10,6 +10,8 @@ export default (state = user, action) => {
 	case userActions.USER_LOGIN_SUCCEDED:
 		({ response } = action);
 		return { ...response.user };
+	case userActions.USER_LOGOUT_SUCCEDED:
+		return null;
 	default:
 		return state;
 	}

@@ -16,6 +16,7 @@ import * as utils from './utils';
 import actions from './data-layer/actions';
 
 const { userActions } = actions;
+const { NBEVERAGES_TOKEN } = constants;
 
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
@@ -24,14 +25,14 @@ const store = configureStore({
 
 sagaMiddleware.run(rootSaga);
 
-const token = localStorage.getItem(constants.NBEVERAGES_TOKEN);
+const token = localStorage.getItem(NBEVERAGES_TOKEN);
 
 if (token) {
 	const decoded = utils.decodeJwtToken(token);
 	const currentTime = Date.now() / 1000;
 
 	if (decoded.exp < currentTime) {
-		localStorage.clear();
+		localStorage.removeItem(NBEVERAGES_TOKEN);
 	} else {
 		store.dispatch(
 			userActions.userLoginSucceded({ user: { ...decoded } }),

@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-import logoImg from './img/rsz_logo.png';
+import logoImg from './img/logo.png';
+import Button from '../Button';
 
 const Header = (props) => {
-	const { user } = props;
+	const { user, onLogout } = props;
+
+	const logoutHandler = (e) => {
+		e.preventDefault();
+
+		onLogout();
+	};
 
 	const Logo = () => (
 		<div className="logo-container">
@@ -16,50 +23,82 @@ const Header = (props) => {
 	const links = [
 		{
 			path: '/',
-			name: <Logo />,
-			exact: true,
-		},
-		{
-			path: '/',
 			name: 'Home',
 			exact: true,
 		},
 		{
 			path: '/catalog',
 			name: 'Catalog',
+			exact: true,
 		},
 		{
 			path: '/contact',
 			name: 'Contact Us',
+			exact: true,
 		},
 	];
 
-	if (user) {
-		links.push({
-			path: '/secret-section',
-			name: 'Admin',
-		});
-	} else {
-		links.push({
-			path: '/login',
-			name: 'Login',
-		});
-	}
-
 	return (
 		<div className="application-header">
-			<div className="application-header__navigation-menu">
-				{links.map((link, index) => (
-					<NavLink
-						key={`${link.path}-${index}`}
-						to={link.path}
-						className="navigation-menu__link"
-						activeClassName="navigation-menu__link--active"
-						exact={link.exact}
-					>
-						{link.name}
-					</NavLink>
-				))}
+			<div className="application-header__container">
+				<div className="application-header__logo-section">
+					<div className="logo-section__work-info">
+						<a className="work-info__phone" href="tel:+375 29 888 888">
+							+375 29 888 888
+						</a>
+						<span className="work-info__hours">
+						Mon - Fr 10:00 - 20:00
+						</span>
+					</div>
+					<div className="work-info__logo">
+						<Logo />
+					</div>
+					<div className="work-info__admin">
+						<div className="work-info__admin-section">
+							{user ? (
+								<div className="admin-section">
+									<Link
+										to="/secret-section"
+										className="navigation-menu__link navigation-menu__link--admin"
+									>
+										admin
+									</Link>
+									{' | '}
+									<Button
+										caption="logout"
+										className="logout-button"
+										onClick={logoutHandler}
+									/>
+								</div>
+							) : (
+								<Link
+									to="/login"
+									className="navigation-menu__link navigation-menu__link--admin"
+								>
+									login
+								</Link>
+							)}
+						</div>
+						<div className="work-info__cart">
+							<Button
+								caption="Cart"
+							/>
+						</div>
+					</div>
+				</div>
+				<div className="application-header__navigation-menu">
+					{links.map((link) => (
+						<NavLink
+							key={link.path}
+							to={link.path}
+							className="navigation-menu__link"
+							// activeClassName="navigation-menu__link--active"
+							exact={link.exact}
+						>
+							{link.name}
+						</NavLink>
+					))}
+				</div>
 			</div>
 		</div>
 	);
@@ -67,10 +106,12 @@ const Header = (props) => {
 
 Header.propTypes = {
 	user: PropTypes.object,
+	onLogout: PropTypes.func,
 };
 
 Header.defaultProps = {
 	user: null,
+	onLogout: () => {},
 };
 
 export default Header;

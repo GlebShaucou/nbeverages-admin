@@ -1,5 +1,7 @@
 import {
 	fork,
+	takeLatest,
+	put,
 } from 'redux-saga/effects';
 
 import makeRequestSaga from './makeRequestSaga';
@@ -14,6 +16,10 @@ const {
 	beverageActions,
 	userActions,
 } = actions;
+
+const {
+	NBEVERAGES_TOKEN,
+} = constants;
 
 const {
 	watcherSagaGenerator: watchFetchBeverages,
@@ -58,7 +64,7 @@ const {
 const handleLoginResponse = (response) => {
 	const { token } = response;
 
-	localStorage.setItem(constants.NBEVERAGES_TOKEN, token);
+	localStorage.setItem(NBEVERAGES_TOKEN, token);
 
 	const decoded = utils.decodeJwtToken(token);
 
@@ -78,10 +84,26 @@ const {
 	watchedActionType: userActions.USER_LOGIN,
 });
 
+function* userLogout() {
+	try {
+		localStorage.removeItem(NBEVERAGES_TOKEN);
+
+		yield put(userActions.userLogoutSucceded());
+	} catch (error) {
+		yield put(userActions.userLogoutFailed(error));
+	}
+}
+
+function* watchLogout() {
+	yield takeLatest(userActions.USER_LOGOUT, userLogout);
+}
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
 	yield fork(watchAddBeverage);
 	yield fork(watchUpdateBeverage);
+
 	yield fork(watchUserLogin);
+	yield fork(watchLogout);
 }

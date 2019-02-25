@@ -5,14 +5,15 @@ export default function Button(props) {
 	const {
 		caption,
 		onClick,
-		type = 'button',
+		type,
+		className,
 	} = props;
 
 	return (
 		<div className="custom-button-wrapper">
 			<button
 				type={type}
-				className="custom-button"
+				className={`custom-button ${className}`}
 				onClick={onClick}
 			>
 				{caption}
@@ -24,11 +25,13 @@ export default function Button(props) {
 Button.propTypes = {
 	caption: PropTypes.string,
 	type: PropTypes.string,
+	className: PropTypes.string,
 	onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
 	caption: '',
-	type: '',
+	className: '',
+	type: 'button',
 	onClick: () => {},
 };
