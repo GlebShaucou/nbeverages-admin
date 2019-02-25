@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Button from '../Button';
 
@@ -18,6 +19,7 @@ const BeverageShortView = (props) => {
 		description,
 		price,
 		currency,
+		_id: itemId,
 	} = item;
 
 	return (
@@ -35,7 +37,12 @@ const BeverageShortView = (props) => {
 						{type}
 					</div>
 					<div className="main-info__name">
-						{name}
+						<Link
+							to={`/catalog/${itemId}`}
+							className="main-info__name-link"
+						>
+							{name}
+						</Link>
 					</div>
 					<div className="main-info__category">
 						{category}

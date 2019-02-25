@@ -1,5 +1,6 @@
 .beverage-short-view {
     box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #000000;
 }
 
 .beverage-short-view__main {
@@ -31,6 +32,10 @@
 
 .main-info__name {
     font-size: 2.1rem;
+}
+
+.main-info__name-link {
+    color: #000000;
 }
 
 .main-info__type {

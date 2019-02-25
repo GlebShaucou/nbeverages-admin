@@ -7,6 +7,11 @@ export default [
 		component: pages.AdminPage,
 	},
 	{
+		path: '/catalog/:beverageId',
+		exact: true,
+		component: pages.CatalogItemPage,
+	},
+	{
 		path: '/catalog',
 		exact: true,
 		component: pages.CatalogPage,
