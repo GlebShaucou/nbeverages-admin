@@ -16,11 +16,13 @@ const AppComponent = (props) => {
 			<div className="application">
 				<HeaderComponent />
 				<NotificationContainer />
-				<Switch>
-					{routes.map(route => (
-						<Route key={route} {...route} />
-					))}
-				</Switch>
+				<div className="application__content">
+					<Switch>
+						{routes.map(route => (
+							<Route key={route} {...route} />
+						))}
+					</Switch>
+				</div>
 				{isFetching && (
 					<Spinner />
 				)}

@@ -26,16 +26,16 @@ const BeverageShortView = (props) => {
 				<div className="beverage-short-view__image-container">
 					<img
 						src={imgSrc}
-						alt="beverage image"
+						alt="beverage"
 						className="bsv-image"
 					/>
 				</div>
 				<div className="beverage-short-view__main-info">
-					<div className="main-info__name">
-						{name}
-					</div>
 					<div className="main-info__type">
 						{type}
+					</div>
+					<div className="main-info__name">
+						{name}
 					</div>
 					<div className="main-info__category">
 						{category}

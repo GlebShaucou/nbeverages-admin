@@ -72,3 +72,11 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.logo-section__work-info {
+    font-size: 2rem;
+}
+
+.work-info__phone {
+    text-decoration: none;
+}

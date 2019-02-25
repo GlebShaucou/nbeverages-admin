@@ -18,6 +18,9 @@ export default class CatalogPage extends Component {
 		return (
 			<div className="page-component page-component--catalog">
 				<div className="page-component__content">
+					<div className="filters-sidebar">
+						filters-sidebar
+					</div>
 					<ul className="catalog">
 						{items.map(item => (
 							<li key={JSON.stringify(item)} className="catalog__item">

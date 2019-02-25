@@ -46,9 +46,9 @@ const Header = (props) => {
 						<a className="work-info__phone" href="tel:+375 29 888 888">
 							+375 29 888 888
 						</a>
-						<span className="work-info__hours">
+						<div className="work-info__hours">
 						Mon - Fr 10:00 - 20:00
-						</span>
+						</div>
 					</div>
 					<div className="work-info__logo">
 						<Logo />
