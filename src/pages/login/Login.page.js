@@ -10,6 +10,10 @@ export default class LoginPage extends Component {
 		password: '',
 	};
 
+	componentDidMount() {
+		document.title = 'Login | Natural Beverages';
+	}
+
 	onLogin = (e) => {
 		e.preventDefault();
 

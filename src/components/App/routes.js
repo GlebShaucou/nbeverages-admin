@@ -32,6 +32,11 @@ export default [
 		component: pages.LoginPage,
 	},
 	{
+		path: '/shopping-cart',
+		exact: true,
+		component: pages.CartPage,
+	},
+	{
 		path: '/',
 		exact: true,
 		component: pages.MainPage,
