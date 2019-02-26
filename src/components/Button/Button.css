@@ -10,3 +10,8 @@
     background-color: #993233;
     cursor: pointer;
 }
+
+.remove-button {
+    color: #000000;
+    background-color: #f3de81;
+}

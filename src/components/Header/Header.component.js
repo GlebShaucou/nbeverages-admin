@@ -6,7 +6,7 @@ import logoImg from './img/logo.png';
 import Button from '../Button';
 
 const Header = (props) => {
-	const { user, onLogout } = props;
+	const { user, onLogout, cart } = props;
 
 	const logoutHandler = (e) => {
 		e.preventDefault();
@@ -80,9 +80,12 @@ const Header = (props) => {
 							)}
 						</div>
 						<div className="work-info__cart">
-							<Button
-								caption="Cart"
-							/>
+							<Link
+								to="/shopping-cart"
+								className="navigation-menu__link navigation-menu__link--admin"
+							>
+								{`Cart (${cart.ids.length})`}
+							</Link>
 						</div>
 					</div>
 				</div>
@@ -106,11 +109,15 @@ const Header = (props) => {
 
 Header.propTypes = {
 	user: PropTypes.object,
+	cart: PropTypes.object,
 	onLogout: PropTypes.func,
 };
 
 Header.defaultProps = {
 	user: null,
+	cart: {
+		ids: [],
+	},
 	onLogout: () => {},
 };
 

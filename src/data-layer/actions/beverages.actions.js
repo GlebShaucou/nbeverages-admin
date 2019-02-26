@@ -31,3 +31,11 @@ export const UPDATE_BEVERAGE_FAILED = 'UPDATE_BEVERAGE_FAILED';
 export const updateBeverage = makeActionCreator(UPDATE_BEVERAGE, 'query');
 export const updateBeverageSucceeded = makeActionCreator(UPDATE_BEVERAGE_SUCCEDED, 'response');
 export const updateBeverageFailed = makeActionCreator(UPDATE_BEVERAGE_FAILED, 'error');
+
+export const FETCH_BEVERAGE_BY_ID = 'FETCH_BEVERAGE_BY_ID';
+export const FETCH_BEVERAGE_BY_ID_SUCCEDED = 'FETCH_BEVERAGE_BY_ID_SUCCEDED';
+export const FETCH_BEVERAGE_BY_ID_FAILED = 'FETCH_BEVERAGE_BY_ID_FAILED';
+
+export const fetchBeverageById = makeActionCreator(FETCH_BEVERAGE_BY_ID, 'query');
+export const fetchBeverageByIdSucceeded = makeActionCreator(FETCH_BEVERAGE_BY_ID_SUCCEDED, 'response');
+export const fetchBeverageByIdFailed = makeActionCreator(FETCH_BEVERAGE_BY_ID_FAILED, 'error');

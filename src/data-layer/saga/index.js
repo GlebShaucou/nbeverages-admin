@@ -98,11 +98,22 @@ function* watchLogout() {
 	yield takeLatest(userActions.USER_LOGOUT, userLogout);
 }
 
+const {
+	watcherSagaGenerator: watchFetchBeverageById,
+} = makeRequestSaga({
+	request: requests.getBeverages,
+	onSuccessAction: beverageActions.fetchBeverageByIdSucceeded,
+	onFailureAction: beverageActions.fetchBeverageByIdFailed,
+}, {
+	watchedActionType: beverageActions.FETCH_BEVERAGE_BY_ID,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
 	yield fork(watchAddBeverage);
 	yield fork(watchUpdateBeverage);
+	yield fork(watchFetchBeverageById);
 
 	yield fork(watchUserLogin);
 	yield fork(watchLogout);

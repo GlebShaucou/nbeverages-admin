@@ -41,6 +41,7 @@ const initialState = {
 	newItem: {
 		schema: [...beverageSchema],
 	},
+	selectedItem: null,
 };
 
 export default (state = initialState, action) => {
@@ -55,6 +56,12 @@ export default (state = initialState, action) => {
 		return {
 			...state,
 			items: [...response.beverages],
+		};
+	case beverageActions.FETCH_BEVERAGE_BY_ID_SUCCEDED:
+		({ response } = action);
+		return {
+			...state,
+			selectedItem: { ...response.beverage },
 		};
 	default:
 		return state;

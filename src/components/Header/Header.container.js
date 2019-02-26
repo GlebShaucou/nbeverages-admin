@@ -7,6 +7,7 @@ const { userActions } = actions;
 
 const mapStateToProps = state => ({
 	user: state.user,
+	cart: state.cart,
 });
 
 const mapDispatchToProps = dispatch => ({

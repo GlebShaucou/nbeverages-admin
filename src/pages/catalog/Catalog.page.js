@@ -5,15 +5,27 @@ import { BeverageShortView } from '../../components';
 
 export default class CatalogPage extends Component {
 	componentDidMount() {
-		const { loadData } = this.props;
+		const { loadResources } = this.props;
 
-		loadData();
+		loadResources();
 
 		document.title = 'Beverages Catalog | Natural Beverages';
 	}
 
+	onCatalogItemButtonClick = (item, isInCart) => {
+		const { addItemToCart, removeItemFromCart } = this.props;
+
+		return () => {
+			if (isInCart) {
+				removeItemFromCart(item._id);
+			} else {
+				addItemToCart(item);
+			}
+		};
+	};
+
 	render() {
-		const { items } = this.props;
+		const { items, cart } = this.props;
 
 		return (
 			<div className="page-component page-component--catalog">
@@ -22,11 +34,20 @@ export default class CatalogPage extends Component {
 						filters-sidebar
 					</div>
 					<ul className="catalog">
-						{items.map(item => (
-							<li key={JSON.stringify(item)} className="catalog__item">
-								<BeverageShortView item={item} />
-							</li>
-						))}
+						{items.map((item) => {
+							const isInCart = cart.ids.includes(item._id);
+
+							return (
+								<li key={JSON.stringify(item)} className="catalog__item">
+									<BeverageShortView
+										item={item}
+										buttonCaption={isInCart ? 'Remove from Cart' : 'Add to Cart'}
+										onButtonClick={this.onCatalogItemButtonClick(item, isInCart)}
+										buttonClassName={isInCart ? 'remove-button' : ''}
+									/>
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			</div>
@@ -36,10 +57,19 @@ export default class CatalogPage extends Component {
 
 CatalogPage.propTypes = {
 	items: PropTypes.array,
-	loadData: PropTypes.func,
+	loadResources: PropTypes.func,
+	addItemToCart: PropTypes.func,
+	removeItemFromCart: PropTypes.func,
+	cart: PropTypes.object,
 };
 
 CatalogPage.defaultProps = {
 	items: [],
-	loadData: () => {},
+	loadResources: () => {},
+	addItemToCart: () => {},
+	removeItemFromCart: () => {},
+	cart: {
+		items: [],
+		ids: [],
+	},
 };

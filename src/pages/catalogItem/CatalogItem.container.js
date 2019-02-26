@@ -3,24 +3,42 @@ import { connect } from 'react-redux';
 import CatalogItemPage from './CatalogItem.page';
 import actions from '../../data-layer/actions';
 
-const getBeverageById = (state, beverageId) => {
-	const { beverages: { items } } = state;
+const {
+	beverageActions,
+	cartActions,
+} = actions;
 
-	return items.find(({ _id }) => _id === beverageId);
+const getBeverageById = (state, beverageId) => {
+	const { beverages: { items, selectedItem } } = state;
+
+	return items.find(({ _id }) => _id === beverageId) || selectedItem;
 };
+const getBeverageIdFromProps = props => props.match.params.beverageId;
 
 const mapStateToProps = (state, props) => {
-	const { match: { params: { beverageId } } } = props;
+	const beverageId = getBeverageIdFromProps(props);
+	const { cart: { ids } } = state;
 
 	return {
 		selectedItem: getBeverageById(state, beverageId),
+		isAddedToCart: ids.includes(beverageId),
 	};
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-	console.log('props', props);
+	const beverageId = getBeverageIdFromProps(props);
 
-	return {};
+	return {
+		loadResources: () => {
+			dispatch(beverageActions.fetchBeverageById({ id: beverageId }));
+		},
+		addItemToCart: (item) => {
+			dispatch(cartActions.addItemToCart(item));
+		},
+		removeItemFromCart: (itemId) => {
+			dispatch(cartActions.removeItemFromCart(itemId));
+		},
+	};
 };
 
 export default connect(

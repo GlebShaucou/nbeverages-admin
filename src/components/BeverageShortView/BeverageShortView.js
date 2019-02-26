@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 
 const BeverageShortView = (props) => {
-	const { item } = props;
+	const {
+		item,
+		onButtonClick,
+		buttonCaption,
+		buttonClassName,
+	} = props;
 
 	if (!item) {
 		return null;
@@ -61,7 +66,9 @@ const BeverageShortView = (props) => {
 				</div>
 				<div className="bsv-footer__buttons">
 					<Button
-						caption="add to Cart"
+						caption={buttonCaption}
+						onClick={onButtonClick}
+						className={buttonClassName}
 					/>
 				</div>
 			</div>
@@ -71,10 +78,16 @@ const BeverageShortView = (props) => {
 
 BeverageShortView.propTypes = {
 	item: PropTypes.object,
+	onButtonClick: PropTypes.func,
+	buttonCaption: PropTypes.string,
+	buttonClassName: PropTypes.string,
 };
 
 BeverageShortView.defaultProps = {
 	item: null,
+	onButtonClick: () => {},
+	buttonCaption: 'Add to Cart',
+	buttonClassName: '',
 };
 
 export default BeverageShortView;
