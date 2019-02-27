@@ -6,11 +6,12 @@ import actions from '../../data-layer/actions';
 const { beverageActions, cartActions } = actions;
 
 const mapStateToProps = (state) => {
-	const { beverages: { items }, cart } = state;
+	const { beverages: { items, filters }, cart } = state;
 
 	return {
 		items,
 		cart,
+		filters,
 	};
 };
 

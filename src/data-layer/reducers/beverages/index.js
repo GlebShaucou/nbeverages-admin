@@ -42,10 +42,27 @@ const initialState = {
 		schema: [...beverageSchema],
 	},
 	selectedItem: null,
+	filters: [],
+};
+
+const getFilters = (beverages) => {
+	const type = new Set();
+	const category = new Set();
+
+	beverages.forEach((beverage) => {
+		type.add(beverage.type);
+		category.add(beverage.category);
+	});
+
+	return {
+		type: [...type],
+		category: [...category],
+	};
 };
 
 export default (state = initialState, action) => {
 	let response;
+	let beverages;
 
 	switch (action.type) {
 	case beverageActions.FETCH_BEVERAGES_SUCCEDED:
@@ -53,9 +70,11 @@ export default (state = initialState, action) => {
 	case beverageActions.ADD_NEW_BEVERAGE_SUCCEDED:
 	case beverageActions.UPDATE_BEVERAGE_SUCCEDED:
 		({ response } = action);
+		({ beverages } = response);
 		return {
 			...state,
-			items: [...response.beverages],
+			items: [...beverages],
+			filters: getFilters(beverages),
 		};
 	case beverageActions.FETCH_BEVERAGE_BY_ID_SUCCEDED:
 		({ response } = action);

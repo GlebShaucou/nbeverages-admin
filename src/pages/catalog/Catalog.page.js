@@ -24,6 +24,10 @@ export default class CatalogPage extends Component {
 		};
 	};
 
+	renderFiltersSection() {
+		const { filters } = this.props;
+	}
+
 	render() {
 		const { items, cart } = this.props;
 
@@ -57,6 +61,7 @@ export default class CatalogPage extends Component {
 
 CatalogPage.propTypes = {
 	items: PropTypes.array,
+	filters: PropTypes.array,
 	loadResources: PropTypes.func,
 	addItemToCart: PropTypes.func,
 	removeItemFromCart: PropTypes.func,
@@ -65,6 +70,7 @@ CatalogPage.propTypes = {
 
 CatalogPage.defaultProps = {
 	items: [],
+	filters: [],
 	loadResources: () => {},
 	addItemToCart: () => {},
 	removeItemFromCart: () => {},

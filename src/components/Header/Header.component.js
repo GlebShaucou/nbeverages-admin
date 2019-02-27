@@ -86,6 +86,13 @@ const Header = (props) => {
 							>
 								{`Cart (${cart.ids.length})`}
 							</Link>
+							{' | '}
+							<Link
+								to="/order-status"
+								className="navigation-menu__link navigation-menu__link--admin"
+							>
+								Check order status
+							</Link>
 						</div>
 					</div>
 				</div>
