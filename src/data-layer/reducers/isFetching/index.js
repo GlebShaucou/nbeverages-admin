@@ -3,6 +3,7 @@ import actions from '../../actions';
 const {
 	beverageActions,
 	userActions,
+	orderActions,
 } = actions;
 const isFetching = false;
 
@@ -14,6 +15,7 @@ export default (state = isFetching, action) => {
 	case beverageActions.UPDATE_BEVERAGE:
 	case beverageActions.FETCH_BEVERAGE_BY_ID:
 	case userActions.USER_LOGIN:
+	case orderActions.CREATE_ORDER:
 		return true;
 	case beverageActions.FETCH_BEVERAGES_FAILED:
 	case beverageActions.DELETE_BEVERAGE_FAILED:
@@ -27,6 +29,8 @@ export default (state = isFetching, action) => {
 	case beverageActions.FETCH_BEVERAGE_BY_ID_FAILED:
 	case userActions.USER_LOGIN_SUCCEDED:
 	case userActions.USER_LOGIN_FAILED:
+	case orderActions.CREATE_ORDER_SUCCEDED:
+	case orderActions.CREATE_ORDER_FAILED:
 		return false;
 	default:
 		return state;

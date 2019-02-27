@@ -1,6 +1,6 @@
 import actions from '../../actions';
 
-const { cartActions } = actions;
+const { cartActions, orderActions } = actions;
 
 const initialState = {
 	items: [],
@@ -24,6 +24,14 @@ export default (state = initialState, action) => {
 		return {
 			items: removeItem(state, action),
 			ids: removeItemId(state, action),
+		};
+	case cartActions.SET_SHOPPING_CART:
+		return {
+			...action.shoppingCart,
+		};
+	case orderActions.CREATE_ORDER_SUCCEDED:
+		return {
+			...initialState,
 		};
 	default:
 		return state;

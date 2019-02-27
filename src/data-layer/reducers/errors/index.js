@@ -1,9 +1,9 @@
 import actions from '../../actions';
-import {FETCH_BEVERAGE_BY_ID_FAILED} from "../../actions/beverages.actions";
 
 const {
 	beverageActions,
 	userActions,
+	orderActions,
 } = actions;
 const errors = [];
 
@@ -35,6 +35,7 @@ export default (state = errors, action) => {
 	case beverageActions.FETCH_BEVERAGE_BY_ID_FAILED:
 	case userActions.USER_LOGIN_SUCCEDED:
 	case userActions.USER_LOGIN_FAILED:
+	case orderActions.CREATE_ORDER_FAILED:
 		return getErrors(action);
 	default:
 		return state;

@@ -15,8 +15,8 @@ import * as constants from './constants';
 import * as utils from './utils';
 import actions from './data-layer/actions';
 
-const { userActions } = actions;
-const { NBEVERAGES_TOKEN } = constants;
+const { userActions, cartActions } = actions;
+const { NBEVERAGES_TOKEN, NBEVERAGES_SHOPPING_CART } = constants;
 
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
@@ -26,6 +26,7 @@ const store = configureStore({
 sagaMiddleware.run(rootSaga);
 
 const token = localStorage.getItem(NBEVERAGES_TOKEN);
+const shoppingCart = localStorage.getItem(NBEVERAGES_SHOPPING_CART);
 
 if (token) {
 	const decoded = utils.decodeJwtToken(token);
@@ -38,6 +39,12 @@ if (token) {
 			userActions.userLoginSucceded({ user: { ...decoded } }),
 		);
 	}
+}
+
+if (shoppingCart) {
+	store.dispatch(
+		cartActions.setShoppingCart(shoppingCart),
+	);
 }
 
 ReactDOM.render(

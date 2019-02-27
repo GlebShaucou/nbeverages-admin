@@ -81,3 +81,11 @@ export const userLogin = user => request({
 		body: { user },
 	},
 });
+
+export const createOrder = order => request({
+	url: `${baseUri}orders`,
+	params: {
+		method: 'POST',
+		body: { ...order },
+	},
+});

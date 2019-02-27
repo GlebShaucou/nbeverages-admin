@@ -15,10 +15,13 @@ import * as constants from '../../constants';
 const {
 	beverageActions,
 	userActions,
+	cartActions,
+	orderActions,
 } = actions;
 
 const {
 	NBEVERAGES_TOKEN,
+	NBEVERAGES_SHOPPING_CART,
 } = constants;
 
 const {
@@ -108,6 +111,62 @@ const {
 	watchedActionType: beverageActions.FETCH_BEVERAGE_BY_ID,
 });
 
+function* updateCartLocalStorage(action) {
+	try {
+		const { item, itemId } = action;
+		const shoppingCart = yield localStorage.getItem(NBEVERAGES_SHOPPING_CART);
+		let updatedShoppingCart = {
+			items: [],
+			ids: [],
+		};
+
+		if (item) {
+			if (shoppingCart) {
+				updatedShoppingCart = {
+					items: [...shoppingCart.items, item],
+					ids: [...shoppingCart.ids, item._id],
+				};
+			} else {
+				updatedShoppingCart = {
+					items: [item],
+					ids: [item._id],
+				};
+			}
+		} else if (itemId) {
+			updatedShoppingCart = {
+				items: shoppingCart.items.filter(({ _id }) => _id !== itemId),
+				ids: shoppingCart.ids.filter(itmId => itmId !== itemId),
+			};
+		}
+
+		yield localStorage.setItem(NBEVERAGES_SHOPPING_CART, updatedShoppingCart);
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+function* watchAddItemToCart() {
+	yield takeLatest(cartActions.ADD_ITEM_TO_CART, updateCartLocalStorage);
+}
+
+function* watchRemoveItemFromCart() {
+	yield takeLatest(cartActions.REMOVE_ITEM_FROM_CART, updateCartLocalStorage);
+}
+
+const {
+	watcherSagaGenerator: watchCreateOrder,
+} = makeRequestSaga({
+	request: requests.createOrder,
+	onSuccessAction: orderActions.createOrderSucceded,
+	onFailureAction: orderActions.createOrderFailed,
+}, {
+	watchedActionType: orderActions.CREATE_ORDER,
+});
+
+function* watchCreateOrderSucceded() {
+	yield takeLatest(orderActions.CREATE_ORDER_SUCCEDED, updateCartLocalStorage);
+}
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
@@ -117,4 +176,10 @@ export default function* rootSaga() {
 
 	yield fork(watchUserLogin);
 	yield fork(watchLogout);
+
+	yield fork(watchAddItemToCart);
+	yield fork(watchRemoveItemFromCart);
+
+	yield fork(watchCreateOrder);
+	yield fork(watchCreateOrderSucceded);
 }

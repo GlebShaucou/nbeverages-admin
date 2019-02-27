@@ -5,6 +5,7 @@ import user from './user';
 import errors from './errors';
 import isFetching from './isFetching';
 import cart from './cart';
+import order from './order';
 
 export default combineReducers({
 	beverages,
@@ -12,4 +13,5 @@ export default combineReducers({
 	errors,
 	isFetching,
 	cart,
+	order,
 });
