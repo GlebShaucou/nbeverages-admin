@@ -7,7 +7,13 @@ const errors = [];
 
 const getErrors = (action) => {
 	const { response, error: errorFromAction } = action;
-	const error = errorFromAction || response ? response.error : '';
+	let error = '';
+
+	if (errorFromAction) {
+		error = errorFromAction;
+	} else if (response) {
+		({ error } = response);
+	}
 
 	if (!error) {
 		return [];

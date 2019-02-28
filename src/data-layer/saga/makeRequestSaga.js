@@ -5,7 +5,10 @@ import {
 } from 'redux-saga/effects';
 import actions from '../actions';
 
-const { errorsActions } = actions;
+const {
+	errorsActions,
+	isFetchingActions,
+} = actions;
 
 export default function makeSimpleSaga({
 	request,
@@ -17,6 +20,8 @@ export default function makeSimpleSaga({
 }) {
 	const workerSagaGenerator = function* workerSaga(action) {
 		try {
+			yield put(isFetchingActions.setFetchingStatus(true));
+
 			const { query } = action;
 			let response = yield call(request, query);
 
@@ -24,11 +29,9 @@ export default function makeSimpleSaga({
 				response = handleResponse(response);
 			}
 
+			yield put(isFetchingActions.setFetchingStatus(false));
+			yield put(errorsActions.setErrors(response.error));
 			yield put(onSuccessAction(response, query));
-
-			const error = response ? response.error : '';
-
-			yield put(errorsActions.setErrors(error));
 		} catch (error) {
 			const errorMessage = error.message || error;
 
@@ -37,6 +40,7 @@ export default function makeSimpleSaga({
 			}
 
 			yield put(errorsActions.setErrors(errorMessage));
+			yield put(isFetchingActions.setFetchingStatus(false));
 		}
 	};
 
