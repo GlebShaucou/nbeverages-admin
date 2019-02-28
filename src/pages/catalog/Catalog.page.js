@@ -26,6 +26,48 @@ export default class CatalogPage extends Component {
 
 	renderFiltersSection() {
 		const { filters } = this.props;
+		const filterNames = Object.keys(filters);
+		const filterHeaders = {
+			type: 'Type',
+			category: 'Category',
+		};
+
+		return (
+			<div className="filters-sidebar">
+				{filterNames.map((filterName) => {
+					const values = filters[filterName];
+
+					if (values.length === 0) {
+						return null;
+					}
+
+					return (
+						<div className="filters-sidebar__filter-section" key={filterName}>
+							<h4 className="filter-section__header">
+								{filterHeaders[filterName]}
+							</h4>
+							<ul className="filter-section__values-list">
+								{values.map(value => (
+									<li className="values-list__item" key={value}>
+										<label htmlFor={value} className="values-list__label">
+											<input
+												type="checkbox"
+												id={value}
+												name={value}
+												className="values-list__checkbox"
+											/>
+											<span className="values-list__label-text">
+												{value}
+											</span>
+										</label>
+									</li>
+								))}
+							</ul>
+						</div>
+					);
+				})}
+			</div>
+		);
 	}
 
 	render() {
@@ -34,9 +76,7 @@ export default class CatalogPage extends Component {
 		return (
 			<div className="page-component page-component--catalog">
 				<div className="page-component__content">
-					<div className="filters-sidebar">
-						filters-sidebar
-					</div>
+					{this.renderFiltersSection()}
 					<ul className="catalog">
 						{items.map((item) => {
 							const isInCart = cart.ids.includes(item._id);
@@ -61,7 +101,7 @@ export default class CatalogPage extends Component {
 
 CatalogPage.propTypes = {
 	items: PropTypes.array,
-	filters: PropTypes.array,
+	filters: PropTypes.object,
 	loadResources: PropTypes.func,
 	addItemToCart: PropTypes.func,
 	removeItemFromCart: PropTypes.func,
@@ -70,7 +110,7 @@ CatalogPage.propTypes = {
 
 CatalogPage.defaultProps = {
 	items: [],
-	filters: [],
+	filters: {},
 	loadResources: () => {},
 	addItemToCart: () => {},
 	removeItemFromCart: () => {},

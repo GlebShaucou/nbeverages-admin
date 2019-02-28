@@ -18,3 +18,15 @@
     padding: 5px;
     list-style-type: none;
 }
+
+.filters-sidebar {
+    font-size: 1.8rem;
+}
+
+.values-list__label-text {
+    padding: 0 10px;
+}
+
+.values-list__label {
+    cursor: pointer;
+}

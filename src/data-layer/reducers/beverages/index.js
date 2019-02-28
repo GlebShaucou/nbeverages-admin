@@ -42,7 +42,8 @@ const initialState = {
 		schema: [...beverageSchema],
 	},
 	selectedItem: null,
-	filters: [],
+	filters: {},
+	appliedFilters: [],
 };
 
 const getFilters = (beverages) => {

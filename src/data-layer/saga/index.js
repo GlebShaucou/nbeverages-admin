@@ -29,7 +29,6 @@ const {
 } = makeRequestSaga({
 	request: requests.getBeverages,
 	onSuccessAction: beverageActions.fetchBeveragesSucceded,
-	onFailureAction: beverageActions.fetchBeveragesFailed,
 }, {
 	watchedActionType: beverageActions.FETCH_BEVERAGES,
 });
@@ -39,7 +38,6 @@ const {
 } = makeRequestSaga({
 	request: requests.deleteBeverages,
 	onSuccessAction: beverageActions.deleteBeverageSucceded,
-	onFailureAction: beverageActions.deleteBeverageFailed,
 }, {
 	watchedActionType: beverageActions.DELETE_BEVERAGE,
 });
@@ -49,7 +47,6 @@ const {
 } = makeRequestSaga({
 	request: requests.createBeverage,
 	onSuccessAction: beverageActions.addNewBeverageSucceeded,
-	onFailureAction: beverageActions.addNewBeverageFailed,
 }, {
 	watchedActionType: beverageActions.ADD_NEW_BEVERAGE,
 });
@@ -59,7 +56,6 @@ const {
 } = makeRequestSaga({
 	request: requests.updateBeverage,
 	onSuccessAction: beverageActions.updateBeverageSucceeded,
-	onFailureAction: beverageActions.updateBeverageFailed,
 }, {
 	watchedActionType: beverageActions.UPDATE_BEVERAGE,
 });
@@ -81,7 +77,6 @@ const {
 } = makeRequestSaga({
 	request: requests.userLogin,
 	onSuccessAction: userActions.userLoginSucceded,
-	onFailureAction: userActions.userLoginFailed,
 	handleResponse: handleLoginResponse,
 }, {
 	watchedActionType: userActions.USER_LOGIN,
@@ -106,7 +101,6 @@ const {
 } = makeRequestSaga({
 	request: requests.getBeverages,
 	onSuccessAction: beverageActions.fetchBeverageByIdSucceeded,
-	onFailureAction: beverageActions.fetchBeverageByIdFailed,
 }, {
 	watchedActionType: beverageActions.FETCH_BEVERAGE_BY_ID,
 });
@@ -158,7 +152,6 @@ const {
 } = makeRequestSaga({
 	request: requests.createOrder,
 	onSuccessAction: orderActions.createOrderSucceded,
-	onFailureAction: orderActions.createOrderFailed,
 }, {
 	watchedActionType: orderActions.CREATE_ORDER,
 });

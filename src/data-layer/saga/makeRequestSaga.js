@@ -3,6 +3,9 @@ import {
 	put,
 	takeLatest,
 } from 'redux-saga/effects';
+import actions from '../actions';
+
+const { errorsActions } = actions;
 
 export default function makeSimpleSaga({
 	request,
@@ -22,8 +25,18 @@ export default function makeSimpleSaga({
 			}
 
 			yield put(onSuccessAction(response, query));
+
+			const error = response ? response.error : '';
+
+			yield put(errorsActions.setErrors(error));
 		} catch (error) {
-			yield put(onFailureAction(error));
+			const errorMessage = error.message || error;
+
+			if (onFailureAction) {
+				yield put(onFailureAction(errorMessage));
+			}
+
+			yield put(errorsActions.setErrors(errorMessage));
 		}
 	};
 
