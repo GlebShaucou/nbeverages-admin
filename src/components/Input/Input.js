@@ -6,16 +6,18 @@ const Input = (props) => {
 		className,
 		label,
 		type,
+		name,
 		...rest
 	} = props;
 
 	return (
-		<label className={`custom-input ${className}`}>
+		<label htmlFor={name} className={`custom-input ${className}`}>
 			<span className="custom-input__label">
 				{label}
 			</span>
 			<input
 				{...rest}
+				name={name}
 				type={type}
 				className="custom-input__input"
 			/>
@@ -28,12 +30,14 @@ Input.propTypes = {
 	label: PropTypes.string,
 	value: PropTypes.string,
 	type: PropTypes.string,
+	name: PropTypes.string,
 	onChange: PropTypes.func,
 };
 Input.defaultProps = {
 	className: '',
 	label: '',
 	value: '',
+	name: '',
 	type: 'text',
 	onChange: () => {},
 };

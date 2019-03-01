@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Button(props) {
+const Button = (props) => {
 	const {
 		caption,
 		onClick,
@@ -20,7 +20,7 @@ export default function Button(props) {
 			</button>
 		</div>
 	);
-}
+};
 
 Button.propTypes = {
 	caption: PropTypes.string,
@@ -35,3 +35,5 @@ Button.defaultProps = {
 	type: 'button',
 	onClick: () => {},
 };
+
+export default Button;

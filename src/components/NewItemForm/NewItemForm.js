@@ -1,106 +1,78 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import deepEqual from 'deep-equal';
 
 import Button from '../Button';
 import Input from '../Input';
 
 import './NewItemForm.css';
 
-class NewItemForm extends Component {
-	state = {
-		values: {},
-	};
+const NewItemForm = (props) => {
+	const {
+		values: valuesFromProps,
+		className,
+		schema,
+		buttonSubmit,
+		buttonReset,
+	} = props;
 
-	componentDidMount() {
-		const { values } = this.props;
+	const [values, setValues] = useState({});
 
-		this.setValues(values);
-	}
+	useEffect(() => {
+		setValues(valuesFromProps);
+	}, [valuesFromProps]);
 
-	componentDidUpdate(prevProps) {
-		const { values } = this.props;
-
-		if (!deepEqual(values, prevProps.values)) {
-			this.setValues(values);
-		}
-	}
-
-	setValues = (values) => {
-		this.setState({
-			values: { ...values },
-		});
-	};
-
-	onChange = key => (e) => {
+	const onChange = key => (e) => {
 		const { value } = e.target;
 
-		this.setState(state => ({
-			values: { ...state.values, [key]: value },
-		}));
+		setValues(prevValues => ({ ...prevValues, [key]: value }));
 	};
 
-	onSubmit = () => {
-		const { onSubmit } = this.props;
-		const { values } = this.state;
-
-		onSubmit(values);
+	const onSubmit = () => {
+		props.onSubmit(values);
 	};
 
-	onReset = () => {
-		const { onReset } = this.props;
-
-		onReset();
+	const onReset = () => {
+		props.onReset();
 	};
 
-	render() {
-		const {
-			className,
-			schema,
-			buttonSubmit,
-			buttonReset,
-		} = this.props;
-		const { values } = this.state;
+	return (
+		<form
+			action=""
+			className={`new-beverage-form ${className}`}
+			onSubmit={(e) => { e.preventDefault(); }}
+		>
+			{schema.map((element) => {
+				const { name, label } = element;
 
-		return (
-			<form
-				action=""
-				className={`new-beverage-form ${className}`}
-				onSubmit={(e) => { e.preventDefault(); }}
-			>
-				{schema.map((element) => {
-					const { name, label } = element;
-
-					return (
-						<div
-							key={name}
-							className={`new-beverage-form__element new-beverage-form__element---${name}`}
-						>
-							<Input
-								label={label}
-								name={name}
-								value={values[name]}
-								onChange={this.onChange(name)}
-							/>
-						</div>
-					);
-				})}
-				{buttonReset.visible && (
-					<Button
-						{...buttonReset}
-						onClick={this.onReset}
-					/>
-				)}
-				{buttonSubmit.visible && (
-					<Button
-						{...buttonSubmit}
-						onClick={this.onSubmit}
-					/>
-				)}
-			</form>
-		);
-	}
-}
+				return (
+					<div
+						key={name}
+						className={`new-beverage-form__element new-beverage-form__element---${name}`}
+					>
+						<Input
+							label={label}
+							name={name}
+							value={values[name]}
+							onChange={onChange(name)}
+						/>
+					</div>
+				);
+			})}
+			{buttonReset.visible && (
+				<Button
+					{...buttonReset}
+					onClick={onReset}
+				/>
+			)}
+			{buttonSubmit.visible && (
+				<Button
+					{...buttonSubmit}
+					onClick={onSubmit}
+				/>
+			)}
+		</form>
+	);
+};
 
 NewItemForm.propTypes = {
 	className: PropTypes.string,
