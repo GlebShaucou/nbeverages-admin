@@ -1,0 +1,14 @@
+.page-component--order {}
+
+.order-page__search-form {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.order-page__search-button {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 20px;
+}

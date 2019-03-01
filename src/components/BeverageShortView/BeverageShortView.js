@@ -21,9 +21,10 @@ const BeverageShortView = (props) => {
 		name,
 		type,
 		category,
-		description,
+		// description,
 		price,
 		currency,
+		quantity,
 		_id: itemId,
 	} = item;
 
@@ -54,12 +55,12 @@ const BeverageShortView = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="beverage-short-view__description">
-				{description}
-			</div>
+			{/* <div className="beverage-short-view__description"> */}
+			{/* {description} */}
+			{/* </div> */}
 			<div className="beverage-short-view__footer">
 				<div className="bsv-footer__quantity">
-					0
+					{`${quantity} g`}
 				</div>
 				<div className="bsv-footer__price">
 					{`${price} ${currency}`}

@@ -37,6 +37,11 @@ export default [
 		component: pages.CartPage,
 	},
 	{
+		path: '/order',
+		exact: true,
+		component: pages.OrderPage,
+	},
+	{
 		path: '/',
 		exact: true,
 		component: pages.MainPage,

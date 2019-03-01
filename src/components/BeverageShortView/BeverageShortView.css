@@ -1,6 +1,9 @@
 .beverage-short-view {
-    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     color: #000000;
+}
+
+.beverage-short-view:hover {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .beverage-short-view__main {
@@ -17,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 1.8rem;
-    padding: 5px;
+    padding: 20px 5px 5px;
 }
 
 .beverage-short-view__image-container {
@@ -31,6 +34,7 @@
 }
 
 .main-info__name {
+    padding: 10px 0;
     font-size: 2.1rem;
 }
 

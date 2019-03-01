@@ -1,80 +1,77 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import { Input, Button } from '../../components';
 
-export default class LoginPage extends Component {
-	state = {
+const LoginPage = (props) => {
+	const [state, setState] = useState({
 		email: '',
 		password: '',
-	};
+	});
 
-	componentDidMount() {
+	useEffect(() => {
 		document.title = 'Login | Natural Beverages';
-	}
+	}, []);
 
-	onLogin = (e) => {
+	const onLogin = (e) => {
 		e.preventDefault();
 
-		const { onLogin } = this.props;
-
-		onLogin({ ...this.state });
+		props.onLogin({ ...state });
 	};
 
-	onInputChange = ({ target }) => {
-		this.setState({
+	const onInputChange = ({ target }) => {
+		setState(prevState => ({
+			...prevState,
 			[target.name]: target.value,
-		});
+		}));
 	};
 
-	render() {
-		const {
-			email,
-			password,
-		} = this.state;
-		const { user } = this.props;
+	const {
+		email,
+		password,
+	} = state;
+	const { user } = props;
 
-		if (user) {
-			return (
-				<Redirect to="/" />
-			);
-		}
-
+	if (user) {
 		return (
-			<div className="page-component page-component--login">
-				<h2 className="login-page__header">
-					Login
-				</h2>
-				<form
-					action=""
-					onSubmit={this.onLogin}
-					className="login-page__form"
-				>
-					<Input
-						type="email"
-						placeholder="Email"
-						className="login-page-form__input"
-						name="email"
-						onChange={this.onInputChange}
-						value={email}
-					/>
-					<Input
-						type="password"
-						placeholder="Password"
-						className="login-page-form__input"
-						name="password"
-						onChange={this.onInputChange}
-						value={password}
-					/>
-					<Button
-						type="submit"
-						caption="Login"
-					/>
-				</form>
-			</div>
+			<Redirect to="/" />
 		);
 	}
+
+	return (
+		<div className="page-component page-component--login">
+			<form
+				action=""
+				onSubmit={onLogin}
+				className="login-page__form"
+			>
+				<Input
+					label="Email"
+					type="email"
+					placeholder="Email"
+					className="login-page-form__input"
+					name="email"
+					onChange={onInputChange}
+					value={email}
+				/>
+				<Input
+					label="Password"
+					type="password"
+					placeholder="Password"
+					className="login-page-form__input"
+					name="password"
+					onChange={onInputChange}
+					value={password}
+				/>
+				<Button
+					type="submit"
+					caption="Login"
+					className="login-page-form__button"
+				/>
+			</form>
+		</div>
+	);
 }
 
 LoginPage.propTypes = {
@@ -86,3 +83,5 @@ LoginPage.defaultProps = {
 	onLogin: () => {},
 	user: null,
 };
+
+export default LoginPage;

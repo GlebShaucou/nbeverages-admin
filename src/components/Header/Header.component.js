@@ -88,7 +88,7 @@ const Header = (props) => {
 							</Link>
 							{' | '}
 							<Link
-								to="/order-status"
+								to="/order"
 								className="navigation-menu__link navigation-menu__link--admin"
 							>
 								Check order status

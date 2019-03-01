@@ -90,7 +90,7 @@ export default class CatalogPage extends Component {
 								<li key={JSON.stringify(item)} className="catalog__item">
 									<BeverageShortView
 										item={item}
-										buttonCaption={isInCart ? 'Remove from Cart' : 'Add to Cart'}
+										buttonCaption={isInCart ? 'Remove' : 'Add'}
 										onButtonClick={this.onCatalogItemButtonClick(item, isInCart)}
 										buttonClassName={isInCart ? 'remove-button' : ''}
 									/>

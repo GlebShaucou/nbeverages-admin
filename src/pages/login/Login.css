@@ -1,0 +1,13 @@
+.page-component--login {}
+
+.login-page__form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.login-page__form  .custom-button-wrapper {
+    align-self: center;
+    margin-top: 10px;
+}
