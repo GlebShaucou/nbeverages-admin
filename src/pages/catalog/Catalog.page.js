@@ -24,22 +24,26 @@ export default class CatalogPage extends Component {
 		};
 	};
 
+	onChangeFilter = ({ filterName, filter }) => {
+		const { setFilter } = this.props;
+
+		return (e) => {
+			setFilter({ filterName, filter, addFilter: e.target.checked });
+		};
+	};
+
 	renderFiltersSection() {
 		const { filters } = this.props;
 		const filterNames = Object.keys(filters);
 		const filterHeaders = {
-			type: 'Type',
 			category: 'Category',
+			type: 'Type',
 		};
 
 		return (
 			<div className="filters-sidebar">
 				{filterNames.map((filterName) => {
 					const values = filters[filterName];
-
-					if (values.length === 0) {
-						return null;
-					}
 
 					return (
 						<div className="filters-sidebar__filter-section" key={filterName}>
@@ -55,6 +59,7 @@ export default class CatalogPage extends Component {
 												id={value}
 												name={value}
 												className="values-list__checkbox"
+												onChange={this.onChangeFilter({ filterName, filter: value })}
 											/>
 											<span className="values-list__label-text">
 												{value}
@@ -105,6 +110,7 @@ CatalogPage.propTypes = {
 	loadResources: PropTypes.func,
 	addItemToCart: PropTypes.func,
 	removeItemFromCart: PropTypes.func,
+	setFilter: PropTypes.func,
 	cart: PropTypes.object,
 };
 
@@ -114,6 +120,7 @@ CatalogPage.defaultProps = {
 	loadResources: () => {},
 	addItemToCart: () => {},
 	removeItemFromCart: () => {},
+	setFilter: () => {},
 	cart: {
 		items: [],
 		ids: [],

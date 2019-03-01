@@ -46,9 +46,24 @@ export const request = ({
 		.catch((error) => { throw error; });
 };
 
-export const getBeverages = ({ id }) => request({
-	url: `${baseUri}beverages${id ? `/${id}` : ''}`,
-});
+export const getBeverages = ({ id, query }) => {
+	let url = `${baseUri}beverages${id ? `/${id}` : ''}`;
+
+	if (query) {
+		const queryParams = Object.keys(query);
+		const encodedUri = encodeURI(
+			queryParams
+				.map(param => `${param}=${query[param]}`)
+				.join('&'),
+		);
+
+		url = `${url}?${encodedUri}`;
+	}
+
+	return request({
+		url,
+	});
+};
 
 export const deleteBeverages = ({ beverageId }) => request({
 	url: `${baseUri}beverages`,

@@ -153,7 +153,7 @@ export default class CartPage extends Component {
 	render() {
 		const { cart, userOrder } = this.props;
 		const { items } = cart;
-		console.log('userOrder', userOrder);
+
 		return (
 			<div className="page-component page-component--cart">
 				{(items.length === 0 && !userOrder) && (

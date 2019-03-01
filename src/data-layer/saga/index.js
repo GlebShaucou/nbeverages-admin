@@ -2,6 +2,8 @@ import {
 	fork,
 	takeLatest,
 	put,
+	call,
+	select,
 } from 'redux-saga/effects';
 
 import makeRequestSaga from './makeRequestSaga';
@@ -17,6 +19,7 @@ const {
 	userActions,
 	cartActions,
 	orderActions,
+	errorsActions,
 } = actions;
 
 const {
@@ -88,7 +91,7 @@ function* userLogout() {
 
 		yield put(userActions.userLogoutSucceded());
 	} catch (error) {
-		yield put(userActions.userLogoutFailed(error));
+		yield put(errorsActions.setErrors(error));
 	}
 }
 
@@ -160,12 +163,36 @@ function* watchCreateOrderSucceded() {
 	yield takeLatest(orderActions.CREATE_ORDER_SUCCEDED, updateCartLocalStorage);
 }
 
+const getAppliedFilters = state => state.beverages.appliedFilters;
+
+function* fetchFilteredBeverages() {
+	try {
+		const appliedFilters = yield select(getAppliedFilters);
+		const query = appliedFilters
+			.reduce((q, { filterName, filter }) => ({
+				...q,
+				[filterName]: filter,
+			}), {});
+
+		const response = yield call(requests.getBeverages, { query });
+
+		yield put(beverageActions.fetchBeveragesSucceded(response));
+	} catch (error) {
+		yield put(errorsActions.setErrors(error));
+	}
+}
+
+function* watchBeveragesFilter() {
+	yield takeLatest(beverageActions.SET_BEVERAGES_FILTER, fetchFilteredBeverages);
+}
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
 	yield fork(watchAddBeverage);
 	yield fork(watchUpdateBeverage);
 	yield fork(watchFetchBeverageById);
+	yield fork(watchBeveragesFilter);
 
 	yield fork(watchUserLogin);
 	yield fork(watchLogout);

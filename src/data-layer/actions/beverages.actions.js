@@ -25,7 +25,10 @@ export const updateBeverage = makeActionCreator(UPDATE_BEVERAGE, 'query');
 export const updateBeverageSucceeded = makeActionCreator(UPDATE_BEVERAGE_SUCCEDED, 'response');
 
 export const FETCH_BEVERAGE_BY_ID = 'FETCH_BEVERAGE_BY_ID';
-export const FETCH_BEVERAGE_BY_ID_SUCCEDED = 'FETCH_BEVERAGE_BY_ID_SUCCEDED';;
+export const FETCH_BEVERAGE_BY_ID_SUCCEDED = 'FETCH_BEVERAGE_BY_ID_SUCCEDED';
 
 export const fetchBeverageById = makeActionCreator(FETCH_BEVERAGE_BY_ID, 'query');
 export const fetchBeverageByIdSucceeded = makeActionCreator(FETCH_BEVERAGE_BY_ID_SUCCEDED, 'response');
+
+export const SET_BEVERAGES_FILTER = 'SET_BEVERAGES_FILTER';
+export const setBeveragesFilter = makeActionCreator(SET_BEVERAGES_FILTER, 'query', 'addFilter');

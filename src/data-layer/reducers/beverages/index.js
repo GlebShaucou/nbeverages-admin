@@ -2,6 +2,10 @@ import actions from '../../actions';
 
 const beverageSchema = [
 	{
+		name: 'category',
+		label: 'Category',
+	},
+	{
 		name: 'type',
 		label: 'Type',
 	},
@@ -16,10 +20,6 @@ const beverageSchema = [
 	{
 		name: 'description',
 		label: 'Description',
-	},
-	{
-		name: 'category',
-		label: 'Category',
 	},
 	{
 		name: 'quantity',
@@ -56,9 +56,20 @@ const getFilters = (beverages) => {
 	});
 
 	return {
-		type: [...type],
 		category: [...category],
+		type: [...type],
 	};
+};
+
+const updateFilters = ({ appliedFilters }, { query, addFilter }) => {
+	const updatedFilters = appliedFilters
+		.filter(appliedFilter => appliedFilter.filterName !== query.filterName);
+
+	if (addFilter) {
+		return [...updatedFilters, { ...query }];
+	}
+
+	return updatedFilters;
 };
 
 export default (state = initialState, action) => {
@@ -82,6 +93,11 @@ export default (state = initialState, action) => {
 		return {
 			...state,
 			selectedItem: { ...response.beverage },
+		};
+	case beverageActions.SET_BEVERAGES_FILTER:
+		return {
+			...state,
+			appliedFilters: updateFilters(state, action),
 		};
 	default:
 		return state;

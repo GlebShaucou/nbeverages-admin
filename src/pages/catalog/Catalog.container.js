@@ -25,6 +25,9 @@ const mapDispatchToProps = dispatch => ({
 	removeItemFromCart: (itemId) => {
 		dispatch(cartActions.removeItemFromCart(itemId));
 	},
+	setFilter: ({ filterName, filter, addFilter }) => {
+		dispatch(beverageActions.setBeveragesFilter({ filterName, filter }, addFilter));
+	},
 });
 
 export default connect(
