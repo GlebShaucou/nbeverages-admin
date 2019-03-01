@@ -12,6 +12,8 @@ const OrderPage = (props) => {
 
 	const onSearchOrder = (e) => {
 		e.preventDefault();
+
+		props.onSearchOrder(orderId);
 	};
 	const onInputChange = (e) => {
 		setOrderId(e.target.value);

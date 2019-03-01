@@ -104,3 +104,11 @@ export const createOrder = order => request({
 		body: { ...order },
 	},
 });
+
+export const getOrders = ({ orderId }) => {
+	const url = `${baseUri}orders${orderId ? `/${orderId}` : ''}`;
+
+	return request({
+		url,
+	});
+};

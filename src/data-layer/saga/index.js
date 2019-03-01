@@ -186,6 +186,15 @@ function* watchBeveragesFilter() {
 	yield takeLatest(beverageActions.SET_BEVERAGES_FILTER, fetchFilteredBeverages);
 }
 
+const {
+	watcherSagaGenerator: watchFetchOrders,
+} = makeRequestSaga({
+	request: requests.getOrders,
+	onSuccessAction: orderActions.createOrderSucceded,
+}, {
+	watchedActionType: orderActions.GET_ORDERS,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
@@ -202,4 +211,5 @@ export default function* rootSaga() {
 
 	yield fork(watchCreateOrder);
 	yield fork(watchCreateOrderSucceded);
+	yield fork(watchFetchOrders);
 }
