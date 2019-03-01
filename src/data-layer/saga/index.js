@@ -13,6 +13,7 @@ import localStorage from '../localStorage';
 
 import * as utils from '../../utils';
 import * as constants from '../../constants';
+import {GET_ORDERS_BY_ID} from "../actions/order.actions";
 
 const {
 	beverageActions,
@@ -192,7 +193,7 @@ const {
 	request: requests.getOrders,
 	onSuccessAction: orderActions.createOrderSucceded,
 }, {
-	watchedActionType: orderActions.GET_ORDERS,
+	watchedActionType: orderActions.GET_ORDERS_BY_ID,
 });
 
 export default function* rootSaga() {

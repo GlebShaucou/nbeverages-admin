@@ -6,12 +6,12 @@ import OrderPage from './Order.page';
 const { orderActions } = actions;
 
 const mapStateToProps = state => ({
-	userOrder: state.userOrder,
+	userOrder: state.order.userOrder,
 });
 
 const mapDispatchToProps = dispatch => ({
 	onSearchOrder: (orderId) => {
-		dispatch(orderActions.getOrders({ orderId }));
+		dispatch(orderActions.getOrdersById({ orderId }));
 	},
 });
 

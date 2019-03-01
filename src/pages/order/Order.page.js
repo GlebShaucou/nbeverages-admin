@@ -18,6 +18,7 @@ const OrderPage = (props) => {
 	const onInputChange = (e) => {
 		setOrderId(e.target.value);
 	};
+	const { userOrder } = props;
 
 	return (
 		<div className="page-component page-component--order">
@@ -37,20 +38,48 @@ const OrderPage = (props) => {
 					className="order-page__search-button"
 				/>
 			</form>
-			<div className="order-page__order-info">
-
-			</div>
+			{userOrder && (
+				<div className="order-page__order-info">
+					<div>
+						Order with id {userOrder._id} status {userOrder.status}
+					</div>
+					<div>
+						Ordered by {userOrder.customerName}
+					</div>
+					<div>
+						Email {userOrder.customerEmail}, phone {userOrder.customerPhone}
+					</div>
+					<div>
+						Delivery address {userOrder.deliveryAddress}
+					</div>
+					<div>
+						Payment method {userOrder.paymentMethod}
+					</div>
+					<div>
+						<ul>
+							{userOrder.items.map(item => (
+								<li key={item._id}>
+									{item.name}
+								</li>
+							))}
+						</ul>
+						<div>
+							Total {userOrder.totalAmount}{userOrder.currency}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
 
 OrderPage.propTypes = {
-	order: PropTypes.object,
+	userOrder: PropTypes.object,
 	onSearchOrder: PropTypes.func,
 };
 
 OrderPage.defaultProps = {
-	order: null,
+	userOrder: null,
 	onSearchOrder: () => {},
 };
 
