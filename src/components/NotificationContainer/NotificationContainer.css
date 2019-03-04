@@ -1,5 +1,16 @@
 .notification-container {
-    color: #f08080;
+    width: 100%;
+}
+
+.notification-container__error-message {
+    max-width: 1320px;
+    margin: 0 auto;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    padding: 15px 30px;
 }
 
 .notification-container__errors-header {

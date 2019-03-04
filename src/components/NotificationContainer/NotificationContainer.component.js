@@ -10,12 +10,14 @@ const NotificationContainer = (props) => {
 
 	return (
 		<div className="notification-container">
-			<h4 className="notification-container__errors-header">Errors:</h4>
-			{errors.map(error => (
-				<span key={error} className="notification-container__error">
-					{JSON.stringify(error)}
-				</span>
-			))}
+			<div className="notification-container__error-message">
+				<h4 className="notification-container__errors-header">Errors:</h4>
+				{errors.map(error => (
+					<span key={error} className="notification-container__error">
+						{JSON.stringify(error)}
+					</span>
+				))}
+			</div>
 		</div>
 	);
 };

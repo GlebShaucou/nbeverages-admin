@@ -3,7 +3,7 @@
 }
 
 .welcome-message-section {
-
+    position: relative;
 }
 
 .promo-section {
@@ -47,3 +47,43 @@
     text-align: justify;
 }
 
+.link-block-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+}
+
+.link-block__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    font-size: 5rem;
+    color: #ffffff;
+    text-decoration: none;
+    border: 6px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 100px 30px;
+}
+
+.welcome-message__link-header {
+
+}
+
+.welcome-message__link-text {
+
+}
+
+.right-section__image-wrapper {
+    position: relative;
+}
+
+.right-section__image-wrapper .link-block__link {
+    padding: 30px;
+}
