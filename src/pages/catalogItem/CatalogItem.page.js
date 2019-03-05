@@ -1,83 +1,95 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../components/Button';
 
-export default class CatalogItemPage extends Component {
-	componentDidMount() {
-		const { loadResources, selectedItem } = this.props;
-
-		loadResources();
+const CatalogItemPage = (props) => {
+	const setDocumentTitle = () => {
+		const { selectedItem } = props;
 
 		document.title = `${(selectedItem && selectedItem.name) || 'Selected'} | Natural Beverages`;
-	}
+	};
 
-	onAddToCartClick = () => {
-		const { selectedItem, addItemToCart } = this.props;
+	useEffect(() => {
+		const { loadResources } = props;
+
+		loadResources();
+		setDocumentTitle();
+	}, []);
+
+	useEffect(() => {
+		setDocumentTitle();
+	}, [props.selectedItem]);
+
+	const onAddToCartClick = () => {
+		const { selectedItem, addItemToCart } = props;
 
 		addItemToCart(selectedItem);
 	};
-
-	onRemoveFromCartClick = () => {
-		const { selectedItem, removeItemFromCart } = this.props;
+	const onRemoveFromCartClick = () => {
+		const { selectedItem, removeItemFromCart } = props;
 
 		removeItemFromCart(selectedItem._id);
 	};
 
-	render() {
-		const { selectedItem, isAddedToCart } = this.props;
+	const { selectedItem, isAddedToCart } = props;
 
-		if (!selectedItem) {
-			return null;
-		}
+	if (!selectedItem) {
+		return null;
+	}
 
-		const {
-			imgSrc,
-			name,
-			type,
-			category,
-			description,
-			price,
-			currency,
-			// _id: itemId,
-		} = selectedItem;
-		const onButtonClick = isAddedToCart ? this.onRemoveFromCartClick : this.onAddToCartClick;
+	const {
+		imgSrc,
+		name,
+		type,
+		category,
+		description,
+		price,
+		currency,
+		quantity,
+		// _id: itemId,
+	} = selectedItem;
+	const onButtonClick = isAddedToCart ? onRemoveFromCartClick : onAddToCartClick;
 
-		return (
-			<div className="page-component page-component--catalog-item">
-				<div className="catalog-item__image-section">
-					<img src={imgSrc} alt="tea" className="catalog-item__image" />
+	return (
+		<div className="page-component page-component--catalog-item">
+			<div className="catalog-item__image-section">
+				<img src={imgSrc} alt="tea" className="catalog-item__image" />
+			</div>
+			<div className="catalog-item__description-section">
+				<h2 className="catalog-item__name">
+					{name}
+				</h2>
+				<div className="catalog-item__type">
+					{`${type} ${category}`}
 				</div>
-				<div className="catalog-item__description-section">
-					<h2 className="catalog-item__name">
-						{name}
-					</h2>
-					<div className="catalog-item__type">
-						{`${type} ${category}`}
-					</div>
-					<div className="catalog-item__amount">
-						100
-					</div>
-					<div className="catalog-item__price">
-						<span>
-							{`${price} ${currency}`}
-						</span>
-						<span>
-							<Button
-								caption={isAddedToCart ? 'Remove From Cart' : 'Add To Cart'}
-								onClick={onButtonClick}
-								className={isAddedToCart ? 'remove-button' : ''}
-							/>
-						</span>
-					</div>
-					<div className="catalog-item__description">
-						{description}
-					</div>
+				<div className="catalog-item__amount">
+					<span className="">
+						Quantity:
+					</span> {`${quantity} g`}
+				</div>
+				<div className="catalog-item__price">
+					<span className="catalog-item__price-value">
+						{`${price} ${currency}`}
+					</span>
+					<span className="catalog-item__button">
+						<Button
+							caption={isAddedToCart ? 'Remove From Cart' : 'Add To Cart'}
+							onClick={onButtonClick}
+							className={isAddedToCart ? 'remove-button' : ''}
+						/>
+					</span>
+				</div>
+				<div className="catalog-item__description">
+					<span className="catalog-item__description-header">
+						Description:
+					</span> <br /><br />
+					{description}
 				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 CatalogItemPage.propTypes = {
 	selectedItem: PropTypes.object,
@@ -94,3 +106,5 @@ CatalogItemPage.defaultProps = {
 	removeItemFromCart: () => {},
 	isAddedToCart: false,
 };
+
+export default CatalogItemPage;

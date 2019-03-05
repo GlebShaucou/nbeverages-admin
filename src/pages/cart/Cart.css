@@ -34,13 +34,14 @@
 .shopping-cart__total-price {
     font-size: 2rem;
     font-weight: 700;
-    padding: 10px 0;
+    padding: 20px 0;
+    text-align: center;
 }
 
 .shopping-cart__customer-info {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 1000px;
     margin: 0 auto;
 }
 
@@ -55,4 +56,9 @@
 
 .shopping-cart__order-id {
     font-weight: 700;
+}
+
+.shopping-cart__empty {
+    font-size: 3rem;
+    text-align: center;
 }

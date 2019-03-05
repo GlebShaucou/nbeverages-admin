@@ -7,4 +7,5 @@
 .application__content {
     width: 100%;
     flex: 1;
+    padding-top: 30px;
 }

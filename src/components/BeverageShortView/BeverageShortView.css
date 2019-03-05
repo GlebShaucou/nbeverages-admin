@@ -19,6 +19,7 @@
 .beverage-short-view__footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 1.8rem;
     padding: 20px 5px 5px;
 }

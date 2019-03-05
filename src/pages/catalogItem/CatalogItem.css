@@ -17,3 +17,24 @@
 .catalog-item__image {
 
 }
+
+.catalog-item__price {
+    padding: 20px 0;
+}
+
+.catalog-item__button {
+    padding: 0 15px;
+}
+
+.catalog-item__amount {
+    padding: 15px 0;
+    font-weight: 700;
+}
+
+.catalog-item__type {
+    padding: 15px 0;
+}
+
+.catalog-item__description-header {
+    font-weight: 700;
+}

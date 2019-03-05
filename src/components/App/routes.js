@@ -1,8 +1,9 @@
 import * as pages from '../../pages';
+import * as constants from '../../constants';
 
 export default [
 	{
-		path: '/secret-section',
+		path: constants.PAGE_ADMIN,
 		exact: true,
 		component: pages.AdminPage,
 	},

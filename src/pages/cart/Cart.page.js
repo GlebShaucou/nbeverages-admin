@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+// import InputMask from 'react-input-mask';
 
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import { Select, Button, Input } from '../../components';
 
 export default class CartPage extends Component {
 	state = {
 		customerName: '',
 		paymentMethod: '',
 		customerEmail: '',
+		deliveryMethod: 'delivery',
 		deliveryAddress: '',
 		customerPhone: '',
 	};
@@ -61,9 +62,44 @@ export default class CartPage extends Component {
 			customerName,
 			paymentMethod,
 			customerEmail,
+			deliveryMethod,
 			deliveryAddress,
 			customerPhone,
 		} = this.state;
+		const paymentMethods = [
+			{
+				value: 'cash',
+				label: 'Cash',
+			},
+			{
+				value: 'creditCard',
+				label: 'Credit Cart',
+			},
+		];
+		const deliveryMethods = [
+			{
+				value: 'delivery',
+				label: 'Delivery',
+			},
+			{
+				value: 'pickup',
+				label: 'Pickup',
+			},
+		];
+		const pickupAddresses = [
+			{
+				value: 'Minsk, ave. Gazety Zvyazda, 37',
+				label: 'Minsk, ave. Gazety Zvyazda, 37',
+			},
+			{
+				value: 'Minsk, ave. Gazety Zvyazda, 35',
+				label: 'Minsk, ave. Gazety Zvyazda, 35',
+			},
+			{
+				value: 'Minsk, ave. Gazety Zvyazda, 33',
+				label: 'Minsk, ave. Gazety Zvyazda, 33',
+			},
+		];
 
 		return (
 			<form
@@ -77,30 +113,52 @@ export default class CartPage extends Component {
 					onChange={this.onChangeFormValue}
 					value={customerName}
 				/>
-				<Input
+				<Select
 					label="Payment Method"
 					name="paymentMethod"
 					onChange={this.onChangeFormValue}
-					value={paymentMethod}
+					selectedValue={paymentMethod}
+					values={paymentMethods}
 				/>
 				<Input
-					label="Email"
-					name="customerEmail"
-					onChange={this.onChangeFormValue}
-					value={customerEmail}
-				/>
-				<Input
-					label="Delivery"
-					name="deliveryAddress"
-					onChange={this.onChangeFormValue}
-					value={deliveryAddress}
-				/>
-				<Input
+					type="tel"
 					label="Phone Number"
 					name="customerPhone"
 					onChange={this.onChangeFormValue}
 					value={customerPhone}
 				/>
+				<Input
+					type="email"
+					label="Email"
+					name="customerEmail"
+					onChange={this.onChangeFormValue}
+					value={customerEmail}
+				/>
+				<Select
+					label="Delivery Method"
+					name="deliveryMethod"
+					onChange={this.onChangeFormValue}
+					selectedValue={deliveryMethod}
+					values={deliveryMethods}
+				/>
+				{deliveryMethod === 'pickup' && (
+					<Select
+						label="Select Pickup Point"
+						name="deliveryAddress"
+						onChange={this.onChangeFormValue}
+						selectedValue={deliveryAddress}
+						values={pickupAddresses}
+					/>
+				)}
+				{deliveryMethod === 'delivery' && (
+					<Input
+						label="Enter Delivery Address"
+						name="deliveryAddress"
+						onChange={this.onChangeFormValue}
+						value={deliveryAddress}
+						placeholder="City, Street, House, Apartment..."
+					/>
+				)}
 				<Button
 					type="submit"
 					caption="Order"
@@ -128,7 +186,10 @@ export default class CartPage extends Component {
 									</Link>
 								</span>
 								<span className="shopping-cart__item-quantity">
-									{item.quantity}
+									{`${item.type}, ${item.category}`}
+								</span>
+								<span className="shopping-cart__item-quantity">
+									{`${item.quantity} g`}
 								</span>
 								<span className="shopping-cart__price">
 									{`${item.price} ${item.currency}`}
@@ -162,7 +223,7 @@ export default class CartPage extends Component {
 					</div>
 				)}
 				{items.length > 0 && this.renderShoppingCartContent()}
-				{userOrder && (
+				{(userOrder && items.length === 0) && (
 					<div className="shopping-cart__oder-description">
 						Your order with id
 						<span className="shopping-cart__order-id">

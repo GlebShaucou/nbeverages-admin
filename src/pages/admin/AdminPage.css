@@ -6,18 +6,31 @@
 }
 
 .admin-page__list-of-items {
-    display: flex;
-    flex-wrap: wrap;
     margin: 0;
     padding: 5px;
 }
 
 .list-of-items__item {
-    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     list-style-type: none;
+    padding: 15px 0;
+}
+
+.item-attr {
+    padding: 0 10px;
+    flex: 1 1 auto;
 }
 
 .item-attr--image {
     width: 100px;
     height: 80px;
+    padding: 0;
+}
+
+.list-of-items__item .admin-button {
+    color: #993233;
+    background-color: #ffffff;
 }

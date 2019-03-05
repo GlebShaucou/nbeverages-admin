@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Input, Button } from '../../components';
+import {Link} from "react-router-dom";
 
 const OrderPage = (props) => {
 	const [orderId, setOrderId] = useState('');
@@ -40,30 +41,47 @@ const OrderPage = (props) => {
 			</form>
 			{userOrder && (
 				<div className="order-page__order-info">
-					<div>
+					<div className="order-info__order-id">
 						Order with id {userOrder._id} status {userOrder.status}
 					</div>
-					<div>
+					<div className="order-info__customer-name">
 						Ordered by {userOrder.customerName}
 					</div>
-					<div>
+					<div className="order-info__email">
 						Email {userOrder.customerEmail}, phone {userOrder.customerPhone}
 					</div>
-					<div>
+					<div className="order-info__delivery">
 						Delivery address {userOrder.deliveryAddress}
 					</div>
-					<div>
+					<div className="order-info__payment-method">
 						Payment method {userOrder.paymentMethod}
 					</div>
-					<div>
-						<ul>
-							{userOrder.items.map(item => (
-								<li key={item._id}>
-									{item.name}
-								</li>
-							))}
+					<div className="order-info__items">
+						<ul className="order-info__items-list">
+							{userOrder.items.map((item) => {
+								const { _id: itemId } = item;
+
+								return (
+									<li key={item._id} className="order-info__item">
+										<span className="order-info__item-name">
+											<Link to={`/catalog/${itemId}`} className="item-name__link">
+												{item.name}
+											</Link>
+										</span>
+										<span className="order-info__item-quantity">
+											{`${item.type}, ${item.category}`}
+										</span>
+										<span className="order-info__item-quantity">
+											{`${item.quantity} g`}
+										</span>
+										<span className="order-info__price">
+											{`${item.price} ${item.currency}`}
+										</span>
+									</li>
+								);
+							})}
 						</ul>
-						<div>
+						<div className="order-info__total-price">
 							Total {userOrder.totalAmount}{userOrder.currency}
 						</div>
 					</div>

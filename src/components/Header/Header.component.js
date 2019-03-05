@@ -4,6 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 
 import logoImg from './img/logo.png';
 import Button from '../Button';
+import * as constants from '../../constants';
 
 const Header = (props) => {
 	const { user, onLogout, cart } = props;
@@ -58,7 +59,7 @@ const Header = (props) => {
 							{user ? (
 								<div className="admin-section">
 									<Link
-										to="/secret-section"
+										to={constants.PAGE_ADMIN}
 										className="navigation-menu__link navigation-menu__link--admin"
 									>
 										admin

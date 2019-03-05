@@ -1,11 +1,12 @@
 .application-header {
     width: 100%;
-    padding: 10px 0;
 }
 
 .application-header__container {
     width: 1320px;
     margin: 0  auto;
+    border-bottom: 1px solid #993233;
+    padding-bottom: 20px;
 }
 
 .application-header__navigation-menu {

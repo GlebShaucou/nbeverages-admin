@@ -1,83 +1,83 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import { NewItemForm, Button } from '../../components';
 
-export default class AdminPage extends Component {
-	state = {
-		editingItemId: '',
-	};
+const AdminPage = (props) => {
+	const [editingItemId, setEditedItem] = useState('');
 
-	componentDidMount() {
-		const { loadData } = this.props;
+	useEffect(() => {
+		const { loadData } = props;
 
 		loadData();
 
 		document.title = 'Administration section | Natural Beverages';
-	}
+	}, []);
 
-	onAddBeverage = (beverage) => {
-		const { addItem } = this.props;
+	const onAddBeverage = (beverage) => {
+		const { addItem } = props;
 
 		addItem(beverage);
 	};
 
-	onUpdateBeverage = beverageId => (beverage) => {
-		const { updateItem } = this.props;
+	const onUpdateBeverage = beverageId => (beverage) => {
+		const { updateItem } = props;
 
 		updateItem({ ...beverage, beverageId });
 	};
 
-	onRemoveItem = beverageId => () => {
+	const onRemoveItem = beverageId => () => {
 		const {
 			removeItem,
-		} = this.props;
+		} = props;
 
 		removeItem({ beverageId });
 	};
 
-	onUpdateItem = editingItemId => () => {
-		this.setState(state => ({
-			editingItemId: state.editingItemId === editingItemId ? '' : editingItemId,
-		}));
+	const onUpdateItem = itemId => () => {
+		setEditedItem(prevItemId => (prevItemId === itemId ? '' : itemId));
 	};
 
-	renderRegularItemView(item) {
+	const renderRegularItemView = (item) => {
 		const { _id: itemId } = item;
 
 		return (
 			<li className="list-of-items__item" key={itemId}>
-				<img className="item-attr item-attr--image" src={item.imgSrc} alt="image" />
-				<div className="item-attr">{item.type}</div>
-				<div className="item-attr">{item.name}</div>
-				<div className="item-attr">{item.description}</div>
-				<div className="item-attr">{item.category}</div>
-				<div className="item-attr">{item.quantity}</div>
-				<div className="item-attr">{item.price}</div>
-				<div className="item-attr">{item.currency}</div>
+				<span className="item-attr item-attr__image-container">
+					<img className="item-attr--image" src={item.imgSrc} alt="beverage" />
+				</span>
+				<span className="item-attr">{item.category}</span>
+				<span className="item-attr">{item.type}</span>
+				<span className="item-attr">{item.name}</span>
+				<span className="item-attr">{item.description}</span>
+				<span className="item-attr">{item.quantity}</span>
+				<span className="item-attr">{item.price}</span>
+				<span className="item-attr">{item.currency}</span>
 				<Button
 					caption="Update"
-					onClick={this.onUpdateItem(itemId)}
+					onClick={onUpdateItem(itemId)}
+					className="admin-button"
 				/>
 				<Button
 					caption="Delete"
-					onClick={this.onRemoveItem(itemId)}
+					onClick={onRemoveItem(itemId)}
+					className="admin-button"
 				/>
 			</li>
 		);
-	}
+	};
 
-	renderEditingItemView(item) {
-		const { newItem } = this.props;
+	const renderEditingItemView = (item) => {
+		const { newItem } = props;
 		const { _id: itemId } = item;
 
 		return (
 			<li className="list-of-items__item" key={itemId}>
 				<NewItemForm
 					{...newItem}
-					onSubmit={this.onUpdateBeverage(itemId)}
-					onReset={this.onUpdateItem(itemId)}
+					onSubmit={onUpdateBeverage(itemId)}
+					onReset={onUpdateItem(itemId)}
 					values={item}
 					buttonSubmit={{
 						caption: 'Update',
@@ -90,11 +90,10 @@ export default class AdminPage extends Component {
 				/>
 			</li>
 		);
-	}
+	};
 
-	renderItems() {
-		const { items } = this.props;
-		const { editingItemId } = this.state;
+	const renderItems = () => {
+		const { items } = props;
 
 		return (
 			<ul className="admin-page__list-of-items">
@@ -102,43 +101,41 @@ export default class AdminPage extends Component {
 					const { _id: itemId } = item;
 
 					if (editingItemId === itemId) {
-						return this.renderEditingItemView(item);
+						return renderEditingItemView(item);
 					}
 
-					return this.renderRegularItemView(item);
+					return renderRegularItemView(item);
 				})}
 			</ul>
 		);
-	}
+	};
 
-	render() {
-		const { newItem, user } = this.props;
+	const { newItem, user } = props;
 
-		if (!user) {
-			return (
-				<Redirect to="/login" />
-			);
-		}
-
+	if (!user) {
 		return (
-			<div className="page-component page-component--admin">
-				<div className="admin-page__edit-section">
-					<NewItemForm
-						onSubmit={this.onAddBeverage}
-						{...newItem}
-						buttonSubmit={{
-							caption: 'Add',
-							visible: true,
-						}}
-					/>
-				</div>
-				<div className="admin-page__content">
-					{this.renderItems()}
-				</div>
-			</div>
+			<Redirect to="/login" />
 		);
 	}
-}
+
+	return (
+		<div className="page-component page-component--admin">
+			<div className="admin-page__edit-section">
+				<NewItemForm
+					onSubmit={onAddBeverage}
+					{...newItem}
+					buttonSubmit={{
+						caption: 'Add',
+						visible: true,
+					}}
+				/>
+			</div>
+			<div className="admin-page__content">
+				{renderItems()}
+			</div>
+		</div>
+	);
+};
 
 AdminPage.propTypes = {
 	items: PropTypes.array,
@@ -159,3 +156,5 @@ AdminPage.defaultProps = {
 	addItem: () => {},
 	updateItem: () => {},
 };
+
+export default AdminPage;
