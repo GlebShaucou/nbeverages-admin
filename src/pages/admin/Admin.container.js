@@ -3,16 +3,18 @@ import AdminPage from './Admin.page';
 
 import actions from '../../data-layer/actions';
 
-const { beverageActions } = actions;
+const { beverageActions, orderActions } = actions;
 
 const mapStateToProps = state => ({
 	...state.beverages,
 	user: state.user,
+	orders: state.order.orders,
 });
 
 const mapDispatchToProps = dispatch => ({
 	loadData: () => {
 		dispatch(beverageActions.fetchBeverages({ id: undefined }));
+		dispatch(orderActions.getOrders({ id: undefined }));
 	},
 	removeItem: ({ beverageId }) => {
 		dispatch(beverageActions.deleteBeverage({ beverageId }));

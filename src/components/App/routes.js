@@ -3,6 +3,11 @@ import * as constants from '../../constants';
 
 export default [
 	{
+		path: `${constants.PAGE_ADMIN_ORDERS}/:orderId`,
+		exact: true,
+		component: pages.AdminPage,
+	},
+	{
 		path: constants.PAGE_ADMIN,
 		exact: true,
 		component: pages.AdminPage,

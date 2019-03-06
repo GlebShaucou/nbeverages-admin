@@ -34,3 +34,29 @@
     color: #993233;
     background-color: #ffffff;
 }
+
+.admin-page__navigation {
+    padding: 15px 0;
+    border-bottom: 2px solid #e3e3e3;
+}
+
+.admin-page__navigation .admin-page__link-button {
+    color: #993233;
+    background-color: #ffffff;
+    margin: 0 5px;
+}
+
+.admin-page__orders {}
+
+.orders-list__item-link {
+    color: #993233;
+    text-decoration: none;
+}
+
+.orders-list__item-link:hover {
+    text-decoration: underline;
+}
+
+.admin-page__orders-table {
+    font-size: 1.5rem;
+}

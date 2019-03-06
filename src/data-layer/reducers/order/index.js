@@ -14,6 +14,11 @@ export default (state = initialState, action) => {
 			...state,
 			userOrder: action.response.order,
 		};
+	case orderActions.GET_ORDERS_SUCCEDED:
+		return {
+			...state,
+			orders: action.response.orders,
+		};
 	default:
 		return state;
 	}

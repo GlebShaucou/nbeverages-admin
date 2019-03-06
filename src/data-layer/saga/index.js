@@ -13,7 +13,7 @@ import localStorage from '../localStorage';
 
 import * as utils from '../../utils';
 import * as constants from '../../constants';
-import {GET_ORDERS_BY_ID} from "../actions/order.actions";
+import {GET_ORDERS, GET_ORDERS_BY_ID} from "../actions/order.actions";
 
 const {
 	beverageActions,
@@ -188,12 +188,21 @@ function* watchBeveragesFilter() {
 }
 
 const {
-	watcherSagaGenerator: watchFetchOrders,
+	watcherSagaGenerator: watchFetchOrdersById,
 } = makeRequestSaga({
 	request: requests.getOrders,
 	onSuccessAction: orderActions.createOrderSucceded,
 }, {
 	watchedActionType: orderActions.GET_ORDERS_BY_ID,
+});
+
+const {
+	watcherSagaGenerator: watchFetchOrders,
+} = makeRequestSaga({
+	request: requests.getOrders,
+	onSuccessAction: orderActions.getOrdersSucceded,
+}, {
+	watchedActionType: orderActions.GET_ORDERS,
 });
 
 export default function* rootSaga() {
@@ -213,4 +222,5 @@ export default function* rootSaga() {
 	yield fork(watchCreateOrder);
 	yield fork(watchCreateOrderSucceded);
 	yield fork(watchFetchOrders);
+	yield fork(watchFetchOrdersById);
 }
