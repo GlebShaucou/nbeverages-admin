@@ -6,7 +6,7 @@ import OrderPage from './Order.page';
 const { orderActions } = actions;
 
 const mapStateToProps = state => ({
-	userOrder: state.order.userOrder,
+	selectedItem: state.order.selectedItem,
 });
 
 const mapDispatchToProps = dispatch => ({

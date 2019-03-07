@@ -7,7 +7,7 @@ const { cartActions, orderActions } = actions;
 
 const mapStateToProps = state => ({
 	cart: state.cart,
-	userOrder: state.order.userOrder,
+	selectedItem: state.order.selectedItem,
 });
 
 const mapDispatchToProps = dispatch => ({

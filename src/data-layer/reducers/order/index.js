@@ -4,7 +4,7 @@ const { orderActions } = actions;
 
 const initialState = {
 	orders: [],
-	userOrder: null,
+	selectedItem: null,
 };
 
 export default (state = initialState, action) => {
@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
 	case orderActions.CREATE_ORDER_SUCCEDED:
 		return {
 			...state,
-			userOrder: action.response.order,
+			selectedItem: action.response.order,
 		};
 	case orderActions.GET_ORDERS_SUCCEDED:
 		return {

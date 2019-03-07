@@ -17,6 +17,11 @@
     width: 100%;
     list-style-type: none;
     padding: 15px 0;
+    border-bottom: 1px solid rgba(153,50,51,0.3);
+}
+
+.list-of-items__item:last-of-type {
+    border-bottom: none;
 }
 
 .item-attr {

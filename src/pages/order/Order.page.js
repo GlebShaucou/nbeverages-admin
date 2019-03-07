@@ -19,7 +19,7 @@ const OrderPage = (props) => {
 	const onInputChange = (e) => {
 		setOrderId(e.target.value);
 	};
-	const { userOrder } = props;
+	const { selectedItem } = props;
 
 	return (
 		<div className="page-component page-component--order">
@@ -39,26 +39,26 @@ const OrderPage = (props) => {
 					className="order-page__search-button"
 				/>
 			</form>
-			{userOrder && (
+			{selectedItem && (
 				<div className="order-page__order-info">
 					<div className="order-info__order-id">
-						Order with id {userOrder._id} status {userOrder.status}
+						Order with id {selectedItem._id} status {selectedItem.status}
 					</div>
 					<div className="order-info__customer-name">
-						Ordered by {userOrder.customerName}
+						Ordered by {selectedItem.customerName}
 					</div>
 					<div className="order-info__email">
-						Email {userOrder.customerEmail}, phone {userOrder.customerPhone}
+						Email {selectedItem.customerEmail}, phone {selectedItem.customerPhone}
 					</div>
 					<div className="order-info__delivery">
-						Delivery address {userOrder.deliveryAddress}
+						Delivery address {selectedItem.deliveryAddress}
 					</div>
 					<div className="order-info__payment-method">
-						Payment method {userOrder.paymentMethod}
+						Payment method {selectedItem.paymentMethod}
 					</div>
 					<div className="order-info__items">
 						<ul className="order-info__items-list">
-							{userOrder.items.map((item) => {
+							{selectedItem.items.map((item) => {
 								const { _id: itemId } = item;
 
 								return (
@@ -82,7 +82,7 @@ const OrderPage = (props) => {
 							})}
 						</ul>
 						<div className="order-info__total-price">
-							Total {userOrder.totalAmount}{userOrder.currency}
+							Total {selectedItem.totalAmount}{selectedItem.currency}
 						</div>
 					</div>
 				</div>
@@ -92,12 +92,12 @@ const OrderPage = (props) => {
 };
 
 OrderPage.propTypes = {
-	userOrder: PropTypes.object,
+	selectedItem: PropTypes.object,
 	onSearchOrder: PropTypes.func,
 };
 
 OrderPage.defaultProps = {
-	userOrder: null,
+	selectedItem: null,
 	onSearchOrder: () => {},
 };
 

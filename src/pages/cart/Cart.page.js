@@ -212,22 +212,22 @@ export default class CartPage extends Component {
 	}
 
 	render() {
-		const { cart, userOrder } = this.props;
+		const { cart, selectedItem } = this.props;
 		const { items } = cart;
 
 		return (
 			<div className="page-component page-component--cart">
-				{(items.length === 0 && !userOrder) && (
+				{(items.length === 0 && !selectedItem) && (
 					<div className="shopping-cart__empty">
 						No Items in Shopping Cart.
 					</div>
 				)}
 				{items.length > 0 && this.renderShoppingCartContent()}
-				{(userOrder && items.length === 0) && (
+				{(selectedItem && items.length === 0) && (
 					<div className="shopping-cart__oder-description">
 						Your order with id
 						<span className="shopping-cart__order-id">
-							{` ${userOrder._id} `}
+							{` ${selectedItem._id} `}
 						</span>
 						was created.
 					</div>
@@ -242,7 +242,7 @@ CartPage.propTypes = {
 	removeItemFromCart: PropTypes.func,
 	createOrder: PropTypes.func,
 	cart: PropTypes.object,
-	userOrder: PropTypes.object,
+	selectedItem: PropTypes.object,
 };
 
 CartPage.defaultProps = {
@@ -253,5 +253,5 @@ CartPage.defaultProps = {
 		items: [],
 		ids: [],
 	},
-	userOrder: null,
+	selectedItem: null,
 };
