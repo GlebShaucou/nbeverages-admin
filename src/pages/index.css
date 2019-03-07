@@ -12,6 +12,10 @@ body {
     padding: 0;
 }
 
+input, textarea, select, button {
+    font-family: 'Source Serif Pro', serif;
+}
+
 ul {
     margin: 0;
     padding: 0;

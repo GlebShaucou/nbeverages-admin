@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
-import ReactTable from 'react-table';
 
-import { NewItemForm, Button } from '../../components';
+import { NewItemForm, Button, Table } from '../../components';
 import * as constants from '../../constants';
 
 const SECTION_CATALOG = 'catalog';
@@ -189,13 +188,12 @@ const AdminPage = (props) => {
 		];
 
 		return (
-			<ReactTable
-				data={orders}
-				columns={tableConf}
-				filterable
-				className="admin-page__orders-table"
-				resizable={false}
-			/>
+			<div className="admin-page__orders">
+				<Table
+					data={orders}
+					columns={tableConf}
+				/>
+			</div>
 		);
 	};
 
