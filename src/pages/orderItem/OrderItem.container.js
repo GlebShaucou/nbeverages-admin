@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 	return {
 		loadResources: () => {
-			dispatch(orderActions.getOrdersById({ id: orderId }));
+			dispatch(orderActions.getOrdersById({ orderId }));
 		},
 		// deleteOrder: (itemId) => {
 		// 	dispatch(orderActions.deleteOrder(itemId));

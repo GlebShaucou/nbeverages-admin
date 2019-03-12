@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import mainImgSrc from './img/main-tea.jpg';
@@ -6,6 +6,10 @@ import promoLeftSrc from './img/promo-left.jpg';
 import promoRightSrc from './img/promo-right.jpg';
 
 const MainPage = () => {
+	useEffect(() => {
+		document.title = 'Place, where you can find you are searching for | Natural Beverages';
+	}, []);
+
 	const LinkWrapper = ({ children, linkTo }) => (
 		<div className="link-block-container">
 			<Link to={linkTo} className="link-block__link">

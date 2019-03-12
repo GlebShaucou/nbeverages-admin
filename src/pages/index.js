@@ -9,3 +9,4 @@ export { default as LoginPage } from './login';
 export { default as CatalogItemPage } from './catalogItem';
 export { default as CartPage } from './cart';
 export { default as OrderPage } from './order';
+export { default as OrderItemPage } from './orderItem';

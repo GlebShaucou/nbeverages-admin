@@ -191,7 +191,7 @@ const {
 	watcherSagaGenerator: watchFetchOrdersById,
 } = makeRequestSaga({
 	request: requests.getOrders,
-	onSuccessAction: orderActions.createOrderSucceded,
+	onSuccessAction: orderActions.getOrdersByIdSucceded,
 }, {
 	watchedActionType: orderActions.GET_ORDERS_BY_ID,
 });

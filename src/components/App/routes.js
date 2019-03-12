@@ -5,7 +5,7 @@ export default [
 	{
 		path: `${constants.PAGE_ADMIN_ORDERS}/:orderId`,
 		exact: true,
-		component: pages.AdminPage,
+		component: pages.OrderItemPage,
 	},
 	{
 		path: constants.PAGE_ADMIN,
@@ -43,7 +43,7 @@ export default [
 		component: pages.CartPage,
 	},
 	{
-		path: '/order',
+		path: constants.PAGE_ORDER,
 		exact: true,
 		component: pages.OrderPage,
 	},

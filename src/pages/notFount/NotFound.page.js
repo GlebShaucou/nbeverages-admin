@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-export default class NotFoundPage extends Component {
-	render() {
-		return (
-			<div className="page-component page-component--not-found">
-				NotFound
-			</div>
-		);
-	}
-}
+const NotFoundPage = () => {
+	useEffect(() => {
+		document.title = 'Not Found | Natural Beverages';
+	}, []);
+
+	return (
+		<div className="page-component page-component--not-found">
+			NotFound
+		</div>
+	);
+};
+
+export default NotFoundPage;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // import InputMask from 'react-input-mask';
 
 import { Select, Button, Input } from '../../components';
+import * as constants from '../../constants';
 
 export default class CartPage extends Component {
 	state = {
@@ -21,6 +22,14 @@ export default class CartPage extends Component {
 		loadResources();
 
 		document.title = 'Shopping Cart | Natural Beverages';
+	}
+
+	componentDidUpdate() {
+		const { selectedItem, cart: { items }, history } = this.props;
+
+		if (selectedItem && items.length === 0) {
+			history.push(constants.PAGE_ORDER);
+		}
 	}
 
 	onRemoveItemFromCartClick = (itemId) => {
@@ -212,26 +221,16 @@ export default class CartPage extends Component {
 	}
 
 	render() {
-		const { cart, selectedItem } = this.props;
+		const { cart } = this.props;
 		const { items } = cart;
 
 		return (
 			<div className="page-component page-component--cart">
-				{(items.length === 0 && !selectedItem) && (
+				{items.length === 0 ? (
 					<div className="shopping-cart__empty">
 						No Items in Shopping Cart.
 					</div>
-				)}
-				{items.length > 0 && this.renderShoppingCartContent()}
-				{(selectedItem && items.length === 0) && (
-					<div className="shopping-cart__oder-description">
-						Your order with id
-						<span className="shopping-cart__order-id">
-							{` ${selectedItem._id} `}
-						</span>
-						was created.
-					</div>
-				)}
+				) : this.renderShoppingCartContent()}
 			</div>
 		);
 	}
@@ -243,6 +242,7 @@ CartPage.propTypes = {
 	createOrder: PropTypes.func,
 	cart: PropTypes.object,
 	selectedItem: PropTypes.object,
+	history: PropTypes.object,
 };
 
 CartPage.defaultProps = {
@@ -254,4 +254,5 @@ CartPage.defaultProps = {
 		ids: [],
 	},
 	selectedItem: null,
+	history: {},
 };

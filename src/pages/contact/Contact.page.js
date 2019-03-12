@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-export default class ContactPage extends Component {
-	componentDidMount() {
+const ContactPage = () => {
+	useEffect(() => {
 		document.title = 'Contacts | Natural Beverages';
-	}
+	});
 
-	render() {
-		return (
-			<div className="page-component page-component--contact">
-				Contact
-			</div>
-		);
-	}
-}
+	return (
+		<div className="page-component page-component--contact">
+			Contact
+		</div>
+	);
+};
+
+export default ContactPage;
