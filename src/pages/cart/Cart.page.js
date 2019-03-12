@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { Select, Button, Input } from '../../components';
 import * as constants from '../../constants';
+import * as utils from '../../utils';
 
 export default class CartPage extends Component {
 	state = {
@@ -75,40 +76,6 @@ export default class CartPage extends Component {
 			deliveryAddress,
 			customerPhone,
 		} = this.state;
-		const paymentMethods = [
-			{
-				value: 'cash',
-				label: 'Cash',
-			},
-			{
-				value: 'creditCard',
-				label: 'Credit Cart',
-			},
-		];
-		const deliveryMethods = [
-			{
-				value: 'delivery',
-				label: 'Delivery',
-			},
-			{
-				value: 'pickup',
-				label: 'Pickup',
-			},
-		];
-		const pickupAddresses = [
-			{
-				value: 'Minsk, ave. Gazety Zvyazda, 37',
-				label: 'Minsk, ave. Gazety Zvyazda, 37',
-			},
-			{
-				value: 'Minsk, ave. Gazety Zvyazda, 35',
-				label: 'Minsk, ave. Gazety Zvyazda, 35',
-			},
-			{
-				value: 'Minsk, ave. Gazety Zvyazda, 33',
-				label: 'Minsk, ave. Gazety Zvyazda, 33',
-			},
-		];
 
 		return (
 			<form
@@ -127,7 +94,7 @@ export default class CartPage extends Component {
 					name="paymentMethod"
 					onChange={this.onChangeFormValue}
 					selectedValue={paymentMethod}
-					values={paymentMethods}
+					values={utils.getPaymentMethods()}
 				/>
 				<Input
 					type="tel"
@@ -148,7 +115,7 @@ export default class CartPage extends Component {
 					name="deliveryMethod"
 					onChange={this.onChangeFormValue}
 					selectedValue={deliveryMethod}
-					values={deliveryMethods}
+					values={utils.getDeliveryMethods()}
 				/>
 				{deliveryMethod === 'pickup' && (
 					<Select
@@ -156,7 +123,7 @@ export default class CartPage extends Component {
 						name="deliveryAddress"
 						onChange={this.onChangeFormValue}
 						selectedValue={deliveryAddress}
-						values={pickupAddresses}
+						values={utils.getPickupAddresses()}
 					/>
 				)}
 				{deliveryMethod === 'delivery' && (
