@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import { BeverageShortView } from '../../components';
+import * as constants from '../../constants';
 
 export default class CatalogPage extends Component {
 	componentDidMount() {
@@ -36,8 +38,8 @@ export default class CatalogPage extends Component {
 		const { filters } = this.props;
 		const filterNames = Object.keys(filters);
 		const filterHeaders = {
-			category: 'Category',
-			type: 'Type',
+			category: constants.FILTER_CATEGORY,
+			type: constants.FILTER_TYPE,
 		};
 
 		return (
@@ -48,7 +50,7 @@ export default class CatalogPage extends Component {
 					return (
 						<div className="filters-sidebar__filter-section" key={filterName}>
 							<h4 className="filter-section__header">
-								{filterHeaders[filterName]}
+								<FormattedMessage id={filterHeaders[filterName]} />
 							</h4>
 							<ul className="filter-section__values-list">
 								{values.map(value => (
@@ -90,7 +92,12 @@ export default class CatalogPage extends Component {
 								<li key={JSON.stringify(item)} className="catalog__item">
 									<BeverageShortView
 										item={item}
-										buttonCaption={isInCart ? 'Remove' : 'Add'}
+										buttonCaption={(
+											<FormattedMessage
+												id={isInCart
+													? constants.BUTTON_CAPTION_REMOVE : constants.BUTTON_CAPTION_ADD}
+											/>
+										)}
 										onButtonClick={this.onCatalogItemButtonClick(item, isInCart)}
 										buttonClassName={isInCart ? 'remove-button' : ''}
 									/>
