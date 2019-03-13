@@ -83,3 +83,22 @@
 .work-info__phone {
     text-decoration: none;
 }
+
+.work-info__locales {
+    padding-bottom: 20px;
+}
+
+.locale-button {
+    color: #993233;
+    background-color: #ffffff;
+    font-size: 1.7rem;
+    padding: 0 3px;
+}
+
+.locale-button:after {
+    content: ' | ';
+}
+
+.locale-button:last-child:after {
+    content: '';
+}

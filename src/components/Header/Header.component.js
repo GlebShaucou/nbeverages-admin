@@ -1,14 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import logoImg from './img/logo.png';
 import Button from '../Button';
 import * as constants from '../../constants';
 
 const Header = (props) => {
-	const { user, onLogout, cart } = props;
+	const {
+		user,
+		onLogout,
+		cart,
+		setLocale,
+		locales,
+	} = props;
 
+	const onChangeLocale = locale => () => {
+		setLocale(locale);
+	};
 	const logoutHandler = (e) => {
 		e.preventDefault();
 
@@ -24,17 +34,17 @@ const Header = (props) => {
 	const links = [
 		{
 			path: '/',
-			name: 'Home',
+			name: <FormattedMessage id={constants.NAVIGATION_LINK_HOME} />,
 			exact: true,
 		},
 		{
 			path: '/catalog',
-			name: 'Catalog',
+			name: <FormattedMessage id={constants.NAVIGATION_LINK_CATALOG} />,
 			exact: true,
 		},
 		{
 			path: '/contact',
-			name: 'Contact Us',
+			name: <FormattedMessage id={constants.NAVIGATION_LINK_CONTACT} />,
 			exact: true,
 		},
 	];
@@ -56,17 +66,29 @@ const Header = (props) => {
 					</div>
 					<div className="work-info__admin">
 						<div className="work-info__admin-section">
+							<div className="work-info__locales">
+								{locales.map(locale => (
+									<Button
+										key={locale}
+										caption={locale}
+										onClick={onChangeLocale(locale)}
+										className="locale-button"
+									/>
+								))}
+							</div>
 							{user ? (
 								<div className="admin-section">
 									<Link
 										to={constants.PAGE_ADMIN}
 										className="navigation-menu__link navigation-menu__link--admin"
 									>
-										admin
+										<FormattedMessage id={constants.NAVIGATION_LINK_ADMIN} />
 									</Link>
 									{' | '}
 									<Button
-										caption="logout"
+										caption={(
+											<FormattedMessage id={constants.NAVIGATION_LINK_LOGOUT} />
+										)}
 										className="logout-button"
 										onClick={logoutHandler}
 									/>
@@ -76,7 +98,7 @@ const Header = (props) => {
 									to="/login"
 									className="navigation-menu__link navigation-menu__link--admin"
 								>
-									login
+									<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
 								</Link>
 							)}
 						</div>
@@ -85,14 +107,17 @@ const Header = (props) => {
 								to="/shopping-cart"
 								className="navigation-menu__link navigation-menu__link--admin"
 							>
-								{`Cart (${cart.ids.length})`}
+								<FormattedMessage
+									id={constants.NAVIGATION_LINK_SHOPPING_CART}
+									values={{ itemsCount: cart.ids.length }}
+								/>
 							</Link>
 							{' | '}
 							<Link
 								to="/order"
 								className="navigation-menu__link navigation-menu__link--admin"
 							>
-								Check order status
+								<FormattedMessage id={constants.NAVIGATION_LINK_CHECK_ORDER_STATUS} />
 							</Link>
 						</div>
 					</div>
@@ -118,7 +143,9 @@ const Header = (props) => {
 Header.propTypes = {
 	user: PropTypes.object,
 	cart: PropTypes.object,
+	locales: PropTypes.array,
 	onLogout: PropTypes.func,
+	setLocale: PropTypes.func,
 };
 
 Header.defaultProps = {
@@ -126,7 +153,9 @@ Header.defaultProps = {
 	cart: {
 		ids: [],
 	},
+	locales: [],
 	onLogout: () => {},
+	setLocale: () => {},
 };
 
 export default Header;

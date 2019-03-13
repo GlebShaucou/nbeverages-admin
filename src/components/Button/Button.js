@@ -10,15 +10,13 @@ const Button = (props) => {
 	} = props;
 
 	return (
-		<div className="custom-button-wrapper">
-			<button
-				type={type}
-				className={`custom-button ${className}`}
-				onClick={onClick}
-			>
-				{caption}
-			</button>
-		</div>
+		<button
+			type={type}
+			className={`custom-button ${className}`}
+			onClick={onClick}
+		>
+			{caption}
+		</button>
 	);
 };
 
