@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { Button, Input, Select } from '../../components';
 import * as utils from '../../utils';
-import {Redirect} from "react-router-dom";
 
 const OrderItemPage = (props) => {
 	const [order, setOrder] = useState(props.selectedItem);
 
 	const setDocumentTitle = () => {
-		document.title = `Order ${props.selectedItem ? props.selectedItem._id : ''} Review | Natural Beverages`;
+		document.title = `Order ${props.selectedItem ? props.selectedItem.orderId : ''} Review | Natural Beverages`;
 	};
 
 	useEffect(() => {
@@ -92,7 +92,7 @@ const OrderItemPage = (props) => {
 				/>
 				{orderDeliveryMethod === 'pickup' && (
 					<Select
-						label="Select Pickup Point"
+						label="Selected Pickup Point"
 						name="deliveryAddress"
 						onChange={onChangeFormValue}
 						selectedValue={orderDeliveryAddress}

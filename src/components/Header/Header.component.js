@@ -123,7 +123,7 @@ const Header = (props) => {
 					</div>
 				</div>
 				<div className="application-header__navigation-menu">
-					{links.map((link) => (
+					{links.map(link => (
 						<NavLink
 							key={link.path}
 							to={link.path}

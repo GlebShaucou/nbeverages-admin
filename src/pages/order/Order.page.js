@@ -42,7 +42,7 @@ const OrderPage = (props) => {
 			{selectedItem && (
 				<div className="order-page__order-info">
 					<div className="order-info__order-id">
-						Order with id {selectedItem._id} status {selectedItem.status}
+						Order with id {selectedItem.orderId} status {selectedItem.status}
 					</div>
 					<div className="order-info__customer-name">
 						Ordered by {selectedItem.customerName}

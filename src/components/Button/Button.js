@@ -21,7 +21,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-	caption: PropTypes.string,
+	caption: PropTypes.any,
 	type: PropTypes.string,
 	className: PropTypes.string,
 	onClick: PropTypes.func,

@@ -150,7 +150,7 @@ const AdminPage = (props) => {
 			},
 			{
 				Header: 'Order ID',
-				accessor: '_id',
+				accessor: 'orderId',
 				Cell: ({ value: orderId }) => (
 					<Link
 						to={`${constants.PAGE_ADMIN_ORDERS}/${orderId}`}

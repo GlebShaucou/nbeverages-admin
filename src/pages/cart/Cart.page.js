@@ -57,6 +57,7 @@ export default class CartPage extends Component {
 			...this.state,
 			totalAmount: this.getTotalPrice(),
 			currency: 'USD',
+			orderId: utils.generateOrderId(7),
 		});
 	};
 
