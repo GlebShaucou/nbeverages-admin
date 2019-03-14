@@ -1,4 +1,6 @@
-.page-component--login {}
+.page-component--login {
+    padding: 30px 0;
+}
 
 .login-page__form {
     display: flex;
@@ -7,7 +9,8 @@
     margin: 0 auto;
 }
 
-.login-page__form  .custom-button-wrapper {
+.login-page-form__button {
+    width: 100%;
     align-self: center;
     margin-top: 10px;
 }

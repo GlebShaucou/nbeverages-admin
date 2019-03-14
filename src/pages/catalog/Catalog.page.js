@@ -14,15 +14,11 @@ export default class CatalogPage extends Component {
 		document.title = 'Beverages Catalog | Natural Beverages';
 	}
 
-	onCatalogItemButtonClick = (item, isInCart) => {
-		const { addItemToCart, removeItemFromCart } = this.props;
+	onCatalogItemButtonClick = (item) => {
+		const { addItemToCart } = this.props;
 
 		return () => {
-			if (isInCart) {
-				removeItemFromCart(item._id);
-			} else {
-				addItemToCart(item);
-			}
+			addItemToCart(item);
 		};
 	};
 
@@ -78,32 +74,26 @@ export default class CatalogPage extends Component {
 	}
 
 	render() {
-		const { items, cart } = this.props;
+		const { items } = this.props;
 
 		return (
 			<div className="page-component page-component--catalog">
 				<div className="page-component__content">
 					{this.renderFiltersSection()}
 					<ul className="catalog">
-						{items.map((item) => {
-							const isInCart = cart.ids.includes(item._id);
-
-							return (
-								<li key={JSON.stringify(item)} className="catalog__item">
-									<BeverageShortView
-										item={item}
-										buttonCaption={(
-											<FormattedMessage
-												id={isInCart
-													? constants.BUTTON_CAPTION_REMOVE : constants.BUTTON_CAPTION_ADD}
-											/>
-										)}
-										onButtonClick={this.onCatalogItemButtonClick(item, isInCart)}
-										buttonClassName={isInCart ? 'remove-button' : ''}
-									/>
-								</li>
-							);
-						})}
+						{items.map(item => (
+							<li key={JSON.stringify(item)} className="catalog__item">
+								<BeverageShortView
+									item={item}
+									buttonCaption={(
+										<FormattedMessage
+											id={constants.BUTTON_CAPTION_ADD}
+										/>
+									)}
+									onButtonClick={this.onCatalogItemButtonClick(item)}
+								/>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

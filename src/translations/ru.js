@@ -27,4 +27,12 @@ export default {
 	[constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS]: 'Введите адрес доставки',
 	[constants.SHOPPING_CART_ORDER]: 'Заказать',
 	[constants.SHOPPING_CART_DELIVERY_ADDRESS_PLACEHOLDER]: 'Город, улица, дом, подъезд, квартира...',
+	[constants.SHOPPING_CART_PRODUCT_NAME]: 'Наименование товара',
+	[constants.SHOPPING_CART_PRODUCT_DESCRIPTION]: 'Описание',
+	[constants.SHOPPING_CART_PRODUCT_QUANTITY]: 'Колличество',
+	[constants.SHOPPING_CART_ITEM_QUANTITY]: '{quantity} г',
+	[constants.SHOPPING_CART_PRODUCT_PRICE]: 'Цена',
+	[constants.SHOPPING_CART_TOTAL_PRICE]: 'Итого: {amount} {currency}',
+	[constants.SHOPPING_CART_CUSTOMER_FORM_NAME]: 'Информация о покупателе',
+	[constants.LOGIN_PASSWORD]: 'Пароль',
 };

@@ -12,9 +12,11 @@ const Input = (props) => {
 
 	return (
 		<label htmlFor={name} className={`custom-input ${className}`}>
-			<span className="custom-input__label">
-				{label}
-			</span>
+			{label && (
+				<span className="custom-input__label">
+					{label}
+				</span>
+			)}
 			<input
 				{...rest}
 				name={name}

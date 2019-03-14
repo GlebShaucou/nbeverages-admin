@@ -60,7 +60,7 @@ const AdminPage = (props) => {
 				<span className="item-attr">{item.type}</span>
 				<span className="item-attr">{item.name}</span>
 				<span className="item-attr">{item.description}</span>
-				<span className="item-attr">{item.quantity}</span>
+				<span className="item-attr">{item.quantityPerUnit}</span>
 				<span className="item-attr">{item.price}</span>
 				<span className="item-attr">{item.currency}</span>
 				<Button

@@ -22,7 +22,7 @@ const beverageSchema = [
 		label: 'Description',
 	},
 	{
-		name: 'quantity',
+		name: 'quantityPerUnit',
 		label: 'Quantity',
 	},
 	{

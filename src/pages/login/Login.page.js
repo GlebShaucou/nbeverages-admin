@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
-import { Input, Button } from '../../components';
+import { Input, Button, Context } from '../../components';
+import * as constants from '../../constants';
 
 const LoginPage = (props) => {
 	const [state, setState] = useState({
@@ -41,35 +43,39 @@ const LoginPage = (props) => {
 
 	return (
 		<div className="page-component page-component--login">
-			<form
-				action=""
-				onSubmit={onLogin}
-				className="login-page__form"
-			>
-				<Input
-					label="Email"
-					type="email"
-					placeholder="Email"
-					className="login-page-form__input"
-					name="email"
-					onChange={onInputChange}
-					value={email}
-				/>
-				<Input
-					label="Password"
-					type="password"
-					placeholder="Password"
-					className="login-page-form__input"
-					name="password"
-					onChange={onInputChange}
-					value={password}
-				/>
-				<Button
-					type="submit"
-					caption="Login"
-					className="login-page-form__button"
-				/>
-			</form>
+			<Context.Consumer>
+				{({ intl: { getTranslation } }) => (
+					<form
+						action=""
+						onSubmit={onLogin}
+						className="login-page__form"
+					>
+						<Input
+							type="email"
+							placeholder={getTranslation({ id: constants.SHOPPING_CART_EMAIL })}
+							className="login-page-form__input"
+							name="email"
+							onChange={onInputChange}
+							value={email}
+						/>
+						<Input
+							type="password"
+							placeholder={getTranslation({ id: constants.LOGIN_PASSWORD })}
+							className="login-page-form__input"
+							name="password"
+							onChange={onInputChange}
+							value={password}
+						/>
+						<Button
+							type="submit"
+							caption={(
+								<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
+							)}
+							className="login-page-form__button"
+						/>
+					</form>
+				)}
+			</Context.Consumer>
 		</div>
 	);
 }

@@ -72,7 +72,7 @@ const OrderPage = (props) => {
 											{`${item.type}, ${item.category}`}
 										</span>
 										<span className="order-info__item-quantity">
-											{`${item.quantity} g`}
+											{`${item.quantityPerUnit} g`}
 										</span>
 										<span className="order-info__price">
 											{`${item.price} ${item.currency}`}

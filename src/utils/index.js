@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 export const decodeJwtToken = token => jwtDecode(token);
-export const getDeliveryMethods = () => ([
+export const getDeliveryMethods = (locale) => ([
 	{
 		value: '',
 		label: 'Select delivery method...',

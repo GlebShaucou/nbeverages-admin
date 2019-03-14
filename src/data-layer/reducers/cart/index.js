@@ -7,8 +7,13 @@ const initialState = {
 	ids: [],
 };
 
-const removeItem = ({ items }, { itemId }) => items.filter(item => item._id !== itemId);
+const removeItem = ({ items }, { itemId }) => {
+	const itemIndex = items.findIndex(item => item._id !== itemId);
+};
 const removeItemId = ({ ids }, { itemId }) => ids.filter(id => id !== itemId);
+
+const addItem = (item) => {};
+const addItemId = (item) => {};
 
 export default (state = initialState, action) => {
 	let item;

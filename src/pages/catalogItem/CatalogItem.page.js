@@ -46,7 +46,7 @@ const CatalogItemPage = (props) => {
 		description,
 		price,
 		currency,
-		quantity,
+		quantityPerUnit,
 		// _id: itemId,
 	} = selectedItem;
 	const onButtonClick = isAddedToCart ? onRemoveFromCartClick : onAddToCartClick;
@@ -66,7 +66,7 @@ const CatalogItemPage = (props) => {
 				<div className="catalog-item__amount">
 					<span className="">
 						Quantity:
-					</span> {`${quantity} g`}
+					</span> {`${quantityPerUnit} g`}
 				</div>
 				<div className="catalog-item__price">
 					<span className="catalog-item__price-value">
