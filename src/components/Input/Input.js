@@ -27,7 +27,7 @@ const Input = (props) => {
 
 Input.propTypes = {
 	className: PropTypes.string,
-	label: PropTypes.string,
+	label: PropTypes.any,
 	value: PropTypes.string,
 	type: PropTypes.string,
 	name: PropTypes.string,

@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import {
+	IntlProvider, addLocaleData,
+} from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ru from 'react-intl/locale-data/ru';
 
-import routes from './routes';
-import NotificationContainer from '../NotificationContainer';
-import HeaderComponent from '../Header';
-import Spinner from '../Spinner';
-import Footer from '../Footer';
 import translations from '../../translations';
+
+import Router from '../Router';
 
 addLocaleData([...en, ...ru]);
 
 const AppComponent = (props) => {
-	const { isFetching, locale } = props;
+	const { locale } = props;
 
 	return (
 		<IntlProvider
@@ -24,23 +22,7 @@ const AppComponent = (props) => {
 			defaultLocale="en"
 			messages={translations[locale]}
 		>
-			<BrowserRouter>
-				<div className="application">
-					<HeaderComponent />
-					<NotificationContainer />
-					<div className="application__content">
-						<Switch>
-							{routes.map(route => (
-								<Route key={route} {...route} />
-							))}
-						</Switch>
-					</div>
-					{isFetching && (
-						<Spinner />
-					)}
-					<Footer />
-				</div>
-			</BrowserRouter>
+			<Router {...props} />
 		</IntlProvider>
 	);
 };

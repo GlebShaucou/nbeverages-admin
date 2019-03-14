@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import InputMask from 'react-input-mask';
+import { FormattedMessage } from 'react-intl';
 
 import { Select, Button, Input } from '../../components';
 import * as constants from '../../constants';
 import * as utils from '../../utils';
+
+import Context from '../../components/Context';
 
 export default class CartPage extends Component {
 	state = {
@@ -77,6 +79,7 @@ export default class CartPage extends Component {
 			deliveryAddress,
 			customerPhone,
 		} = this.state;
+		const { intl } = this.context;
 
 		return (
 			<form
@@ -85,13 +88,17 @@ export default class CartPage extends Component {
 				onSubmit={this.onCreateOrder}
 			>
 				<Input
-					label="Name"
+					label={(
+						<FormattedMessage id={constants.SHOPPING_CART_CUSTOMER_NAME} />
+					)}
 					name="customerName"
 					onChange={this.onChangeFormValue}
 					value={customerName}
 				/>
 				<Select
-					label="Payment Method"
+					label={(
+						<FormattedMessage id={constants.SHOPPING_CART_PAYMENT_METHOD} />
+					)}
 					name="paymentMethod"
 					onChange={this.onChangeFormValue}
 					selectedValue={paymentMethod}
@@ -99,20 +106,26 @@ export default class CartPage extends Component {
 				/>
 				<Input
 					type="tel"
-					label="Phone Number"
+					label={(
+						<FormattedMessage id={constants.SHOPPING_CART_PHONE_NUMBER} />
+					)}
 					name="customerPhone"
 					onChange={this.onChangeFormValue}
 					value={customerPhone}
 				/>
 				<Input
 					type="email"
-					label="Email"
+					label={(
+						<FormattedMessage id={constants.SHOPPING_CART_EMAIL} />
+					)}
 					name="customerEmail"
 					onChange={this.onChangeFormValue}
 					value={customerEmail}
 				/>
 				<Select
-					label="Delivery Method"
+					label={(
+						<FormattedMessage id={constants.SHOPPING_CART_DELIVERY_METHOD} />
+					)}
 					name="deliveryMethod"
 					onChange={this.onChangeFormValue}
 					selectedValue={deliveryMethod}
@@ -120,7 +133,9 @@ export default class CartPage extends Component {
 				/>
 				{deliveryMethod === 'pickup' && (
 					<Select
-						label="Select Pickup Point"
+						label={(
+							<FormattedMessage id={constants.SHOPPING_CART_SELECT_PICKUP_POINT} />
+						)}
 						name="deliveryAddress"
 						onChange={this.onChangeFormValue}
 						selectedValue={deliveryAddress}
@@ -129,16 +144,22 @@ export default class CartPage extends Component {
 				)}
 				{deliveryMethod === 'delivery' && (
 					<Input
-						label="Enter Delivery Address"
+						label={(
+							<FormattedMessage id={constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS} />
+						)}
 						name="deliveryAddress"
 						onChange={this.onChangeFormValue}
 						value={deliveryAddress}
-						placeholder="City, Street, House, Apartment..."
+						placeholder={
+							intl.getTranslation({ id: constants.SHOPPING_CART_DELIVERY_ADDRESS_PLACEHOLDER })
+						}
 					/>
 				)}
 				<Button
 					type="submit"
-					caption="Order"
+					caption={(
+						<FormattedMessage id={constants.SHOPPING_CART_ORDER} />
+					)}
 				/>
 			</form>
 		);
@@ -224,3 +245,5 @@ CartPage.defaultProps = {
 	selectedItem: null,
 	history: {},
 };
+
+CartPage.contextType = Context;

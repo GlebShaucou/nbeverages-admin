@@ -13,7 +13,7 @@ export default {
 	[constants.FILTER_TYPE]: 'Type',
 	[constants.BUTTON_CAPTION_ADD]: 'Add',
 	[constants.BUTTON_CAPTION_REMOVE]: 'Remove',
-	[constants.MAIN_WELCOME_HEADER]: 'Welcome to Natural Beverages!',
+	[constants.MAIN_WELCOME_HEADER]: 'Welcome to Tea City!',
 	[constants.MAIN_WELCOME_MESSAGE]: 'Place, where you can find you are searching for',
 	[constants.MAIN_ORDER_STATUS]: 'Check your order status',
 	[constants.MAIN_VISIT]: 'Visit our shop',

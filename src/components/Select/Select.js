@@ -38,7 +38,7 @@ const Select = (props) => {
 Select.propTypes = {
 	values: PropTypes.array,
 	name: PropTypes.string,
-	label: PropTypes.string,
+	label: PropTypes.any,
 	selectedValue: PropTypes.string,
 	onChange: PropTypes.func,
 };
