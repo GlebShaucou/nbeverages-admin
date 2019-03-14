@@ -21,7 +21,6 @@ const BeverageShortView = (props) => {
 		name,
 		type,
 		category,
-		// description,
 		price,
 		currency,
 		quantityPerUnit,
@@ -55,9 +54,6 @@ const BeverageShortView = (props) => {
 					</div>
 				</div>
 			</div>
-			{/* <div className="beverage-short-view__description"> */}
-			{/* {description} */}
-			{/* </div> */}
 			<div className="beverage-short-view__footer">
 				<div className="bsv-footer__quantity">
 					{`${quantityPerUnit} g`}
@@ -80,7 +76,7 @@ const BeverageShortView = (props) => {
 BeverageShortView.propTypes = {
 	item: PropTypes.object,
 	onButtonClick: PropTypes.func,
-	buttonCaption: PropTypes.string,
+	buttonCaption: PropTypes.any,
 	buttonClassName: PropTypes.string,
 };
 

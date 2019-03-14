@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
-import { NewItemForm, Button, Table } from '../../components';
+import {
+	NewItemForm, Button, Table, Context,
+} from '../../components';
 import * as constants from '../../constants';
 
 const SECTION_CATALOG = 'catalog';
@@ -119,17 +122,31 @@ const AdminPage = (props) => {
 		);
 	};
 
-	const renderCatalog = () => {
-		const { newItem } = props;
+	const renderCatalog = ({ getTranslation }) => {
+		const { newItem: { schema } } = props;
+		const mappings = {
+			category: constants.ADMIN_ITEM_CATEGORY,
+			type: constants.ADMIN_ITEM_TYPE,
+			imgSrc: constants.ADMIN_ITEM_IMG_SRC,
+			name: constants.ADMIN_ITEM_NAME,
+			description: constants.ADMIN_ITEM_DESCRIPTION,
+			quantityPerUnit: constants.ADMIN_ITEM_QUANTITY_PER_UNIT,
+			price: constants.ADMIN_ITEM_PRICE,
+			currency: constants.ADMIN_ITEM_CURRENCY,
+		};
+		const newSchema = schema.map(({ name }) => ({
+			name,
+			label: getTranslation({ id: mappings[name] }),
+		}));
 
 		return (
 			<div className="admin-page__catalog">
 				<div className="admin-page__edit-section">
 					<NewItemForm
 						onSubmit={onAddBeverage}
-						{...newItem}
+						schema={newSchema}
 						buttonSubmit={{
-							caption: 'Add',
+							caption: getTranslation({ id: constants.ADMIN_ITEM_ADD_BUTTON }),
 							visible: true,
 						}}
 					/>
@@ -207,20 +224,30 @@ const AdminPage = (props) => {
 
 	return (
 		<div className="page-component page-component--admin">
-			<div className="admin-page__navigation">
-				<Button
-					caption={SECTION_CATALOG}
-					className="admin-page__link-button"
-					onClick={onUpdateSelectedSection(SECTION_CATALOG)}
-				/>
-				<Button
-					caption={SECTION_ORDERS}
-					className="admin-page__link-button"
-					onClick={onUpdateSelectedSection(SECTION_ORDERS)}
-				/>
-			</div>
-			{selectedSection === SECTION_CATALOG && renderCatalog()}
-			{selectedSection === SECTION_ORDERS && renderOrders()}
+			<Context.Consumer>
+				{({ intl: { getTranslation } }) => (
+					<div className="admin-page__container">
+						<div className="admin-page__navigation">
+							<Button
+								caption={(
+									<FormattedMessage id={constants.ADMIN_CATALOG} />
+								)}
+								className="admin-page__link-button"
+								onClick={onUpdateSelectedSection(SECTION_CATALOG)}
+							/>
+							<Button
+								caption={(
+									<FormattedMessage id={constants.ADMIN_ORDERS} />
+								)}
+								className="admin-page__link-button"
+								onClick={onUpdateSelectedSection(SECTION_ORDERS)}
+							/>
+						</div>
+						{selectedSection === SECTION_CATALOG && renderCatalog({ getTranslation })}
+						{selectedSection === SECTION_ORDERS && renderOrders({ getTranslation })}
+					</div>
+				)}
+			</Context.Consumer>
 		</div>
 	);
 };

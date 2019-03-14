@@ -1,12 +1,17 @@
 .new-beverage-form {
-    width: 100%;
+    width: 50%;
 }
 
 .new-beverage-form__element {
-    /*padding: 3px 0;*/
+
 }
 
-.new-beverage-form__label {
-    /*display: inline-block;*/
-    /*width: 100px;*/
+.new-beverage-form__element .custom-input__label {
+    width: 35%;
 }
+
+.new-beverage-form__element .custom-input__input {
+    width: 65%;
+}
+
+.new-beverage-form__label {}

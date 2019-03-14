@@ -45,17 +45,14 @@ const NewItemForm = (props) => {
 				const { name, label } = element;
 
 				return (
-					<div
+					<Input
+						label={label}
+						name={name}
+						value={values[name]}
+						onChange={onChange(name)}
 						key={name}
 						className={`new-beverage-form__element new-beverage-form__element---${name}`}
-					>
-						<Input
-							label={label}
-							name={name}
-							value={values[name]}
-							onChange={onChange(name)}
-						/>
-					</div>
+					/>
 				);
 			})}
 			{buttonReset.visible && (
