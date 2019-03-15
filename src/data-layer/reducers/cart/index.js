@@ -7,13 +7,25 @@ const initialState = {
 	ids: [],
 };
 
-const removeItem = ({ items }, { itemId }) => {
-	const itemIndex = items.findIndex(item => item._id !== itemId);
-};
+const removeItem = ({ items }, { itemId }) => items.filter(item => item._id !== itemId);
 const removeItemId = ({ ids }, { itemId }) => ids.filter(id => id !== itemId);
 
-const addItem = (item) => {};
-const addItemId = (item) => {};
+const addItem = ({ items }, { item }) => {
+	const itemIndex = items.findIndex(({ _id }) => _id === item._id);
+
+	if (itemIndex > -1) {
+		const updateItems = [...items];
+
+		updateItems[itemIndex] = {
+			...item,
+			quantity: items[itemIndex].quantity + 1,
+		};
+
+		return updateItems;
+	}
+
+	return [...items, { ...item, quantity: 1 }];
+};
 
 export default (state = initialState, action) => {
 	let item;
@@ -22,7 +34,7 @@ export default (state = initialState, action) => {
 	case cartActions.ADD_ITEM_TO_CART:
 		({ item } = action);
 		return {
-			items: [...state.items, { ...item }],
+			items: addItem(state, action),
 			ids: [...state.ids, item._id],
 		};
 	case cartActions.REMOVE_ITEM_FROM_CART:

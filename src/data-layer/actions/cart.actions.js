@@ -8,3 +8,6 @@ export const removeItemFromCart = makeActionCreator(REMOVE_ITEM_FROM_CART, 'item
 
 export const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
 export const setShoppingCart = makeActionCreator(SET_SHOPPING_CART, 'shoppingCart');
+
+export const UPDATE_SHOPPING_CART_ITEM_QUANTITY = 'UPDATE_SHOPPING_CART_ITEM_QUANTITY';
+export const updateShoppingCartItemQuantity = makeActionCreator(UPDATE_SHOPPING_CART_ITEM_QUANTITY, 'quantity');

@@ -74,10 +74,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1 1 30%;
 }
 
 .logo-section__work-info {
+    flex: 1 1 30%;
     font-size: 2rem;
+}
+
+.work-info__logo {
+    flex: 1 1 30%;
+    text-align: center;
 }
 
 .work-info__phone {

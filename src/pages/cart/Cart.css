@@ -11,6 +11,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.8rem;
+    padding: 8px 0;
 }
 
 .shopping-cart__item:first-of-type {
@@ -68,7 +69,7 @@
 
 .shopping-cart__item-header {
     position: absolute;
-    top: -40px;
+    top: -50px;
     left: 0;
     font-weight: 700;
 }
@@ -88,4 +89,13 @@
 .customer-info__legend {
     font-size: 1.8rem;
     font-weight: 700;
+}
+
+.shopping-cart__item-prop .shopping-cart__number-input {
+    display: inline-block;
+    width: 80px;
+}
+
+.shopping-cart__number-input .custom-input__input {
+    width: 100%;
 }

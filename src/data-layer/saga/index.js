@@ -13,7 +13,6 @@ import localStorage from '../localStorage';
 
 import * as utils from '../../utils';
 import * as constants from '../../constants';
-import {GET_ORDERS, GET_ORDERS_BY_ID} from "../actions/order.actions";
 
 const {
 	beverageActions,
@@ -109,35 +108,13 @@ const {
 	watchedActionType: beverageActions.FETCH_BEVERAGE_BY_ID,
 });
 
-function* updateCartLocalStorage(action) {
+const getShoppingCart = state => state.cart;
+
+function* updateCartLocalStorage() {
 	try {
-		const { item, itemId } = action;
-		const shoppingCart = yield localStorage.getItem(NBEVERAGES_SHOPPING_CART);
-		let updatedShoppingCart = {
-			items: [],
-			ids: [],
-		};
+		const shoppingCart = yield select(getShoppingCart);
 
-		if (item) {
-			if (shoppingCart) {
-				updatedShoppingCart = {
-					items: [...shoppingCart.items, item],
-					ids: [...shoppingCart.ids, item._id],
-				};
-			} else {
-				updatedShoppingCart = {
-					items: [item],
-					ids: [item._id],
-				};
-			}
-		} else if (itemId) {
-			updatedShoppingCart = {
-				items: shoppingCart.items.filter(({ _id }) => _id !== itemId),
-				ids: shoppingCart.ids.filter(itmId => itmId !== itemId),
-			};
-		}
-
-		yield localStorage.setItem(NBEVERAGES_SHOPPING_CART, updatedShoppingCart);
+		yield localStorage.setItem(NBEVERAGES_SHOPPING_CART, shoppingCart);
 	} catch (e) {
 		console.error(e);
 	}

@@ -79,95 +79,98 @@ export default class CartPage extends Component {
 			deliveryAddress,
 			customerPhone,
 		} = this.state;
-		const { intl } = this.context;
 
 		return (
-			<form
-				action=""
-				className="shopping-cart__customer-info"
-				onSubmit={this.onCreateOrder}
-			>
-				<fieldset className="customer-info__fieldset">
-					<legend className="customer-info__legend">
-						<FormattedMessage id={constants.SHOPPING_CART_CUSTOMER_FORM_NAME} />
-					</legend>
-					<Input
-						label={(
-							<FormattedMessage id={constants.SHOPPING_CART_CUSTOMER_NAME} />
-						)}
-						name="customerName"
-						onChange={this.onChangeFormValue}
-						value={customerName}
-					/>
-					<Select
-						label={(
-							<FormattedMessage id={constants.SHOPPING_CART_PAYMENT_METHOD} />
-						)}
-						name="paymentMethod"
-						onChange={this.onChangeFormValue}
-						selectedValue={paymentMethod}
-						values={utils.getPaymentMethods()}
-					/>
-					<Input
-						type="tel"
-						label={(
-							<FormattedMessage id={constants.SHOPPING_CART_PHONE_NUMBER} />
-						)}
-						name="customerPhone"
-						onChange={this.onChangeFormValue}
-						value={customerPhone}
-					/>
-					<Input
-						type="email"
-						label={(
-							<FormattedMessage id={constants.SHOPPING_CART_EMAIL} />
-						)}
-						name="customerEmail"
-						onChange={this.onChangeFormValue}
-						value={customerEmail}
-					/>
-					<Select
-						label={(
-							<FormattedMessage id={constants.SHOPPING_CART_DELIVERY_METHOD} />
-						)}
-						name="deliveryMethod"
-						onChange={this.onChangeFormValue}
-						selectedValue={deliveryMethod}
-						values={utils.getDeliveryMethods()}
-					/>
-					{deliveryMethod === 'pickup' && (
-						<Select
-							label={(
-								<FormattedMessage id={constants.SHOPPING_CART_SELECT_PICKUP_POINT} />
+			<Context.Consumer>
+				{({ intl: { getTranslation } }) => (
+					<form
+						action=""
+						className="shopping-cart__customer-info"
+						onSubmit={this.onCreateOrder}
+					>
+						<fieldset className="customer-info__fieldset">
+							<legend className="customer-info__legend">
+								<FormattedMessage id={constants.SHOPPING_CART_CUSTOMER_FORM_NAME} />
+							</legend>
+							<Input
+								label={(
+									<FormattedMessage id={constants.SHOPPING_CART_CUSTOMER_NAME} />
+								)}
+								name="customerName"
+								onChange={this.onChangeFormValue}
+								value={customerName}
+							/>
+							<Select
+								label={(
+									<FormattedMessage id={constants.SHOPPING_CART_PAYMENT_METHOD} />
+								)}
+								name="paymentMethod"
+								onChange={this.onChangeFormValue}
+								selectedValue={paymentMethod}
+								values={utils.getPaymentMethods()}
+							/>
+							<Input
+								type="tel"
+								label={(
+									<FormattedMessage id={constants.SHOPPING_CART_PHONE_NUMBER} />
+								)}
+								name="customerPhone"
+								onChange={this.onChangeFormValue}
+								value={customerPhone}
+							/>
+							<Input
+								type="email"
+								label={(
+									<FormattedMessage id={constants.SHOPPING_CART_EMAIL} />
+								)}
+								name="customerEmail"
+								onChange={this.onChangeFormValue}
+								value={customerEmail}
+							/>
+							<Select
+								label={(
+									<FormattedMessage id={constants.SHOPPING_CART_DELIVERY_METHOD} />
+								)}
+								name="deliveryMethod"
+								onChange={this.onChangeFormValue}
+								selectedValue={deliveryMethod}
+								values={utils.getDeliveryMethods()}
+							/>
+							{deliveryMethod === 'pickup' && (
+								<Select
+									label={(
+										<FormattedMessage id={constants.SHOPPING_CART_SELECT_PICKUP_POINT} />
+									)}
+									name="deliveryAddress"
+									onChange={this.onChangeFormValue}
+									selectedValue={deliveryAddress}
+									values={utils.getPickupAddresses()}
+								/>
 							)}
-							name="deliveryAddress"
-							onChange={this.onChangeFormValue}
-							selectedValue={deliveryAddress}
-							values={utils.getPickupAddresses()}
-						/>
-					)}
-					{deliveryMethod === 'delivery' && (
-						<Input
-							label={(
-								<FormattedMessage id={constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS} />
+							{deliveryMethod === 'delivery' && (
+								<Input
+									label={(
+										<FormattedMessage id={constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS} />
+									)}
+									name="deliveryAddress"
+									onChange={this.onChangeFormValue}
+									value={deliveryAddress}
+									placeholder={
+										getTranslation({ id: constants.SHOPPING_CART_DELIVERY_ADDRESS_PLACEHOLDER })
+									}
+								/>
 							)}
-							name="deliveryAddress"
-							onChange={this.onChangeFormValue}
-							value={deliveryAddress}
-							placeholder={
-								intl.getTranslation({ id: constants.SHOPPING_CART_DELIVERY_ADDRESS_PLACEHOLDER })
-							}
-						/>
-					)}
-					<Button
-						type="submit"
-						className="customer-info__button"
-						caption={(
-							<FormattedMessage id={constants.SHOPPING_CART_ORDER} />
-						)}
-					/>
-				</fieldset>
-			</form>
+							<Button
+								type="submit"
+								className="customer-info__button"
+								caption={(
+									<FormattedMessage id={constants.SHOPPING_CART_ORDER} />
+								)}
+							/>
+						</fieldset>
+					</form>
+				)}
+			</Context.Consumer>
 		);
 	}
 
@@ -181,7 +184,7 @@ export default class CartPage extends Component {
 			<div className="shopping-cart__content">
 				<ul className="shopping-cart__items-list">
 					{items.map((item, index) => {
-						const { _id: itemId } = item;
+						const { _id: itemId, quantity } = item;
 
 						return (
 							<li className="shopping-cart__item" key={itemId}>
@@ -206,14 +209,27 @@ export default class CartPage extends Component {
 								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
 									{index === 0 && (
 										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY_PER_UNIT} />
 										</span>
 									)}
 									<FormattedMessage
-										id={constants.SHOPPING_CART_ITEM_QUANTITY}
+										id={constants.SHOPPING_CART_ITEM_QUANTITY_PER_UNIT}
 										values={{
 											quantity: item.quantityPerUnit,
 										}}
+									/>
+								</span>
+								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
+										</span>
+									)}
+									<Input
+										type="number"
+										onChange={() => {}}
+										value={quantity}
+										className="shopping-cart__number-input"
 									/>
 								</span>
 								<span className="shopping-cart__item-prop shopping-cart__price">
@@ -222,7 +238,7 @@ export default class CartPage extends Component {
 											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_PRICE} />
 										</span>
 									)}
-									{`${item.price} ${item.currency}`}
+									{`${item.price * quantity} ${item.currency}`}
 									{index === itemsLength - 1 && (
 										<span className="shopping-cart__total-price">
 											<FormattedMessage
