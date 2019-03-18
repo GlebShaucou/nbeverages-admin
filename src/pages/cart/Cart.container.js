@@ -17,6 +17,9 @@ const mapDispatchToProps = dispatch => ({
 	createOrder: (order) => {
 		dispatch(orderActions.createOrder(order));
 	},
+	changeItemQuantity: ({ itemId, quantity }) => {
+		dispatch(cartActions.updateShoppingCartItemQuantity(itemId, quantity));
+	},
 });
 
 export default connect(

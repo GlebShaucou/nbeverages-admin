@@ -18,7 +18,7 @@ const addItem = ({ items }, { item }) => {
 
 		updateItems[itemIndex] = {
 			...item,
-			quantity: items[itemIndex].quantity + 1,
+			quantity: +items[itemIndex].quantity + 1,
 		};
 
 		return updateItems;
@@ -26,16 +26,31 @@ const addItem = ({ items }, { item }) => {
 
 	return [...items, { ...item, quantity: 1 }];
 };
+const addItemIds = ({ ids }, { item: { _id: itemId } }) => {
+	if (ids.findIndex(id => id === itemId) > -1) {
+		return ids;
+	}
+
+	return [...ids, itemId];
+};
+
+const updateItemQuantity = ({ items }, { itemId, quantity }) => items.map((item) => {
+	if (item._id === itemId) {
+		return {
+			...item,
+			quantity,
+		};
+	}
+
+	return item;
+});
 
 export default (state = initialState, action) => {
-	let item;
-
 	switch (action.type) {
 	case cartActions.ADD_ITEM_TO_CART:
-		({ item } = action);
 		return {
 			items: addItem(state, action),
-			ids: [...state.ids, item._id],
+			ids: addItemIds(state, action),
 		};
 	case cartActions.REMOVE_ITEM_FROM_CART:
 		return {
@@ -49,6 +64,11 @@ export default (state = initialState, action) => {
 	case orderActions.CREATE_ORDER_SUCCEDED:
 		return {
 			...initialState,
+		};
+	case cartActions.UPDATE_SHOPPING_CART_ITEM_QUANTITY:
+		return {
+			...state,
+			items: updateItemQuantity(state, action),
 		};
 	default:
 		return state;

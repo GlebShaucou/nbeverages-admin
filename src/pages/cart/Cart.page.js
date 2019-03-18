@@ -67,7 +67,18 @@ export default class CartPage extends Component {
 		const { cart } = this.props;
 		const { items } = cart;
 
-		return items.reduce((total, { price }) => total + +price, 0);
+		return items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);
+	};
+
+	changeQuantity = itemId => (e) => {
+		const { changeItemQuantity } = this.props;
+		const { target: { value } } = e;
+
+		if (value === 0) {
+			return;
+		}
+
+		changeItemQuantity({ itemId, quantity: value });
 	};
 
 	renderCustomerInfoForm() {
@@ -227,7 +238,7 @@ export default class CartPage extends Component {
 									)}
 									<Input
 										type="number"
-										onChange={() => {}}
+										onChange={this.changeQuantity(itemId)}
 										value={quantity}
 										className="shopping-cart__number-input"
 									/>
@@ -287,6 +298,7 @@ CartPage.propTypes = {
 	loadResources: PropTypes.func,
 	removeItemFromCart: PropTypes.func,
 	createOrder: PropTypes.func,
+	changeItemQuantity: PropTypes.func,
 	cart: PropTypes.object,
 	selectedItem: PropTypes.object,
 	history: PropTypes.object,
@@ -296,6 +308,7 @@ CartPage.defaultProps = {
 	loadResources: () => {},
 	removeItemFromCart: () => {},
 	createOrder: () => {},
+	changeItemQuantity: () => {},
 	cart: {
 		items: [],
 		ids: [],
