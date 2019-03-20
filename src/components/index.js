@@ -10,3 +10,4 @@ export { default as Footer } from './Footer';
 export { default as Select } from './Select';
 export { default as Table } from './Table';
 export { default as Context } from './Context';
+export { default as SelectedItems } from './SelectedItems';

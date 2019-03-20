@@ -1,24 +1,26 @@
 import jwtDecode from 'jwt-decode';
 
+import * as constants from '../constants';
+
 export const decodeJwtToken = token => jwtDecode(token);
-export const getDeliveryMethods = (locale) => ([
+export const getDeliveryMethods = getTranslation => ([
 	{
 		value: '',
-		label: 'Select delivery method...',
+		label: getTranslation({ id: constants.DELIVERY_METHODS_PLACEHOLDER }),
 	},
 	{
 		value: 'delivery',
-		label: 'Delivery',
+		label: getTranslation({ id: constants.DELIVERY_METHODS_DELIVERY }),
 	},
 	{
 		value: 'pickup',
-		label: 'Pickup',
+		label: getTranslation({ id: constants.DELIVERY_METHODS_PICKUP }),
 	},
 ]);
-export const getPickupAddresses = () => ([
+export const getPickupAddresses = getTranslation => ([
 	{
 		value: '',
-		label: 'Select pickup address...',
+		label: getTranslation({ id: constants.PICKUP_ADDRESS_PLACEHOLDER }),
 	},
 	{
 		value: 'Minsk, ave. Gazety Zvyazda, 37',
@@ -33,18 +35,18 @@ export const getPickupAddresses = () => ([
 		label: 'Minsk, ave. Gazety Zvyazda, 33',
 	},
 ]);
-export const getPaymentMethods = () => ([
+export const getPaymentMethods = getTranslation => ([
 	{
 		value: '',
-		label: 'Select payment method...',
+		label: getTranslation({ id: constants.PAYMENT_METHODS_PLACEHOLDER }),
 	},
 	{
 		value: 'cash',
-		label: 'Cash',
+		label: getTranslation({ id: constants.PAYMENT_METHODS_CASH }),
 	},
 	{
 		value: 'creditCard',
-		label: 'Credit Cart',
+		label: getTranslation({ id: constants.PAYMENT_METHODS_CREDIT_CARD }),
 	},
 ]);
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -61,3 +63,7 @@ export const generateOrderId = (length, orderId = []) => {
 
 	return orderId.join('').toUpperCase();
 };
+
+export const getTotalPrice = ({
+	items,
+}) => items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);

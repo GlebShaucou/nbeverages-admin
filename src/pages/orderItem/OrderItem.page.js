@@ -9,7 +9,7 @@ const OrderItemPage = (props) => {
 	const [order, setOrder] = useState(props.selectedItem);
 
 	const setDocumentTitle = () => {
-		document.title = `Order ${props.selectedItem ? props.selectedItem.orderId : ''} Review | Natural Beverages`;
+		document.title = `Order ${props.selectedItem ? props.selectedItem.orderId : ''} Review | Tea City`;
 	};
 
 	useEffect(() => {

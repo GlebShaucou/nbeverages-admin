@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const NotFoundPage = () => {
 	useEffect(() => {
-		document.title = 'Not Found | Natural Beverages';
+		document.title = 'Not Found | Tea City';
 	}, []);
 
 	return (

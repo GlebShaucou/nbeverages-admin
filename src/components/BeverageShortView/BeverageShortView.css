@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.8rem;
-    padding: 20px 5px 5px;
+    padding: 30px 5px 5px;
 }
 
 .beverage-short-view__image-container {
@@ -66,4 +66,16 @@
 
 .bsv-image {
     height: 200px;
+}
+
+.bsv-footer__item {
+    flex: 1;
+    position: relative;
+}
+
+.bsv-footer__item-header {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    font-size: 1.5rem;
 }

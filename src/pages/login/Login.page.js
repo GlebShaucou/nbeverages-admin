@@ -13,7 +13,7 @@ const LoginPage = (props) => {
 	});
 
 	useEffect(() => {
-		document.title = 'Login | Natural Beverages';
+		document.title = 'Login | Tea City';
 	}, []);
 
 	const onLogin = (e) => {

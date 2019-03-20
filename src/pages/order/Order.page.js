@@ -8,7 +8,7 @@ const OrderPage = (props) => {
 	const [orderId, setOrderId] = useState('');
 
 	useEffect(() => {
-		document.title = 'Order | Natural Beverages';
+		document.title = 'Order | Tea City';
 	}, []);
 
 	const onSearchOrder = (e) => {

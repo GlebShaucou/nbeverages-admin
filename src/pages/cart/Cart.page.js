@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import {
-	Select, Button, Input, Context,
+	Select,
+	Button,
+	Input,
+	Context,
+	SelectedItems,
 } from '../../components';
 import * as constants from '../../constants';
 import * as utils from '../../utils';
@@ -24,7 +27,7 @@ export default class CartPage extends Component {
 
 		loadResources();
 
-		document.title = 'Shopping Cart | Natural Beverages';
+		document.title = 'Shopping Cart | Tea City';
 	}
 
 	componentDidUpdate() {
@@ -34,14 +37,6 @@ export default class CartPage extends Component {
 			history.push(constants.PAGE_ORDER);
 		}
 	}
-
-	onRemoveItemFromCartClick = (itemId) => {
-		const { removeItemFromCart } = this.props;
-
-		return () => {
-			removeItemFromCart(itemId);
-		};
-	};
 
 	onChangeFormValue = (e) => {
 		this.setState({
@@ -65,20 +60,8 @@ export default class CartPage extends Component {
 
 	getTotalPrice = () => {
 		const { cart } = this.props;
-		const { items } = cart;
 
-		return items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);
-	};
-
-	changeQuantity = itemId => (e) => {
-		const { changeItemQuantity } = this.props;
-		const { target: { value } } = e;
-
-		if (value === 0) {
-			return;
-		}
-
-		changeItemQuantity({ itemId, quantity: value });
+		return utils.getTotalPrice(cart);
 	};
 
 	renderCustomerInfoForm() {
@@ -118,7 +101,7 @@ export default class CartPage extends Component {
 								name="paymentMethod"
 								onChange={this.onChangeFormValue}
 								selectedValue={paymentMethod}
-								values={utils.getPaymentMethods()}
+								values={utils.getPaymentMethods(getTranslation)}
 							/>
 							<Input
 								type="tel"
@@ -145,7 +128,7 @@ export default class CartPage extends Component {
 								name="deliveryMethod"
 								onChange={this.onChangeFormValue}
 								selectedValue={deliveryMethod}
-								values={utils.getDeliveryMethods()}
+								values={utils.getDeliveryMethods(getTranslation)}
 							/>
 							{deliveryMethod === 'pickup' && (
 								<Select
@@ -155,7 +138,7 @@ export default class CartPage extends Component {
 									name="deliveryAddress"
 									onChange={this.onChangeFormValue}
 									selectedValue={deliveryAddress}
-									values={utils.getPickupAddresses()}
+									values={utils.getPickupAddresses(getTranslation)}
 								/>
 							)}
 							{deliveryMethod === 'delivery' && (
@@ -186,93 +169,21 @@ export default class CartPage extends Component {
 	}
 
 	renderShoppingCartContent() {
-		const { cart } = this.props;
+		const {
+			cart,
+			removeItemFromCart,
+			changeItemQuantity,
+		} = this.props;
 		const { items } = cart;
-		const totalPrice = this.getTotalPrice();
-		const itemsLength = items.length;
 
 		return (
 			<div className="shopping-cart__content">
-				<ul className="shopping-cart__items-list">
-					{items.map((item, index) => {
-						const { _id: itemId, quantity } = item;
-
-						return (
-							<li className="shopping-cart__item" key={itemId}>
-								<span className="shopping-cart__item-prop shopping-cart__item-name">
-									{index === 0 && (
-										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_NAME} />
-										</span>
-									)}
-									<Link to={`/catalog/${itemId}`} className="item-name__link">
-										{item.name}
-									</Link>
-								</span>
-								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
-									{index === 0 && (
-										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_DESCRIPTION} />
-										</span>
-									)}
-									{`${item.type}, ${item.category}`}
-								</span>
-								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
-									{index === 0 && (
-										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY_PER_UNIT} />
-										</span>
-									)}
-									<FormattedMessage
-										id={constants.SHOPPING_CART_ITEM_QUANTITY_PER_UNIT}
-										values={{
-											quantity: item.quantityPerUnit,
-										}}
-									/>
-								</span>
-								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
-									{index === 0 && (
-										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
-										</span>
-									)}
-									<Input
-										type="number"
-										onChange={this.changeQuantity(itemId)}
-										value={quantity}
-										className="shopping-cart__number-input"
-									/>
-								</span>
-								<span className="shopping-cart__item-prop shopping-cart__price">
-									{index === 0 && (
-										<span className="shopping-cart__item-header">
-											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_PRICE} />
-										</span>
-									)}
-									{`${item.price * quantity} ${item.currency}`}
-									{index === itemsLength - 1 && (
-										<span className="shopping-cart__total-price">
-											<FormattedMessage
-												id={constants.SHOPPING_CART_TOTAL_PRICE}
-												values={{
-													amount: totalPrice,
-													currency: items[0].currency,
-												}}
-											/>
-										</span>
-									)}
-								</span>
-								<Button
-									caption={(
-										<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
-									)}
-									className="shopping-cart__remove-button"
-									onClick={this.onRemoveItemFromCartClick(itemId)}
-								/>
-							</li>
-						);
-					})}
-				</ul>
+				<SelectedItems
+					items={items}
+					editableQuantity
+					onRemoveItem={removeItemFromCart}
+					onChangeItemQuantity={changeItemQuantity}
+				/>
 				{this.renderCustomerInfoForm()}
 			</div>
 		);

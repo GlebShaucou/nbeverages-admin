@@ -11,7 +11,7 @@ export default class CatalogPage extends Component {
 
 		loadResources();
 
-		document.title = 'Beverages Catalog | Natural Beverages';
+		document.title = 'Beverages Catalog | Tea City';
 	}
 
 	onCatalogItemButtonClick = (item) => {

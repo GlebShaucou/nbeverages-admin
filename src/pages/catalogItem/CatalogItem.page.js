@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '../../components/Button';
+import * as constants from '../../constants';
 
 const CatalogItemPage = (props) => {
 	const setDocumentTitle = () => {
 		const { selectedItem } = props;
 
-		document.title = `${(selectedItem && selectedItem.name) || 'Selected'} | Natural Beverages`;
+		document.title = `${(selectedItem && selectedItem.name) || 'Selected'} | Tea City`;
 	};
 
 	useEffect(() => {
@@ -26,13 +28,8 @@ const CatalogItemPage = (props) => {
 
 		addItemToCart(selectedItem);
 	};
-	const onRemoveFromCartClick = () => {
-		const { selectedItem, removeItemFromCart } = props;
 
-		removeItemFromCart(selectedItem._id);
-	};
-
-	const { selectedItem, isAddedToCart } = props;
+	const { selectedItem } = props;
 
 	if (!selectedItem) {
 		return null;
@@ -49,7 +46,6 @@ const CatalogItemPage = (props) => {
 		quantityPerUnit,
 		// _id: itemId,
 	} = selectedItem;
-	const onButtonClick = isAddedToCart ? onRemoveFromCartClick : onAddToCartClick;
 
 	return (
 		<div className="page-component page-component--catalog-item">
@@ -64,26 +60,40 @@ const CatalogItemPage = (props) => {
 					{`${type} ${category}`}
 				</div>
 				<div className="catalog-item__amount">
-					<span className="">
-						Quantity:
-					</span> {`${quantityPerUnit} g`}
+					<FormattedMessage
+						id={constants.CATALOG_ITEM_QUANTITY_PER_UNIT}
+					/>
+					<FormattedMessage
+						id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}
+						values={{ quantityPerUnit }}
+					/>
 				</div>
 				<div className="catalog-item__price">
+					<FormattedMessage
+						id={constants.CATALOG_ITEM_PRICE}
+						className="catalog-item__price-header"
+					/>{' '}
 					<span className="catalog-item__price-value">
 						{`${price} ${currency}`}
 					</span>
 					<span className="catalog-item__button">
 						<Button
-							caption={isAddedToCart ? 'Remove From Cart' : 'Add To Cart'}
-							onClick={onButtonClick}
-							className={isAddedToCart ? 'remove-button' : ''}
+							caption={(
+								<FormattedMessage
+									id={constants.CATALOG_ITEM_BUTTON_ADD_TO_CART}
+								/>
+							)}
+							onClick={onAddToCartClick}
 						/>
 					</span>
 				</div>
 				<div className="catalog-item__description">
 					<span className="catalog-item__description-header">
-						Description:
-					</span> <br /><br />
+						<FormattedMessage
+							id={constants.CATALOG_ITEM_DESCRIPTION}
+						/>
+					</span>
+					<br /><br />
 					{description}
 				</div>
 			</div>
@@ -95,16 +105,12 @@ CatalogItemPage.propTypes = {
 	selectedItem: PropTypes.object,
 	loadResources: PropTypes.func,
 	addItemToCart: PropTypes.func,
-	removeItemFromCart: PropTypes.func,
-	isAddedToCart: PropTypes.bool,
 };
 
 CatalogItemPage.defaultProps = {
 	selectedItem: null,
 	loadResources: () => {},
 	addItemToCart: () => {},
-	removeItemFromCart: () => {},
-	isAddedToCart: false,
 };
 
 export default CatalogItemPage;

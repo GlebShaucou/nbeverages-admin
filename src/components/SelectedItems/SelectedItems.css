@@ -1,0 +1,39 @@
+.shopping-cart__item-prop {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.shopping-cart__item-prop .shopping-cart__number-input {
+    display: inline-block;
+    width: 80px;
+}
+
+.shopping-cart__number-input .custom-input__input {
+    width: 100%;
+}
+
+.shopping-cart__item-name {
+    flex: 2;
+}
+
+.shopping-cart__item-category-type {
+    flex: 2;
+}
+
+.shopping-cart__item-quantity-per-unit {
+
+}
+
+.shopping-cart__item-quantity {
+
+}
+
+.shopping-cart__price {
+
+}
+
+.shopping-cart__remove-button {
+    flex: 1;
+}

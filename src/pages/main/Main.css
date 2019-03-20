@@ -1,5 +1,5 @@
 .page-component--main {
-
+    padding-top: 30px;
 }
 
 .welcome-message-section {
@@ -36,10 +36,11 @@
 
 .description-section {
     font-size: 2rem;
-    padding-bottom: 50px;
+    padding: 50px 0;
 }
 
 .description__header {
+    padding-bottom: 20px;
     color: #993233;
 }
 

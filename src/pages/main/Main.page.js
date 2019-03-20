@@ -10,7 +10,7 @@ import promoRightSrc from './img/promo-right.jpg';
 
 const MainPage = () => {
 	useEffect(() => {
-		document.title = 'Place, where you can find you are searching for | Natural Beverages';
+		document.title = 'Place, where you can find you are searching for | Tea City';
 	}, []);
 
 	const LinkWrapper = ({ children, linkTo }) => (
@@ -34,6 +34,14 @@ const MainPage = () => {
 					</span>
 				</LinkWrapper>
 			</div>
+			<div className="description-section">
+				<h2 className="description__header">
+					<FormattedMessage id={constants.MAIN_WELCOME_HEADER} />
+				</h2>
+				<div className="description__text">
+					<FormattedMessage id={constants.MAIN_TEA_DESCRIPTION} />
+				</div>
+			</div>
 			<div className="promo-section">
 				<div className="promo__left-section">
 					<img src={promoLeftSrc} alt="tea" className="left-section__image" />
@@ -52,14 +60,6 @@ const MainPage = () => {
 							</span>
 						</LinkWrapper>
 					</div>
-				</div>
-			</div>
-			<div className="description-section">
-				<h2 className="description__header">
-					<FormattedMessage id={constants.MAIN_WELCOME_HEADER} />
-				</h2>
-				<div className="description__text">
-					<FormattedMessage id={constants.MAIN_TEA_DESCRIPTION} />
 				</div>
 			</div>
 		</div>

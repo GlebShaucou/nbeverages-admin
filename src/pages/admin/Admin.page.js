@@ -20,7 +20,7 @@ const AdminPage = (props) => {
 
 		loadData();
 
-		document.title = 'Administration section | Natural Beverages';
+		document.title = 'Administration section | Tea City';
 	}, []);
 
 	const onAddBeverage = (beverage) => {

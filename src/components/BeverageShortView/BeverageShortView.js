@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '../Button';
+import * as constants from '../../constants';
 
 const BeverageShortView = (props) => {
 	const {
@@ -55,13 +57,26 @@ const BeverageShortView = (props) => {
 				</div>
 			</div>
 			<div className="beverage-short-view__footer">
-				<div className="bsv-footer__quantity">
-					{`${quantityPerUnit} g`}
+				<div className="bsv-footer__item bsv-footer__quantity">
+					<span className="bsv-footer__item-header">
+						<FormattedMessage
+							id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_BOXING}
+						/>
+					</span>
+					<FormattedMessage
+						id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}
+						values={{ quantityPerUnit }}
+					/>
 				</div>
-				<div className="bsv-footer__price">
+				<div className="bsv-footer__item bsv-footer__price">
+					<span className="bsv-footer__item-header">
+						<FormattedMessage
+							id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PRICE}
+						/>
+					</span>
 					{`${price} ${currency}`}
 				</div>
-				<div className="bsv-footer__buttons">
+				<div className="bsv-footer__item bsv-footer__buttons">
 					<Button
 						caption={buttonCaption}
 						onClick={onButtonClick}
