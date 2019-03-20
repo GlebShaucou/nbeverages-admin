@@ -12,7 +12,7 @@ const SelectedItems = (props) => {
 		items,
 		onRemoveItem,
 		onChangeItemQuantity,
-		editableQuantity,
+		editable,
 	} = props;
 	const totalPrice = utils.getTotalPrice({ items });
 	const itemsLength = items.length;
@@ -74,7 +74,7 @@ const SelectedItems = (props) => {
 									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
 								</span>
 							)}
-							{editableQuantity ? (
+							{editable ? (
 								<Input
 									type="number"
 									onChange={onChangeItemQuantityClick(itemId)}
@@ -107,13 +107,15 @@ const SelectedItems = (props) => {
 							)}
 						</span>
 						<span className="shopping-cart__item-prop shopping-cart__item-edit">
-							<Button
-								caption={(
-									<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
-								)}
-								className="shopping-cart__remove-button"
-								onClick={onRemoveItemClick(itemId)}
-							/>
+							{editable && (
+								<Button
+									caption={(
+										<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
+									)}
+									className="shopping-cart__remove-button"
+									onClick={onRemoveItemClick(itemId)}
+								/>
+							)}
 						</span>
 					</li>
 				);
@@ -126,14 +128,14 @@ SelectedItems.propTypes = {
 	items: PropTypes.array,
 	onRemoveItem: PropTypes.func,
 	onChangeItemQuantity: PropTypes.func,
-	editableQuantity: PropTypes.bool,
+	editable: PropTypes.bool,
 };
 
 SelectedItems.defaultProps = {
 	items: [],
 	onRemoveItem: () => {},
 	onChangeItemQuantity: () => {},
-	editableQuantity: false,
+	editable: false,
 };
 
 export default SelectedItems;

@@ -180,7 +180,7 @@ export default class CartPage extends Component {
 			<div className="shopping-cart__content">
 				<SelectedItems
 					items={items}
-					editableQuantity
+					editable
 					onRemoveItem={removeItemFromCart}
 					onChangeItemQuantity={changeItemQuantity}
 				/>

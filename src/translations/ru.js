@@ -61,4 +61,13 @@ export default {
 	[constants.CATALOG_ITEM_DESCRIPTION]: 'Описание',
 	[constants.CATALOG_ITEM_BUTTON_ADD_TO_CART]: 'Добавить в корзину',
 	[constants.CATALOG_ITEM_PRICE]: 'Стоимость',
+	[constants.ORDER_PAGE_ORDER_ID]: 'Номер заказа',
+	[constants.ORDER_PAGE_ORDER_STATUS]: 'Статус заказа',
+	[constants.ORDER_PAGE_CUSTOMER_NAME]: 'Заказ оформлен на',
+	[constants.ORDER_PAGE_CUSTOMER_EMAIL]: 'Электронная почта',
+	[constants.ORDER_PAGE_CUSTOMER_PHONE]: 'Номер телефона',
+	[constants.ORDER_PAGE_DELIVERY_METHOD]: 'Способ доставки',
+	[constants.ORDER_PAGE_DELIVERY_ADDRESS]: 'Адрес доставки',
+	[constants.ORDER_PAGE_PAYMENT_METHOD]: 'Способ оплаты',
+	[constants.ORDER_PAGE_BUTTON_SEARCH]: 'Найти',
 };

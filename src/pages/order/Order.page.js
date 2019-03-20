@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
-import { Input, Button } from '../../components';
+import {
+	Input, Button, SelectedItems, Context,
+} from '../../components';
+import * as constants from '../../constants';
 
 const OrderPage = (props) => {
 	const [orderId, setOrderId] = useState('');
@@ -22,72 +26,107 @@ const OrderPage = (props) => {
 	const { selectedItem } = props;
 
 	return (
-		<div className="page-component page-component--order">
-			<form
-				action=""
-				onSubmit={onSearchOrder}
-				className="order-page__search-form"
-			>
-				<Input
-					label="Order ID"
-					value={orderId}
-					onChange={onInputChange}
-				/>
-				<Button
-					type="submit"
-					caption="Search Order"
-					className="order-page__search-button"
-				/>
-			</form>
-			{selectedItem && (
-				<div className="order-page__order-info">
-					<div className="order-info__order-id">
-						Order with id {selectedItem.orderId} status {selectedItem.status}
-					</div>
-					<div className="order-info__customer-name">
-						Ordered by {selectedItem.customerName}
-					</div>
-					<div className="order-info__email">
-						Email {selectedItem.customerEmail}, phone {selectedItem.customerPhone}
-					</div>
-					<div className="order-info__delivery">
-						Delivery address {selectedItem.deliveryAddress}
-					</div>
-					<div className="order-info__payment-method">
-						Payment method {selectedItem.paymentMethod}
-					</div>
-					<div className="order-info__items">
-						<ul className="order-info__items-list">
-							{selectedItem.items.map((item) => {
-								const { _id: itemId } = item;
-
-								return (
-									<li key={item._id} className="order-info__item">
-										<span className="order-info__item-name">
-											<Link to={`/catalog/${itemId}`} className="item-name__link">
-												{item.name}
-											</Link>
-										</span>
-										<span className="order-info__item-quantity">
-											{`${item.type}, ${item.category}`}
-										</span>
-										<span className="order-info__item-quantity">
-											{`${item.quantityPerUnit} g`}
-										</span>
-										<span className="order-info__price">
-											{`${item.price} ${item.currency}`}
-										</span>
-									</li>
-								);
-							})}
-						</ul>
-						<div className="order-info__total-price">
-							Total {selectedItem.totalAmount}{selectedItem.currency}
+		<Context.Consumer>
+			{({ intl }) => (
+				<div className="page-component page-component--order">
+					<form
+						action=""
+						onSubmit={onSearchOrder}
+						className="order-page__search-form"
+					>
+						<Input
+							placeholder={intl.getTranslation({ id: constants.ORDER_PAGE_ORDER_ID })}
+							value={orderId}
+							onChange={onInputChange}
+						/>
+						<Button
+							type="submit"
+							caption={(
+								<FormattedMessage id={constants.ORDER_PAGE_BUTTON_SEARCH} />
+							)}
+							className="order-page__search-button"
+						/>
+					</form>
+					{selectedItem && (
+						<div className="order-page__order-info">
+							<Table className="table table-bordered order-page__table">
+								<tbody>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_ORDER_ID} />
+										</th>
+										<td>
+											{selectedItem.orderId}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_ORDER_STATUS} />
+										</th>
+										<td>
+											{selectedItem.status}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_CUSTOMER_NAME} />
+										</th>
+										<td>
+											{selectedItem.customerName}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_CUSTOMER_EMAIL} />
+										</th>
+										<td>
+											{selectedItem.customerEmail}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_CUSTOMER_PHONE} />
+										</th>
+										<td>
+											{selectedItem.customerPhone}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_DELIVERY_METHOD} />
+										</th>
+										<td>
+											{selectedItem.deliveryMethod}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_DELIVERY_ADDRESS} />
+										</th>
+										<td>
+											{selectedItem.deliveryAddress}
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<FormattedMessage id={constants.ORDER_PAGE_PAYMENT_METHOD} />
+										</th>
+										<td>
+											{selectedItem.paymentMethod}
+										</td>
+									</tr>
+								</tbody>
+							</Table>
+							<div className="order-info__items">
+								<SelectedItems
+									items={selectedItem.items}
+								/>
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			)}
-		</div>
+		</Context.Consumer>
 	);
 };
 

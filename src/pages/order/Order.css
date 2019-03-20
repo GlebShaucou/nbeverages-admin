@@ -1,4 +1,6 @@
-.page-component--order {}
+.page-component--order {
+    padding-top: 30px;
+}
 
 .order-page__search-form {
     display: flex;
@@ -28,7 +30,9 @@
 
 .order-info__payment-method {}
 
-.order-info__items {}
+.order-info__items {
+    margin-top: 80px;
+}
 
 .order-info__items-list {}
 
@@ -49,4 +53,8 @@
 
 .order-info__price {
     flex: 1;
+}
+
+.order-page__table th {
+    text-align: left;
 }
