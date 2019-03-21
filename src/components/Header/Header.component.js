@@ -58,7 +58,7 @@ const Header = (props) => {
 							+375 29 888 888
 						</a>
 						<div className="work-info__hours">
-						Mon - Fr 10:00 - 20:00
+							<FormattedMessage id={constants.HEADER_WORKING_HOURS} />
 						</div>
 					</div>
 					<div className="work-info__logo">

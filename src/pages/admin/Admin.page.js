@@ -51,78 +51,7 @@ const AdminPage = (props) => {
 		setSelectedSection(section);
 	};
 
-	const renderRegularItemView = (item) => {
-		const { _id: itemId } = item;
-
-		return (
-			<li className="list-of-items__item" key={itemId}>
-				<span className="item-attr item-attr__image-container">
-					<img className="item-attr--image" src={item.imgSrc} alt="beverage" />
-				</span>
-				<span className="item-attr">{item.category}</span>
-				<span className="item-attr">{item.type}</span>
-				<span className="item-attr">{item.name}</span>
-				<span className="item-attr">{item.description}</span>
-				<span className="item-attr">{item.quantityPerUnit}</span>
-				<span className="item-attr">{item.price}</span>
-				<span className="item-attr">{item.currency}</span>
-				<Button
-					caption="Update"
-					onClick={onUpdateItem(itemId)}
-					className="admin-button"
-				/>
-				<Button
-					caption="Delete"
-					onClick={onRemoveItem(itemId)}
-					className="admin-button"
-				/>
-			</li>
-		);
-	};
-
-	const renderEditingItemView = (item) => {
-		const { newItem } = props;
-		const { _id: itemId } = item;
-
-		return (
-			<li className="list-of-items__item" key={itemId}>
-				<NewItemForm
-					{...newItem}
-					onSubmit={onUpdateBeverage(itemId)}
-					onReset={onUpdateItem(itemId)}
-					values={item}
-					buttonSubmit={{
-						caption: 'Update',
-						visible: true,
-					}}
-					buttonReset={{
-						caption: 'Close',
-						visible: true,
-					}}
-				/>
-			</li>
-		);
-	};
-
-	const renderItems = () => {
-		const { items } = props;
-
-		return (
-			<ul className="admin-page__list-of-items">
-				{items.map((item) => {
-					const { _id: itemId } = item;
-
-					if (editingItemId === itemId) {
-						return renderEditingItemView(item);
-					}
-
-					return renderRegularItemView(item);
-				})}
-			</ul>
-		);
-	};
-
-	const renderCatalog = ({ getTranslation }) => {
+	const getItemSchema = (getTranslation) => {
 		const { newItem: { schema } } = props;
 		const mappings = {
 			category: constants.ADMIN_ITEM_CATEGORY,
@@ -134,29 +63,141 @@ const AdminPage = (props) => {
 			price: constants.ADMIN_ITEM_PRICE,
 			currency: constants.ADMIN_ITEM_CURRENCY,
 		};
-		const newSchema = schema.map(({ name }) => ({
+
+		return schema.map(({ name }) => ({
 			name,
 			label: getTranslation({ id: mappings[name] }),
 		}));
+	};
+
+	const renderEditingItemView = ({ getTranslation, item }) => {
+		const { _id: itemId } = item;
 
 		return (
-			<div className="admin-page__catalog">
-				<div className="admin-page__edit-section">
-					<NewItemForm
-						onSubmit={onAddBeverage}
-						schema={newSchema}
-						buttonSubmit={{
-							caption: getTranslation({ id: constants.ADMIN_ITEM_ADD_BUTTON }),
-							visible: true,
-						}}
-					/>
-				</div>
-				<div className="admin-page__content">
-					{renderItems()}
-				</div>
-			</div>
+			<li className="list-of-items__item" key={itemId}>
+				<NewItemForm
+					schema={getItemSchema(getTranslation)}
+					onSubmit={onUpdateBeverage(itemId)}
+					onReset={onUpdateItem(itemId)}
+					values={item}
+					buttonSubmit={{
+						caption: getTranslation({ id: constants.ADMIN_ITEM_BUTTON_UPDATE }),
+						visible: true,
+					}}
+					buttonReset={{
+						caption: getTranslation({ id: constants.ADMIN_ITEM_BUTTON_CLOSE }),
+						visible: true,
+					}}
+				/>
+			</li>
 		);
 	};
+
+	const renderItems = ({ getTranslation }) => {
+		const { items } = props;
+		const tableConf = [
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_IMAGE }),
+				accessor: 'imgSrc',
+				Cell: ({ value: imgSrc }) => (
+					<img className="item-attr--image" src={imgSrc} alt="beverage" />
+				),
+				filterable: false,
+				sortable: false,
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_CATEGORY }),
+				accessor: 'category',
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_TYPE }),
+				accessor: 'type',
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_ITEM_NAME }),
+				accessor: 'name',
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_DESCRIPTION }),
+				accessor: 'description',
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_QUANTITY_PER_UNIT }),
+				accessor: 'quantityPerUnit',
+				Cell: ({ value: quantityPerUnit }) => (
+					<FormattedMessage
+						id={constants.ADMIN_CATALOG_QUANTITY_PER_UNIT}
+						values={{ quantityPerUnit }}
+					/>
+				),
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_PRICE }),
+				id: 'unitPrice',
+				accessor: order => `${order.price} ${order.currency}`,
+				headerClassName: 'admin-page__catalog-item-header',
+				className: 'admin-page__catalog-item',
+			},
+			{
+				Header: '',
+				accessor: '_id',
+				Cell: ({ value: itemId }) => (
+					<span className="admin-page__catalog-item--buttons">
+						<Button
+							caption={getTranslation({ id: constants.ADMIN_ITEM_BUTTON_UPDATE })}
+							onClick={onUpdateItem(itemId)}
+							className="admin-button"
+						/>
+						<Button
+							caption={getTranslation({ id: constants.ADMIN_ITEM_BUTTON_DELETE })}
+							onClick={onRemoveItem(itemId)}
+							className="admin-button"
+						/>
+					</span>
+				),
+				filterable: false,
+				sortable: false,
+				headerClassName: 'admin-page__catalog-item-header',
+			},
+		];
+
+		return (
+			<Table
+				data={items}
+				columns={tableConf}
+			/>
+		);
+	};
+
+	const renderCatalog = ({ getTranslation }) => (
+		<div className="admin-page__catalog">
+			<div className="admin-page__edit-section">
+				<NewItemForm
+					onSubmit={onAddBeverage}
+					schema={getItemSchema(getTranslation)}
+					buttonSubmit={{
+						caption: getTranslation({ id: constants.ADMIN_ITEM_ADD_BUTTON }),
+						visible: true,
+					}}
+				/>
+			</div>
+			<div className="admin-page__content">
+				{renderItems({ getTranslation })}
+			</div>
+		</div>
+	);
 
 	const renderOrders = () => {
 		const { orders } = props;

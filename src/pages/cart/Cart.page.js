@@ -197,7 +197,7 @@ export default class CartPage extends Component {
 			<div className="page-component page-component--cart">
 				{items.length === 0 ? (
 					<div className="shopping-cart__empty">
-						No Items in Shopping Cart.
+						<FormattedMessage id={constants.SHOPPING_CART_NO_ITEMS} />
 					</div>
 				) : this.renderShoppingCartContent()}
 			</div>

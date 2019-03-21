@@ -40,7 +40,8 @@
 }
 
 .custom-table.ReactTable .rt-tbody .rt-td {
-    border-right: 1px solid rgba(153,50,51,0.02);
+    /*border-right: 1px solid rgba(153,50,51,0.02);*/
+    border-right: none;
 }
 
 .custom-table.ReactTable .-pagination {
@@ -66,4 +67,9 @@
 
 .custom-table.ReactTable .rt-thead.-filters input, .ReactTable .rt-thead.-filters select {
     border: 1px solid rgba(153,50,51,0.1);
+}
+
+.custom-table.ReactTable .rt-td {
+    white-space: normal;
+    text-align: justify;
 }
