@@ -32,11 +32,6 @@ const CustomerInfoForm = (props) => {
 			[name]: value,
 		}));
 	};
-	const onSubmitCustomer = (e) => {
-		e.preventDefault();
-
-		props.submitCustomer(customer);
-	};
 
 	return (
 		<Context.Consumer>
@@ -44,7 +39,7 @@ const CustomerInfoForm = (props) => {
 				<form
 					action=""
 					className="customer-info-form"
-					onSubmit={onSubmitCustomer}
+					onSubmit={(e) => { e.preventDefault(); }}
 				>
 					<fieldset className="customer-info__fieldset">
 						<legend className="customer-info__legend">
@@ -119,13 +114,15 @@ const CustomerInfoForm = (props) => {
 								}
 							/>
 						)}
-						<Button
-							type="submit"
-							className="customer-info__button"
-							caption={(
-								<FormattedMessage id={constants.SHOPPING_CART_ORDER} />
-							)}
-						/>
+						<div className="customer-info__buttons">
+							{props.buttons.map(button => (
+								<Button
+									className={`customer-info__button ${button.className || ''}`}
+									caption={button.caption}
+									onClick={() => { button.onClick(customer); }}
+								/>
+							))}
+						</div>
 					</fieldset>
 				</form>
 			)}
@@ -135,7 +132,7 @@ const CustomerInfoForm = (props) => {
 
 CustomerInfoForm.propTypes = {
 	customer: PropTypes.object,
-	submitCustomer: PropTypes.func,
+	buttons: PropTypes.array,
 };
 
 CustomerInfoForm.defaultProps = {
@@ -147,7 +144,11 @@ CustomerInfoForm.defaultProps = {
 		deliveryAddress: '',
 		customerPhone: '',
 	},
-	submitCustomer: () => {},
+	buttons: [{
+		caption: 'Submit',
+		onClick: () => {},
+		className: '',
+	}],
 };
 
 export default CustomerInfoForm;

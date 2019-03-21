@@ -62,7 +62,12 @@ export default class CartPage extends Component {
 					onChangeItemQuantity={changeItemQuantity}
 				/>
 				<CustomerInfoForm
-					submitCustomer={this.onCreateOrder}
+					buttons={[{
+						caption: (
+							<FormattedMessage id={constants.SHOPPING_CART_ORDER} />
+						),
+						onClick: this.onCreateOrder,
+					}]}
 				/>
 			</div>
 		);

@@ -91,4 +91,6 @@ export default {
 	[constants.TABLE_ROWS_TEXT]: 'записей',
 	[constants.TABLE_PAGE_TEXT]: 'Страница',
 	[constants.ORDER_ITEM_HEADER]: 'Редактирование информации о заказе',
+	[constants.ORDER_ITEM_BUTTON_UPDATE]: 'Сохранить изменения',
+	[constants.ORDER_ITEM_BUTTON_DELETE]: 'Удалить',
 };

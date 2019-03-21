@@ -14,3 +14,16 @@
     padding: 10px 0;
     font-size: 2rem;
 }
+
+.order-item__button-update {
+    color: #993233;
+    background-color: #ffffff;
+}
+
+.order-item__button-delete {
+    background-color: #f08080;
+}
+
+.order-item__button-delete:hover {
+    background-color: #dc143c;
+}

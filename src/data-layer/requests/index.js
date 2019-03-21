@@ -112,3 +112,11 @@ export const getOrders = ({ orderId }) => {
 		url,
 	});
 };
+
+export const deleteOrder = ({ orderId }) => request({
+	url: `${baseUri}orders`,
+	params: {
+		method: 'DELETE',
+		body: { orderId },
+	},
+});
