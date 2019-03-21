@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { FormattedMessage } from  'react-intl';
 
-import { Button, Input, Select } from '../../components';
+import {
+	Button,
+	Input,
+	Select,
+	Context,
+	CustomerInfoForm,
+	SelectedItems,
+} from '../../components';
 import * as utils from '../../utils';
+import * as constants from '../../constants';
 
 const OrderItemPage = (props) => {
 	const [order, setOrder] = useState(props.selectedItem);
@@ -34,14 +43,6 @@ const OrderItemPage = (props) => {
 
 		updateItem(order);
 	};
-	const onChangeFormValue = (e) => {
-		const { target } = e;
-
-		setOrder(prevOrder => ({
-			...prevOrder,
-			[target.name]: target.value,
-		}));
-	};
 
 	if (!props.user) {
 		return (
@@ -54,76 +55,21 @@ const OrderItemPage = (props) => {
 	}
 
 	const {
-		deliveryMethod: orderDeliveryMethod,
-		deliveryAddress: orderDeliveryAddress,
+		items,
+		...customer
 	} = order;
 
 	return (
 		<div className="page-component page-component--order-item">
-			<form
-				action=""
-				onSubmit={(e) => { e.preventDefault(); }}
-				className="order-item__form"
-			>
-				<Input
-					label="Customer Name"
-					name="customerName"
-					onChange={onChangeFormValue}
-					value={order.customerName}
-				/>
-				<Input
-					label="Customer Email"
-					name="customerEmail"
-					onChange={onChangeFormValue}
-					value={order.customerEmail}
-				/>
-				<Input
-					label="Customer Phone"
-					name="customerPhone"
-					onChange={onChangeFormValue}
-					value={order.customerPhone}
-				/>
-				<Select
-					label="Delivery Method"
-					name="deliveryMethod"
-					onChange={onChangeFormValue}
-					selectedValue={orderDeliveryMethod}
-					values={utils.getDeliveryMethods()}
-				/>
-				{orderDeliveryMethod === 'pickup' && (
-					<Select
-						label="Selected Pickup Point"
-						name="deliveryAddress"
-						onChange={onChangeFormValue}
-						selectedValue={orderDeliveryAddress}
-						values={utils.getPickupAddresses()}
-					/>
-				)}
-				{orderDeliveryMethod === 'delivery' && (
-					<Input
-						label="Enter Delivery Address"
-						name="deliveryAddress"
-						onChange={onChangeFormValue}
-						value={orderDeliveryAddress}
-						placeholder="City, Street, House, Apartment..."
-					/>
-				)}
-				<Select
-					label="Payment Method"
-					name="paymentMethod"
-					onChange={onChangeFormValue}
-					selectedValue={order.paymentMethod}
-					values={utils.getPaymentMethods()}
-				/>
-				<Button
-					caption="Delete"
-					onClick={onRemoveItem}
-				/>
-				<Button
-					caption="Update"
-					onClick={onUpdateItem}
-				/>
-			</form>
+			<h2 className="order-item__header">
+				<FormattedMessage id={constants.ORDER_ITEM_HEADER} />
+			</h2>
+			<CustomerInfoForm
+				customer={customer}
+			/>
+			<SelectedItems
+				items={items}
+			/>
 		</div>
 	);
 };

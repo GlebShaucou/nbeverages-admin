@@ -1,7 +1,16 @@
 .page-component--order-item {
-
+    padding-top: 20px;
 }
 
 .order-item__form {
 
+}
+
+.page-component--order-item .shopping-cart__items-list {
+    margin-top: 80px;
+}
+
+.order-item__header {
+    padding: 10px 0;
+    font-size: 2rem;
 }

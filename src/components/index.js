@@ -11,3 +11,4 @@ export { default as Select } from './Select';
 export { default as Table } from './Table';
 export { default as Context } from './Context';
 export { default as SelectedItems } from './SelectedItems';
+export { default as CustomerInfoForm } from './CustomerInfoForm';

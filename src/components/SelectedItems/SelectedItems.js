@@ -106,8 +106,8 @@ const SelectedItems = (props) => {
 								</span>
 							)}
 						</span>
-						<span className="shopping-cart__item-prop shopping-cart__item-edit">
-							{editable && (
+						{editable && (
+							<span className="shopping-cart__item-prop shopping-cart__item-edit">
 								<Button
 									caption={(
 										<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
@@ -115,8 +115,8 @@ const SelectedItems = (props) => {
 									className="shopping-cart__remove-button"
 									onClick={onRemoveItemClick(itemId)}
 								/>
-							)}
-						</span>
+							</span>
+						)}
 					</li>
 				);
 			})}
