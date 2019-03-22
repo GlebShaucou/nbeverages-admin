@@ -28,15 +28,13 @@ const OrderItemPage = (props) => {
 		setOrder(props.selectedItem);
 	}, [props.selectedItem]);
 
-	const onRemoveItem = () => {
-		const { removeItem, selectedItem } = props;
-
-		removeItem(selectedItem._id);
-	};
-	const onUpdateItem = () => {
+	const onUpdateCustomer = (customer) => {
 		const { updateItem } = props;
 
-		updateItem(order);
+		updateItem({
+			...order,
+			...customer,
+		});
 	};
 
 	if (!props.user) {
@@ -51,6 +49,7 @@ const OrderItemPage = (props) => {
 
 	const {
 		items,
+		status,
 		...customer
 	} = order;
 
@@ -64,17 +63,10 @@ const OrderItemPage = (props) => {
 				buttons={[
 					{
 						caption: (
-							<FormattedMessage id={constants.ORDER_ITEM_BUTTON_DELETE} />
-						),
-						className: 'order-item__button-delete',
-						onClick: onRemoveItem,
-					},
-					{
-						caption: (
 							<FormattedMessage id={constants.ORDER_ITEM_BUTTON_UPDATE} />
 						),
 						className: 'order-item__button-update',
-						// onClick: this.onCreateOrder,
+						onClick: onUpdateCustomer,
 					},
 				]}
 			/>

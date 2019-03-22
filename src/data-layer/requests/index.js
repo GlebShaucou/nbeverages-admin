@@ -120,3 +120,11 @@ export const deleteOrder = ({ orderId }) => request({
 		body: { orderId },
 	},
 });
+
+export const updateOrder = ({ order }) => request({
+	url: `${baseUri}orders`,
+	params: {
+		method: 'PUT',
+		body: { ...order },
+	},
+});

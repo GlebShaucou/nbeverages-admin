@@ -182,6 +182,15 @@ const {
 	watchedActionType: orderActions.GET_ORDERS,
 });
 
+const {
+	watcherSagaGenerator: watchOrdersUpdate,
+} = makeRequestSaga({
+	request: requests.updateOrder,
+	onSuccessAction: orderActions.updateOrderSucceded,
+}, {
+	watchedActionType: orderActions.UPDATE_ORDER,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
@@ -200,4 +209,5 @@ export default function* rootSaga() {
 	yield fork(watchCreateOrderSucceded);
 	yield fork(watchFetchOrders);
 	yield fork(watchFetchOrdersById);
+	yield fork(watchOrdersUpdate);
 }

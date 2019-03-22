@@ -18,4 +18,8 @@ export const getOrdersByIdSucceded = makeActionCreator(GET_ORDERS_BY_ID_SUCCEDED
 export const getOrders = makeActionCreator(GET_ORDERS, 'query');
 export const getOrdersSucceded = makeActionCreator(GET_ORDERS_SUCCEDED, 'response');
 
-export const DELETE_ORDER = 'DELETE_ORDER';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
+export const UPDATE_ORDER_SUCCEEDED = 'UPDATE_ORDER_SUCCEEDED';
+
+export const updateOrder = makeActionCreator(UPDATE_ORDER, 'query');
+export const updateOrderSucceded = makeActionCreator(UPDATE_ORDER_SUCCEEDED, 'response');

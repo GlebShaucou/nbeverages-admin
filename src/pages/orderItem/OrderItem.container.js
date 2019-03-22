@@ -30,9 +30,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		loadResources: () => {
 			dispatch(orderActions.getOrdersById({ orderId }));
 		},
-		// deleteOrder: (itemId) => {
-		// 	dispatch(orderActions.deleteOrder(itemId));
-		// },
+		updateItem: (order) => {
+			dispatch(orderActions.updateOrder({ order }));
+		},
 	};
 };
 

@@ -115,8 +115,9 @@ const CustomerInfoForm = (props) => {
 							/>
 						)}
 						<div className="customer-info__buttons">
-							{props.buttons.map(button => (
+							{props.buttons.map((button, index) => (
 								<Button
+									key={index}
 									className={`customer-info__button ${button.className || ''}`}
 									caption={button.caption}
 									onClick={() => { button.onClick(customer); }}
