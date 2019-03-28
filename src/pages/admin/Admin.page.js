@@ -7,6 +7,7 @@ import {
 	NewItemForm, Button, Table, Context,
 } from '../../components';
 import * as constants from '../../constants';
+import * as utils from '../../utils';
 
 const SECTION_CATALOG = 'catalog';
 const SECTION_ORDERS = 'orders';
@@ -51,6 +52,19 @@ const AdminPage = (props) => {
 		setSelectedSection(section);
 	};
 
+	const getValues = (name, getTranslation) => {
+		switch (name) {
+		case 'category':
+			return utils.getBeverageCategories(getTranslation);
+		case 'type':
+			return utils.getBeverageTypes(getTranslation);
+		case 'currency':
+			return utils.getCurrencies(getTranslation);
+		default:
+			return [];
+		}
+	};
+
 	const getItemSchema = (getTranslation) => {
 		const { newItem: { schema } } = props;
 		const mappings = {
@@ -67,6 +81,7 @@ const AdminPage = (props) => {
 		return schema.map(({ name }) => ({
 			name,
 			label: getTranslation({ id: mappings[name] }),
+			values: getValues(name, getTranslation),
 		}));
 	};
 

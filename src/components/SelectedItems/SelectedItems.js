@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import * as constants from '../../constants';
-import { Button, Input } from '../index';
+import { Button, Input, Context } from '../index';
 import * as utils from '../../utils';
 
 const SelectedItems = (props) => {
@@ -31,96 +31,100 @@ const SelectedItems = (props) => {
 	};
 
 	return (
-		<ul className="shopping-cart__items-list">
-			{items.map((item, index) => {
-				const { _id: itemId, quantity } = item;
+		<Context.Consumer>
+			{({ intl: { getTranslation } }) => (
+				<ul className="shopping-cart__items-list">
+					{items.map((item, index) => {
+						const { _id: itemId, quantity } = item;
 
-				return (
-					<li className="shopping-cart__item" key={itemId}>
-						<span className="shopping-cart__item-prop shopping-cart__item-name">
-							{index === 0 && (
-								<span className="shopping-cart__item-header">
-									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_NAME} />
+						return (
+							<li className="shopping-cart__item" key={itemId}>
+								<span className="shopping-cart__item-prop shopping-cart__item-name">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_NAME} />
+										</span>
+									)}
+									<Link to={`/catalog/${itemId}`} className="item-name__link">
+										{item.name}
+									</Link>
 								</span>
-							)}
-							<Link to={`/catalog/${itemId}`} className="item-name__link">
-								{item.name}
-							</Link>
-						</span>
-						<span className="shopping-cart__item-prop shopping-cart__item-category-type">
-							{index === 0 && (
-								<span className="shopping-cart__item-header">
-									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_DESCRIPTION} />
+								<span className="shopping-cart__item-prop shopping-cart__item-category-type">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_DESCRIPTION} />
+										</span>
+									)}
+									{`${utils.getStringTranslation(item.type, getTranslation)}, ${utils.getStringTranslation(item.category, getTranslation)}`}
 								</span>
-							)}
-							{`${item.type}, ${item.category}`}
-						</span>
-						<span className="shopping-cart__item-prop shopping-cart__item-quantity-per-unit">
-							{index === 0 && (
-								<span className="shopping-cart__item-header">
-									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY_PER_UNIT} />
-								</span>
-							)}
-							<FormattedMessage
-								id={constants.SHOPPING_CART_ITEM_QUANTITY_PER_UNIT}
-								values={{
-									quantity: item.quantityPerUnit,
-								}}
-							/>
-						</span>
-						<span className="shopping-cart__item-prop shopping-cart__item-quantity">
-							{index === 0 && (
-								<span className="shopping-cart__item-header">
-									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
-								</span>
-							)}
-							{editable ? (
-								<Input
-									type="number"
-									onChange={onChangeItemQuantityClick(itemId)}
-									value={quantity}
-									className="shopping-cart__number-input"
-								/>
-							) : (
-								<span className="shopping-cart__number-input">
-									{quantity}
-								</span>
-							)}
-						</span>
-						<span className="shopping-cart__item-prop shopping-cart__price">
-							{index === 0 && (
-								<span className="shopping-cart__item-header">
-									<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_PRICE} />
-								</span>
-							)}
-							{`${item.price * quantity} ${item.currency}`}
-							{index === itemsLength - 1 && (
-								<span className="shopping-cart__total-price">
+								<span className="shopping-cart__item-prop shopping-cart__item-quantity-per-unit">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY_PER_UNIT} />
+										</span>
+									)}
 									<FormattedMessage
-										id={constants.SHOPPING_CART_TOTAL_PRICE}
+										id={constants.SHOPPING_CART_ITEM_QUANTITY_PER_UNIT}
 										values={{
-											amount: totalPrice,
-											currency: items[0].currency,
+											quantity: item.quantityPerUnit,
 										}}
 									/>
 								</span>
-							)}
-						</span>
-						{editable && (
-							<span className="shopping-cart__item-prop shopping-cart__item-edit">
-								<Button
-									caption={(
-										<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
+								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY} />
+										</span>
 									)}
-									className="shopping-cart__remove-button"
-									onClick={onRemoveItemClick(itemId)}
-								/>
-							</span>
-						)}
-					</li>
-				);
-			})}
-		</ul>
+									{editable ? (
+										<Input
+											type="number"
+											onChange={onChangeItemQuantityClick(itemId)}
+											value={quantity}
+											className="shopping-cart__number-input"
+										/>
+									) : (
+										<span className="shopping-cart__number-input">
+											{quantity}
+										</span>
+									)}
+								</span>
+								<span className="shopping-cart__item-prop shopping-cart__price">
+									{index === 0 && (
+										<span className="shopping-cart__item-header">
+											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_PRICE} />
+										</span>
+									)}
+									{`${item.price * quantity} ${utils.getStringTranslation(item.currency, getTranslation)}`}
+									{index === itemsLength - 1 && (
+										<span className="shopping-cart__total-price">
+											<FormattedMessage
+												id={constants.SHOPPING_CART_TOTAL_PRICE}
+												values={{
+													amount: totalPrice,
+													currency: utils.getStringTranslation(items[0].currency, getTranslation),
+												}}
+											/>
+										</span>
+									)}
+								</span>
+								{editable && (
+									<span className="shopping-cart__item-prop shopping-cart__item-edit">
+										<Button
+											caption={(
+												<FormattedMessage id={constants.BUTTON_CAPTION_REMOVE} />
+											)}
+											className="shopping-cart__remove-button"
+											onClick={onRemoveItemClick(itemId)}
+										/>
+									</span>
+								)}
+							</li>
+						);
+					})}
+				</ul>
+			)}
+		</Context.Consumer>
 	);
 };
 

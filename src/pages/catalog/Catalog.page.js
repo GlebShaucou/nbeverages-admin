@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { BeverageShortView } from '../../components';
+import { BeverageShortView, Context } from '../../components';
 import * as constants from '../../constants';
+import * as utils from '../../utils';
 
 export default class CatalogPage extends Component {
 	componentDidMount() {
@@ -30,7 +31,7 @@ export default class CatalogPage extends Component {
 		};
 	};
 
-	renderFiltersSection() {
+	renderFiltersSection(getTranslation) {
 		const { filters } = this.props;
 		const filterNames = Object.keys(filters);
 		const filterHeaders = {
@@ -60,7 +61,7 @@ export default class CatalogPage extends Component {
 												onChange={this.onChangeFilter({ filterName, filter: value })}
 											/>
 											<span className="values-list__label-text">
-												{value}
+												{utils.getStringTranslation(value, getTranslation)}
 											</span>
 										</label>
 									</li>
@@ -77,26 +78,30 @@ export default class CatalogPage extends Component {
 		const { items } = this.props;
 
 		return (
-			<div className="page-component page-component--catalog">
-				<div className="page-component__content">
-					{this.renderFiltersSection()}
-					<ul className="catalog">
-						{items.map(item => (
-							<li key={JSON.stringify(item)} className="catalog__item">
-								<BeverageShortView
-									item={item}
-									buttonCaption={(
-										<FormattedMessage
-											id={constants.BUTTON_CAPTION_ADD}
+			<Context.Consumer>
+				{({ intl: { getTranslation } }) => (
+					<div className="page-component page-component--catalog">
+						<div className="page-component__content">
+							{this.renderFiltersSection(getTranslation)}
+							<ul className="catalog">
+								{items.map(item => (
+									<li key={JSON.stringify(item)} className="catalog__item">
+										<BeverageShortView
+											item={item}
+											buttonCaption={(
+												<FormattedMessage
+													id={constants.BUTTON_CAPTION_ADD}
+												/>
+											)}
+											onButtonClick={this.onCatalogItemButtonClick(item)}
 										/>
-									)}
-									onButtonClick={this.onCatalogItemButtonClick(item)}
-								/>
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
+									</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				)}
+			</Context.Consumer>
 		);
 	}
 }

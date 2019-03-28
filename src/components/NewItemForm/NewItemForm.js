@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import Input from '../Input';
+import Select from '../Select';
 
 import './NewItemForm.css';
 
@@ -42,7 +43,19 @@ const NewItemForm = (props) => {
 			onSubmit={(e) => { e.preventDefault(); }}
 		>
 			{schema.map((element) => {
-				const { name, label } = element;
+				const { name, label, values: selectValues } = element;
+
+				if (selectValues && selectValues.length > 0) {
+					return (
+						<Select
+							label={label}
+							name={name}
+							onChange={onChange(name)}
+							selectedValue={values[name]}
+							values={selectValues}
+						/>
+					);
+				}
 
 				return (
 					<Input

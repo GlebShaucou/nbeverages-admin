@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
-	Context,
 	SelectedItems,
 	CustomerInfoForm,
 } from '../../components';
@@ -111,5 +110,3 @@ CartPage.defaultProps = {
 	selectedItem: null,
 	history: {},
 };
-
-CartPage.contextType = Context;

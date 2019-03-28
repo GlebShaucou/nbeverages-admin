@@ -67,3 +67,71 @@ export const generateOrderId = (length, orderId = []) => {
 export const getTotalPrice = ({
 	items,
 }) => items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);
+
+export const getBeverageCategories = getTranslation => ([
+	{
+		value: '',
+		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_SELECT_PLACEHOLDER }),
+	},
+	{
+		value: 'tea',
+		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_TEA }),
+	},
+	{
+		value: 'coffee',
+		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_COFFEE }),
+	},
+]);
+
+export const getBeverageTypes = getTranslation => ([
+	{
+		value: '',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_SELECT_PLACEHOLDER }),
+	},
+	{
+		value: 'green',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_GREEN }),
+	},
+	{
+		value: 'black',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_BLACK }),
+	},
+	{
+		value: 'red',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_RED }),
+	},
+	{
+		value: 'herbal',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_HERBAL }),
+	},
+	{
+		value: 'arabic',
+		label: getTranslation({ id: constants.BEVERAGE_TYPES_ARABIC }),
+	},
+]);
+
+export const getCurrencies = getTranslation => ([
+	{
+		value: '',
+		label: getTranslation({ id: constants.CURRENCY_SELECT_PLACEHOLDER }),
+	},
+	{
+		value: 'byn',
+		label: getTranslation({ id: constants.CURRENCY_BYN }),
+	},
+	{
+		value: 'usd',
+		label: getTranslation({ id: constants.CURRENCY_USD }),
+	},
+]);
+
+export const getStringTranslation = (label, getTranslation) => {
+	const translationId = {
+		tea: constants.BEVERAGE_CATEGORY_TEA,
+		herbal: constants.BEVERAGE_TYPES_HERBAL,
+		byn: constants.CURRENCY_BYN,
+		usd: constants.CURRENCY_USD,
+	}[label];
+
+	return getTranslation({ id: translationId });
+};
