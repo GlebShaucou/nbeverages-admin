@@ -1,7 +1,7 @@
 {
-  "name": "nbeverages-admin",
+  "name": "tea-city-ui",
   "version": "1.0.0",
-  "description": "nbeverages",
+  "description": "tea-city",
   "private": true,
   "scripts": {
     "start": "serve -s build",
@@ -62,10 +62,6 @@
     "type": "git",
     "url": "git+https://github.com/GlebShaucou/nbeverages-admin.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GlebShaucou/nbeverages-admin/issues"
-  },
-  "homepage": "https://github.com/GlebShaucou/nbeverages-admin#readme"
+  "author": "Anastasiya Shautsova",
+  "license": "ISC"
 }

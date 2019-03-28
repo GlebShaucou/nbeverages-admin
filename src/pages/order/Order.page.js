@@ -18,6 +18,10 @@ const OrderPage = (props) => {
 	const onSearchOrder = (e) => {
 		e.preventDefault();
 
+		if (!orderId) {
+			return;
+		}
+
 		props.onSearchOrder(orderId);
 	};
 	const onInputChange = (e) => {

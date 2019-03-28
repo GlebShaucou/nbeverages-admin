@@ -70,15 +70,15 @@ const AdminPage = (props) => {
 		}));
 	};
 
-	const renderEditingItemView = ({ getTranslation, item }) => {
-		const { _id: itemId } = item;
+	const renderEditingItemView = ({ getTranslation }) => {
+		const item = props.items.find(({ _id }) => editingItemId === _id);
 
 		return (
-			<li className="list-of-items__item" key={itemId}>
+			<div className="update-item-form" key={editingItemId}>
 				<NewItemForm
 					schema={getItemSchema(getTranslation)}
-					onSubmit={onUpdateBeverage(itemId)}
-					onReset={onUpdateItem(itemId)}
+					onSubmit={onUpdateBeverage(editingItemId)}
+					onReset={onUpdateItem(editingItemId)}
 					values={item}
 					buttonSubmit={{
 						caption: getTranslation({ id: constants.ADMIN_ITEM_BUTTON_UPDATE }),
@@ -89,7 +89,7 @@ const AdminPage = (props) => {
 						visible: true,
 					}}
 				/>
-			</li>
+			</div>
 		);
 	};
 
@@ -183,18 +183,21 @@ const AdminPage = (props) => {
 
 	const renderCatalog = ({ getTranslation }) => (
 		<div className="admin-page__catalog">
-			<div className="admin-page__edit-section">
-				<NewItemForm
-					onSubmit={onAddBeverage}
-					schema={getItemSchema(getTranslation)}
-					buttonSubmit={{
-						caption: getTranslation({ id: constants.ADMIN_ITEM_ADD_BUTTON }),
-						visible: true,
-					}}
-				/>
-			</div>
+			{!editingItemId && (
+				<div className="admin-page__edit-section">
+					<NewItemForm
+						onSubmit={onAddBeverage}
+						schema={getItemSchema(getTranslation)}
+						buttonSubmit={{
+							caption: getTranslation({ id: constants.ADMIN_ITEM_ADD_BUTTON }),
+							visible: true,
+						}}
+					/>
+				</div>
+			)}
 			<div className="admin-page__content">
-				{renderItems({ getTranslation })}
+				{editingItemId
+					? renderEditingItemView({ getTranslation }) : renderItems({ getTranslation })}
 			</div>
 		</div>
 	);

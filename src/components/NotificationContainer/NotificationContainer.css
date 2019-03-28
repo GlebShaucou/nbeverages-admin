@@ -1,5 +1,6 @@
 .notification-container {
     width: 100%;
+    padding: 10px 0;
 }
 
 .notification-container__error-message {
