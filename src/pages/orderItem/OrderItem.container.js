@@ -19,7 +19,7 @@ const mapStateToProps = (state, props) => {
 
 	return {
 		selectedItem: getOrderById(state, orderId),
-		user: state.user,
+		user: state.user.user,
 	};
 };
 

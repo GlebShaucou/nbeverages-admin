@@ -7,7 +7,7 @@ const { beverageActions, orderActions } = actions;
 
 const mapStateToProps = state => ({
 	...state.beverages,
-	user: state.user,
+	user: state.user.user,
 	orders: state.order.orders,
 });
 

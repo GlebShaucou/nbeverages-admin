@@ -1,19 +1,28 @@
 import actions from '../../actions';
 
 const { userActions } = actions;
-const user = null;
+const userInitState = {
+	user: null,
+	message: '',
+};
 
-export default (state = user, action) => {
+export default (state = userInitState, action) => {
 	let response;
 
 	switch (action.type) {
 	case userActions.USER_LOGIN_SUCCEDED:
 		({ response } = action);
-		return { ...response.user };
+		return {
+			user: response.user,
+			message: '',
+		};
 	case userActions.USER_LOGOUT_SUCCEDED:
-		return null;
+		return userInitState;
 	case userActions.USER_CREATE_SUCCEDED:
-		return state;
+		return {
+			...state,
+			message: 'success',
+		};
 	default:
 		return state;
 	}

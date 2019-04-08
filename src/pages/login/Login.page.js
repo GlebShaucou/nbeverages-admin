@@ -45,35 +45,42 @@ const LoginPage = (props) => {
 		<div className="page-component page-component--login">
 			<Context.Consumer>
 				{({ intl: { getTranslation } }) => (
-					<form
-						action=""
-						onSubmit={onLogin}
-						className="login-page__form"
-					>
-						<Input
-							type="email"
-							placeholder={getTranslation({ id: constants.SHOPPING_CART_EMAIL })}
-							className="login-page-form__input"
-							name="email"
-							onChange={onInputChange}
-							value={email}
-						/>
-						<Input
-							type="password"
-							placeholder={getTranslation({ id: constants.LOGIN_PASSWORD })}
-							className="login-page-form__input"
-							name="password"
-							onChange={onInputChange}
-							value={password}
-						/>
-						<Button
-							type="submit"
-							caption={(
-								<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
-							)}
-							className="login-page-form__button"
-						/>
-					</form>
+					<div className="login-page-area">
+						{props.message === 'success' && (
+							<div className="login-page__notification">
+								Пользователь был успешно создан.
+							</div>
+						)}
+						<form
+							action=""
+							onSubmit={onLogin}
+							className="login-page__form"
+						>
+							<Input
+								type="email"
+								placeholder={getTranslation({ id: constants.SHOPPING_CART_EMAIL })}
+								className="login-page-form__input"
+								name="email"
+								onChange={onInputChange}
+								value={email}
+							/>
+							<Input
+								type="password"
+								placeholder={getTranslation({ id: constants.LOGIN_PASSWORD })}
+								className="login-page-form__input"
+								name="password"
+								onChange={onInputChange}
+								value={password}
+							/>
+							<Button
+								type="submit"
+								caption={(
+									<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
+								)}
+								className="login-page-form__button"
+							/>
+						</form>
+					</div>
 				)}
 			</Context.Consumer>
 		</div>
@@ -83,11 +90,13 @@ const LoginPage = (props) => {
 LoginPage.propTypes = {
 	onLogin: PropTypes.func,
 	user: PropTypes.object,
+	message: PropTypes.string,
 };
 
 LoginPage.defaultProps = {
 	onLogin: () => {},
 	user: null,
+	message: '',
 };
 
 export default LoginPage;

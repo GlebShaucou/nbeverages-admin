@@ -6,7 +6,7 @@ import actions from '../../data-layer/actions';
 const { userActions } = actions;
 
 const mapStateToProps = state => ({
-	user: state.user,
+	...state.user,
 });
 
 const mapDispatchToProps = dispatch => ({

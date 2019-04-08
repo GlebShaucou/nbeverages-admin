@@ -6,7 +6,7 @@ import actions from '../../data-layer/actions';
 const { userActions, localeActions } = actions;
 
 const mapStateToProps = state => ({
-	user: state.user,
+	user: state.user.user,
 	cart: state.cart,
 	locales: state.locale.locales,
 });

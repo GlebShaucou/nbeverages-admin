@@ -7,9 +7,9 @@ const {
 	userActions,
 } = actions;
 
-const mapStateToProps = (state) => {
-	return {};
-};
+const mapStateToProps = (state) => ({
+	...state.user,
+});
 
 const mapDispatchToProps = (dispatch) => ({
 	register: (user) => {

@@ -8,6 +8,7 @@ import {
 } from '../../components';
 import * as constants from '../../constants';
 import * as utils from '../../utils';
+import {Redirect} from "react-router-dom";
 
 const RegistrationPage = (props) => {
 	const [username, setUsername] = useState('');
@@ -22,6 +23,12 @@ const RegistrationPage = (props) => {
 			username, email, password, role: 'user',
 		});
 	};
+
+	if (props.message === 'success') {
+		return (
+			<Redirect to="/login" />
+		);
+	}
 
 	return (
 		<Context.Consumer>
@@ -62,10 +69,14 @@ const RegistrationPage = (props) => {
 
 RegistrationPage.propTypes = {
 	register: PropTypes.func,
+	user: PropTypes.object,
+	message: PropTypes.string,
 };
 
 RegistrationPage.defaultProps = {
 	register: () => {},
+	user: null,
+	message: '',
 };
 
 export default RegistrationPage;

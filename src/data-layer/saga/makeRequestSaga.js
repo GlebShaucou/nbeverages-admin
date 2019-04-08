@@ -31,7 +31,7 @@ export default function makeSimpleSaga({
 
 			yield put(onSuccessAction(response, query));
 			yield put(isFetchingActions.setFetchingStatus(false));
-			yield put(errorsActions.setErrors(response.message, response));
+			yield put(errorsActions.setErrors(response.error));
 		} catch (error) {
 			const errorMessage = error.message || error;
 
