@@ -48,6 +48,7 @@ const NewItemForm = (props) => {
 				if (selectValues && selectValues.length > 0) {
 					return (
 						<Select
+							key={name}
 							label={label}
 							name={name}
 							onChange={onChange(name)}

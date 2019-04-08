@@ -27,3 +27,14 @@
 .order-item__button-delete:hover {
     background-color: #dc143c;
 }
+
+.order-item__order-status {
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.order-item__order-status .custom-select {
+    margin-right: 30px;
+}

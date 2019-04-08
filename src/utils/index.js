@@ -133,5 +133,5 @@ export const getStringTranslation = (label, getTranslation) => {
 		usd: constants.CURRENCY_USD,
 	}[label];
 
-	return getTranslation({ id: translationId });
+	return translationId ? getTranslation({ id: translationId }) : label;
 };

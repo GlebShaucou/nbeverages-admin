@@ -7,6 +7,7 @@ import {
 	Input, Button, SelectedItems, Context,
 } from '../../components';
 import * as constants from '../../constants';
+import * as utils from '../../utils';
 
 const OrderPage = (props) => {
 	const [orderId, setOrderId] = useState('');
@@ -31,7 +32,7 @@ const OrderPage = (props) => {
 
 	return (
 		<Context.Consumer>
-			{({ intl }) => (
+			{({ intl: { getTranslation } }) => (
 				<div className="page-component page-component--order">
 					<form
 						action=""
@@ -39,7 +40,7 @@ const OrderPage = (props) => {
 						className="order-page__search-form"
 					>
 						<Input
-							placeholder={intl.getTranslation({ id: constants.ORDER_PAGE_ORDER_ID })}
+							placeholder={getTranslation({ id: constants.ORDER_PAGE_ORDER_ID })}
 							value={orderId}
 							onChange={onInputChange}
 						/>
@@ -100,7 +101,7 @@ const OrderPage = (props) => {
 											<FormattedMessage id={constants.ORDER_PAGE_DELIVERY_METHOD} />
 										</th>
 										<td>
-											{selectedItem.deliveryMethod}
+											{utils.getStringTranslation(selectedItem.deliveryMethod, getTranslation)}
 										</td>
 									</tr>
 									<tr>
