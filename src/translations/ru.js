@@ -105,4 +105,6 @@ export default {
 	[constants.CURRENCY_USD]: 'дол. США',
 	[constants.CURRENCY_BYN]: 'бел. руб.',
 	[constants.CURRENCY_SELECT_PLACEHOLDER]: 'Выберите валюту...',
+	[constants.NAVIGATION_LINK_REGISTRATION]: 'Регистрация',
+	[constants.NAVIGATION_LINK_ACCOUNT]: 'Кабинет пользователя',
 };

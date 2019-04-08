@@ -89,6 +89,14 @@ export const updateBeverage = beverage => request({
 	},
 });
 
+export const createUser = user => request({
+	url: `${baseUri}users`,
+	params: {
+		method: 'POST',
+		body: { ...user },
+	},
+});
+
 export const userLogin = user => request({
 	url: `${baseUri}users/login`,
 	params: {

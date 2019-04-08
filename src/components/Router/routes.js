@@ -43,6 +43,11 @@ export default [
 		component: pages.CartPage,
 	},
 	{
+		path: constants.PAGE_REGISTRATION,
+		exact: true,
+		component: pages.RegistrationPage,
+	},
+	{
 		path: constants.PAGE_ORDER,
 		exact: true,
 		component: pages.OrderPage,

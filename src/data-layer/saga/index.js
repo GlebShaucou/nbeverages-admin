@@ -191,6 +191,15 @@ const {
 	watchedActionType: orderActions.UPDATE_ORDER,
 });
 
+const {
+	watcherSagaGenerator: watchCreateUser,
+} = makeRequestSaga({
+	request: requests.createUser,
+	onSuccessAction: userActions.createUserSucceded,
+}, {
+	watchedActionType: userActions.USER_CREATE,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
@@ -201,6 +210,7 @@ export default function* rootSaga() {
 
 	yield fork(watchUserLogin);
 	yield fork(watchLogout);
+	yield fork(watchCreateUser);
 
 	yield fork(watchAddItemToCart);
 	yield fork(watchRemoveItemFromCart);

@@ -29,9 +29,9 @@ export default function makeSimpleSaga({
 				response = handleResponse(response);
 			}
 
-			yield put(isFetchingActions.setFetchingStatus(false));
-			yield put(errorsActions.setErrors(response.error));
 			yield put(onSuccessAction(response, query));
+			yield put(isFetchingActions.setFetchingStatus(false));
+			yield put(errorsActions.setErrors(response.message, response));
 		} catch (error) {
 			const errorMessage = error.message || error;
 

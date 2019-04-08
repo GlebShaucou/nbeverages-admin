@@ -78,12 +78,21 @@ const Header = (props) => {
 							</div>
 							{user ? (
 								<div className="admin-section">
-									<Link
-										to={constants.PAGE_ADMIN}
-										className="navigation-menu__link navigation-menu__link--admin"
-									>
-										<FormattedMessage id={constants.NAVIGATION_LINK_ADMIN} />
-									</Link>
+									{user.role === 'admin' ? (
+										<Link
+											to={constants.PAGE_ADMIN}
+											className="navigation-menu__link navigation-menu__link--admin"
+										>
+											<FormattedMessage id={constants.NAVIGATION_LINK_ADMIN} />
+										</Link>
+									) : (
+										<Link
+											to={constants.PAGE_ACCOUNT}
+											className="navigation-menu__link navigation-menu__link--admin"
+										>
+											<FormattedMessage id={constants.NAVIGATION_LINK_ACCOUNT} />
+										</Link>
+									)}
 									{' | '}
 									<Button
 										caption={(
@@ -94,12 +103,21 @@ const Header = (props) => {
 									/>
 								</div>
 							) : (
-								<Link
-									to="/login"
-									className="navigation-menu__link navigation-menu__link--admin"
-								>
-									<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
-								</Link>
+								<div className="admin-section__registration">
+									<Link
+										to={constants.PAGE_REGISTRATION}
+										className="navigation-menu__link navigation-menu__link--admin"
+									>
+										<FormattedMessage id={constants.NAVIGATION_LINK_REGISTRATION} />
+									</Link>
+									{' | '}
+									<Link
+										to="/login"
+										className="navigation-menu__link navigation-menu__link--admin"
+									>
+										<FormattedMessage id={constants.NAVIGATION_LINK_LOGIN} />
+									</Link>
+								</div>
 							)}
 						</div>
 						<div className="work-info__cart">
