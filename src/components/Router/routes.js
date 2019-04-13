@@ -48,6 +48,11 @@ export default [
 		component: pages.RegistrationPage,
 	},
 	{
+		path: constants.PAGE_USER_ACCOUNT,
+		exact: true,
+		component: pages.UserAccountPage,
+	},
+	{
 		path: constants.PAGE_ORDER,
 		exact: true,
 		component: pages.OrderPage,

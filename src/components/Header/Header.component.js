@@ -66,16 +66,16 @@ const Header = (props) => {
 					</div>
 					<div className="work-info__admin">
 						<div className="work-info__admin-section">
-							<div className="work-info__locales">
-								{locales.map(locale => (
-									<Button
-										key={locale}
-										caption={locale}
-										onClick={onChangeLocale(locale)}
-										className="locale-button"
-									/>
-								))}
-							</div>
+							{/*<div className="work-info__locales">*/}
+							{/*	{locales.map(locale => (*/}
+							{/*		<Button*/}
+							{/*			key={locale}*/}
+							{/*			caption={locale}*/}
+							{/*			onClick={onChangeLocale(locale)}*/}
+							{/*			className="locale-button"*/}
+							{/*		/>*/}
+							{/*	))}*/}
+							{/*</div>*/}
 							{user ? (
 								<div className="admin-section">
 									{user.role === 'admin' ? (
@@ -87,7 +87,7 @@ const Header = (props) => {
 										</Link>
 									) : (
 										<Link
-											to={constants.PAGE_ACCOUNT}
+											to={constants.PAGE_USER_ACCOUNT}
 											className="navigation-menu__link navigation-menu__link--admin"
 										>
 											<FormattedMessage id={constants.NAVIGATION_LINK_ACCOUNT} />

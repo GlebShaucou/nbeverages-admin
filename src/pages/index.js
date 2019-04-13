@@ -11,3 +11,4 @@ export { default as CartPage } from './cart';
 export { default as OrderPage } from './order';
 export { default as OrderItemPage } from './orderItem';
 export { default as RegistrationPage } from './registration';
+export { default as UserAccountPage } from './userAccount';

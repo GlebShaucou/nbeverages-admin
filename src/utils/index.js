@@ -135,3 +135,8 @@ export const getStringTranslation = (label, getTranslation) => {
 
 	return translationId ? getTranslation({ id: translationId }) : label;
 };
+
+export const getTextForValue = (value) => {
+
+	return value;
+};

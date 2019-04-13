@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { Redirect } from 'react-router-dom';
 
 import {
-	Input, Button, SelectedItems, Context,
+	Input, Button, Context,
 } from '../../components';
 import * as constants from '../../constants';
 import * as utils from '../../utils';
-import {Redirect} from "react-router-dom";
 
 const RegistrationPage = (props) => {
 	const [username, setUsername] = useState('');

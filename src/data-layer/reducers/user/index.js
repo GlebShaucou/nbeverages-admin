@@ -4,6 +4,7 @@ const { userActions } = actions;
 const userInitState = {
 	user: null,
 	message: '',
+	orders: [],
 };
 
 export default (state = userInitState, action) => {
@@ -13,6 +14,7 @@ export default (state = userInitState, action) => {
 	case userActions.USER_LOGIN_SUCCEDED:
 		({ response } = action);
 		return {
+			...state,
 			user: response.user,
 			message: '',
 		};
