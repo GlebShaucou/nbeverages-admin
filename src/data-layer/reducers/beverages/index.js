@@ -3,35 +3,43 @@ import actions from '../../actions';
 const beverageSchema = [
 	{
 		name: 'category',
-		label: 'Category',
+		label: 'Категория',
 	},
 	{
 		name: 'type',
-		label: 'Type',
+		label: 'Тип',
 	},
 	{
 		name: 'imgSrc',
-		label: 'Image Source',
+		label: 'Ссылка на изображение',
 	},
 	{
 		name: 'name',
-		label: 'Name',
+		label: 'Наименование товара',
 	},
 	{
 		name: 'description',
-		label: 'Description',
+		label: 'Описание',
 	},
 	{
-		name: 'quantityPerUnit',
-		label: 'Quantity',
+		name: 'availablePackaging',
+		label: 'Фасовка',
 	},
 	{
-		name: 'price',
-		label: 'Price',
+		name: 'packingUnit',
+		label: 'Единица измерения',
 	},
 	{
-		name: 'currency',
-		label: 'Currency',
+		name: 'standartPackaging',
+		label: 'Стандартная упаковка',
+	},
+	{
+		name: 'standartPackagingPrice',
+		label: 'Стоимость стандартной упаковки',
+	},
+	{
+		name: 'standartPackagingCurrency',
+		label: 'Валюта',
 	},
 ];
 

@@ -161,7 +161,7 @@ const AdminPage = (props) => {
 			{
 				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_PRICE }),
 				id: 'unitPrice',
-				accessor: order => `${order.price} ${order.currency}`,
+				accessor: item => `${item.price} ${item.currency}`,
 				headerClassName: 'admin-page__catalog-item-header',
 				className: 'admin-page__catalog-item',
 			},
@@ -221,11 +221,11 @@ const AdminPage = (props) => {
 		const { orders } = props;
 		const tableConf = [
 			{
-				Header: 'Status',
+				Header: 'Статус',
 				accessor: 'status',
 			},
 			{
-				Header: 'Order ID',
+				Header: '№ заказа',
 				accessor: 'orderId',
 				Cell: ({ value: orderId }) => (
 					<Link
@@ -237,11 +237,11 @@ const AdminPage = (props) => {
 				),
 			},
 			{
-				Header: 'Customer Name',
+				Header: 'Имя покупателя',
 				accessor: 'customerName',
 			},
 			{
-				Header: 'Phone',
+				Header: '№ телефона',
 				accessor: 'customerPhone',
 			},
 			{
@@ -249,15 +249,15 @@ const AdminPage = (props) => {
 				accessor: 'customerEmail',
 			},
 			{
-				Header: 'Delivery Address',
+				Header: 'Адрес доставки',
 				accessor: 'deliveryAddress',
 			},
 			{
-				Header: 'Payment Method',
+				Header: 'Способ оплаты',
 				accessor: 'paymentMethod',
 			},
 			{
-				Header: 'Total Price',
+				Header: 'К оплате',
 				id: 'totalPrice',
 				accessor: order => `${order.totalAmount} ${order.currency}`,
 			},
