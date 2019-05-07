@@ -26,8 +26,8 @@ const AdminPage = (props) => {
 
 	const onAddBeverage = (beverage) => {
 		const { addItem } = props;
-
-		addItem(beverage);
+		console.log(beverage);
+		// addItem(beverage);
 	};
 
 	const onUpdateBeverage = beverageId => (beverage) => {
@@ -52,36 +52,25 @@ const AdminPage = (props) => {
 		setSelectedSection(section);
 	};
 
-	const getValues = (name, getTranslation) => {
+	const getValues = (name) => {
 		switch (name) {
 		case 'category':
-			return utils.getBeverageCategories(getTranslation);
+			return utils.getBeverageCategories();
 		case 'type':
-			return utils.getBeverageTypes(getTranslation);
-		case 'currency':
-			return utils.getCurrencies(getTranslation);
+			return utils.getBeverageTypes();
+		case 'packingUnit':
+			return utils.getPackingUnits();
 		default:
 			return [];
 		}
 	};
 
-	const getItemSchema = (getTranslation) => {
+	const getItemSchema = () => {
 		const { newItem: { schema } } = props;
-		const mappings = {
-			category: constants.ADMIN_ITEM_CATEGORY,
-			type: constants.ADMIN_ITEM_TYPE,
-			imgSrc: constants.ADMIN_ITEM_IMG_SRC,
-			name: constants.ADMIN_ITEM_NAME,
-			description: constants.ADMIN_ITEM_DESCRIPTION,
-			quantityPerUnit: constants.ADMIN_ITEM_QUANTITY_PER_UNIT,
-			price: constants.ADMIN_ITEM_PRICE,
-			currency: constants.ADMIN_ITEM_CURRENCY,
-		};
 
-		return schema.map(({ name }) => ({
-			name,
-			label: getTranslation({ id: mappings[name] }),
-			values: getValues(name, getTranslation),
+		return schema.map(item => ({
+			...item,
+			values: getValues(item.name),
 		}));
 	};
 

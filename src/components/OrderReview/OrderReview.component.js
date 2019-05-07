@@ -63,7 +63,7 @@ const OrderReview = (props) => {
 							<FormattedMessage id={constants.ORDER_PAGE_DELIVERY_METHOD} />
 						</th>
 						<td>
-							{utils.getTextForValue(order.deliveryMethod)}
+							{/*{utils.getTextForValue(order.deliveryMethod)}*/}
 						</td>
 					</tr>
 					<tr>

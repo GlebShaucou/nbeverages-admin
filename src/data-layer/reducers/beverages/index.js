@@ -26,20 +26,16 @@ const beverageSchema = [
 		label: 'Фасовка',
 	},
 	{
-		name: 'packingUnit',
-		label: 'Единица измерения',
-	},
-	{
 		name: 'standartPackaging',
 		label: 'Стандартная упаковка',
 	},
 	{
-		name: 'standartPackagingPrice',
-		label: 'Стоимость стандартной упаковки',
+		name: 'packingUnit',
+		label: 'Единица измерения',
 	},
 	{
-		name: 'standartPackagingCurrency',
-		label: 'Валюта',
+		name: 'standartPackagingPrice',
+		label: 'Стоимость стандартной упаковки',
 	},
 ];
 

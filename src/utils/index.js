@@ -3,24 +3,24 @@ import jwtDecode from 'jwt-decode';
 import * as constants from '../constants';
 
 export const decodeJwtToken = token => jwtDecode(token);
-export const getDeliveryMethods = getTranslation => ([
+export const getDeliveryMethods = () => ([
 	{
 		value: '',
-		label: getTranslation({ id: constants.DELIVERY_METHODS_PLACEHOLDER }),
+		label: 'Выберите способ доставки',
 	},
 	{
 		value: 'delivery',
-		label: getTranslation({ id: constants.DELIVERY_METHODS_DELIVERY }),
+		label: 'Доставка',
 	},
 	{
 		value: 'pickup',
-		label: getTranslation({ id: constants.DELIVERY_METHODS_PICKUP }),
+		label: 'Самовывоз',
 	},
 ]);
-export const getPickupAddresses = getTranslation => ([
+export const getPickupAddresses = () => ([
 	{
 		value: '',
-		label: getTranslation({ id: constants.PICKUP_ADDRESS_PLACEHOLDER }),
+		label: 'Выберите адрес',
 	},
 	{
 		value: 'Minsk, ave. Gazety Zvyazda, 37',
@@ -35,18 +35,18 @@ export const getPickupAddresses = getTranslation => ([
 		label: 'Minsk, ave. Gazety Zvyazda, 33',
 	},
 ]);
-export const getPaymentMethods = getTranslation => ([
+export const getPaymentMethods = () => ([
 	{
 		value: '',
-		label: getTranslation({ id: constants.PAYMENT_METHODS_PLACEHOLDER }),
+		label: 'Выберите способ оплаты',
 	},
 	{
 		value: 'cash',
-		label: getTranslation({ id: constants.PAYMENT_METHODS_CASH }),
+		label: 'Наличные',
 	},
 	{
 		value: 'creditCard',
-		label: getTranslation({ id: constants.PAYMENT_METHODS_CREDIT_CARD }),
+		label: 'Карта',
 	},
 ]);
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -68,45 +68,45 @@ export const getTotalPrice = ({
 	items,
 }) => items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);
 
-export const getBeverageCategories = getTranslation => ([
+export const getBeverageCategories = () => ([
 	{
 		value: '',
-		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_SELECT_PLACEHOLDER }),
+		label: 'Выберите категорию напитка',
 	},
 	{
 		value: 'tea',
-		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_TEA }),
+		label: 'Чай',
 	},
 	{
 		value: 'coffee',
-		label: getTranslation({ id: constants.BEVERAGE_CATEGORY_COFFEE }),
+		label: 'Кофе',
 	},
 ]);
 
-export const getBeverageTypes = getTranslation => ([
+export const getBeverageTypes = () => ([
 	{
 		value: '',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_SELECT_PLACEHOLDER }),
+		label: 'Выберите тип напитка',
 	},
 	{
 		value: 'green',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_GREEN }),
+		label: 'Зеленый',
 	},
 	{
 		value: 'black',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_BLACK }),
+		label: 'Черный',
 	},
 	{
 		value: 'red',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_RED }),
+		label: 'Красный',
 	},
 	{
 		value: 'herbal',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_HERBAL }),
+		label: 'Травяной',
 	},
 	{
 		value: 'arabic',
-		label: getTranslation({ id: constants.BEVERAGE_TYPES_ARABIC }),
+		label: 'Арабика',
 	},
 ]);
 
@@ -136,7 +136,13 @@ export const getStringTranslation = (label, getTranslation) => {
 	return translationId ? getTranslation({ id: translationId }) : label;
 };
 
-export const getTextForValue = (value) => {
-
-	return value;
-};
+export const getPackingUnits = () => ([
+	{
+		value: '',
+		label: 'Выберите фасовку',
+	},
+	{
+		value: 'gram',
+		label: 'Граммы',
+	},
+]);
