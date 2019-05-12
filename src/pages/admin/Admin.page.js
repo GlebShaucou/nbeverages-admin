@@ -27,7 +27,7 @@ const AdminPage = (props) => {
 	const onAddBeverage = (beverage) => {
 		const { addItem } = props;
 		console.log(beverage);
-		// addItem(beverage);
+		addItem(beverage);
 	};
 
 	const onUpdateBeverage = beverageId => (beverage) => {
@@ -113,13 +113,15 @@ const AdminPage = (props) => {
 			},
 			{
 				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_CATEGORY }),
-				accessor: 'category',
+				id: 'category',
+				accessor: item => item.category.label,
 				headerClassName: 'admin-page__catalog-item-header',
 				className: 'admin-page__catalog-item',
 			},
 			{
 				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_TYPE }),
-				accessor: 'type',
+				id: 'type',
+				accessor: item => item.type.label,
 				headerClassName: 'admin-page__catalog-item-header',
 				className: 'admin-page__catalog-item',
 			},
@@ -135,22 +137,22 @@ const AdminPage = (props) => {
 				headerClassName: 'admin-page__catalog-item-header',
 				className: 'admin-page__catalog-item',
 			},
-			{
-				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_QUANTITY_PER_UNIT }),
-				accessor: 'quantityPerUnit',
-				Cell: ({ value: quantityPerUnit }) => (
-					<FormattedMessage
-						id={constants.ADMIN_CATALOG_QUANTITY_PER_UNIT}
-						values={{ quantityPerUnit }}
-					/>
-				),
-				headerClassName: 'admin-page__catalog-item-header',
-				className: 'admin-page__catalog-item',
-			},
+			// {
+			// 	Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_QUANTITY_PER_UNIT }),
+			// 	accessor: 'quantityPerUnit',
+			// 	Cell: ({ value: quantityPerUnit }) => (
+			// 		<FormattedMessage
+			// 			id={constants.ADMIN_CATALOG_QUANTITY_PER_UNIT}
+			// 			values={{ quantityPerUnit }}
+			// 		/>
+			// 	),
+			// 	headerClassName: 'admin-page__catalog-item-header',
+			// 	className: 'admin-page__catalog-item',
+			// },
 			{
 				Header: getTranslation({ id: constants.ADMIN_CATALOG_HEADER_PRICE }),
-				id: 'unitPrice',
-				accessor: item => `${item.price} ${item.currency}`,
+				id: 'standartPackagingPrice',
+				accessor: item => `${item.standartPackagingPrice.amount} ${item.standartPackagingPrice.currency.label}`,
 				headerClassName: 'admin-page__catalog-item-header',
 				className: 'admin-page__catalog-item',
 			},

@@ -21,21 +21,21 @@ const beverageSchema = [
 		name: 'description',
 		label: 'Описание',
 	},
-	{
-		name: 'availablePackaging',
-		label: 'Фасовка',
-	},
-	{
-		name: 'standartPackaging',
-		label: 'Стандартная упаковка',
-	},
-	{
-		name: 'packingUnit',
-		label: 'Единица измерения',
-	},
+	// {
+	// 	name: 'availablePackaging',
+	// 	label: 'Фасовка',
+	// },
+	// {
+	// 	name: 'standartPackaging',
+	// 	label: 'Стандартная упаковка',
+	// },
+	// {
+	// 	name: 'packingUnit',
+	// 	label: 'Единица измерения',
+	// },
 	{
 		name: 'standartPackagingPrice',
-		label: 'Стоимость стандартной упаковки',
+		label: 'Стоимость',
 	},
 ];
 

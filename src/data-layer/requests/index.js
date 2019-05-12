@@ -3,8 +3,8 @@ const metadata = {
 	devBaseUrl: 'http://localhost:3003/api/',
 	proBaseUrl: 'https://nbeverages-backend.herokuapp.com/api/',
 };
-// const baseUri = process.env.NODE_ENV === 'development' ? metadata.devBaseUrl : metadata.proBaseUrl;
-const baseUri = metadata.proBaseUrl;
+const baseUri = process.env.NODE_ENV === 'development' ? metadata.devBaseUrl : metadata.proBaseUrl;
+// const baseUri = metadata.proBaseUrl;
 
 export const request = ({
 	url,

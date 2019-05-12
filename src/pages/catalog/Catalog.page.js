@@ -51,17 +51,17 @@ export default class CatalogPage extends Component {
 							</h4>
 							<ul className="filter-section__values-list">
 								{values.map(value => (
-									<li className="values-list__item" key={value}>
-										<label htmlFor={value} className="values-list__label">
+									<li className="values-list__item" key={value.value}>
+										<label htmlFor={value.value} className="values-list__label">
 											<input
 												type="checkbox"
-												id={value}
-												name={value}
+												id={value.value}
+												name={value.value}
 												className="values-list__checkbox"
 												onChange={this.onChangeFilter({ filterName, filter: value })}
 											/>
 											<span className="values-list__label-text">
-												{utils.getStringTranslation(value, getTranslation)}
+												{value.label}
 											</span>
 										</label>
 									</li>

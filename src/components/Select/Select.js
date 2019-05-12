@@ -5,10 +5,18 @@ const Select = (props) => {
 	const {
 		name,
 		label,
-		values,
+		options,
 		onChange,
 		selectedValue,
 	} = props;
+
+	const onOptionSelect = (e) => {
+		const { value } = e.target;
+
+		const selectedOption = options.find(option => option.value === value);
+
+		onChange(selectedOption);
+	};
 
 	return (
 		<span className="custom-select">
@@ -16,17 +24,17 @@ const Select = (props) => {
 				{label}
 			</span>
 			<select
-				value={selectedValue}
+				value={selectedValue.value}
 				name={name}
-				onChange={onChange}
+				onChange={onOptionSelect}
 				className="custom-select__select"
 			>
-				{values.map((value) => {
-					const { value: optionValue } = value;
+				{options.map((option) => {
+					const { value: optionValue, label: optionLabel } = option;
 
 					return (
 						<option value={optionValue} key={optionValue}>
-							{value.label}
+							{optionLabel}
 						</option>
 					);
 				})}
@@ -36,18 +44,20 @@ const Select = (props) => {
 };
 
 Select.propTypes = {
-	values: PropTypes.array,
+	options: PropTypes.array,
 	name: PropTypes.string,
 	label: PropTypes.any,
-	selectedValue: PropTypes.string,
+	selectedValue: PropTypes.object,
+	getValue: PropTypes.func,
 	onChange: PropTypes.func,
 };
 
 Select.defaultProps = {
-	values: [],
+	options: [],
 	name: 'select',
 	label: '',
-	selectedValue: '',
+	selectedValue: {},
+	getValue: () => {},
 	onChange: () => {},
 };
 

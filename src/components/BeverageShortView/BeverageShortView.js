@@ -47,7 +47,7 @@ const BeverageShortView = (props) => {
 						</div>
 						<div className="beverage-short-view__main-info">
 							<div className="main-info__type">
-								{utils.getStringTranslation(type, getTranslation)}
+								{type.label}
 							</div>
 							<div className="main-info__name">
 								<Link
@@ -58,7 +58,7 @@ const BeverageShortView = (props) => {
 								</Link>
 							</div>
 							<div className="main-info__category">
-								{utils.getStringTranslation(category, getTranslation)}
+								{category.label}
 							</div>
 						</div>
 					</div>
@@ -69,10 +69,10 @@ const BeverageShortView = (props) => {
 									id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_BOXING}
 								/>
 							</span>
-							<FormattedMessage
-								id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}
-								values={{ quantityPerUnit }}
-							/>
+							{/*<FormattedMessage*/}
+							{/*	id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}*/}
+							{/*	values={{ quantityPerUnit }}*/}
+							{/*/>*/}
 						</div>
 						<div className="bsv-footer__item bsv-footer__price">
 							<span className="bsv-footer__item-header">
@@ -80,7 +80,7 @@ const BeverageShortView = (props) => {
 									id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PRICE}
 								/>
 							</span>
-							{`${price} ${utils.getStringTranslation(currency, getTranslation)}`}
+							{`${item.standartPackagingPrice.amount} ${item.standartPackagingPrice.currency.label}`}
 						</div>
 						<div className="bsv-footer__item bsv-footer__buttons">
 							<FontAwesomeIcon icon="cart-plus" />

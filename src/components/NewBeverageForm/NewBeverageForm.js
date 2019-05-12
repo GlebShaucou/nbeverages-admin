@@ -5,9 +5,9 @@ import Button from '../Button';
 import Input from '../Input';
 import Select from '../Select';
 
-import './NewItemForm.css';
+import './NewBeverageForm.css';
 
-const NewItemForm = (props) => {
+const NewBeverageForm = (props) => {
 	const {
 		values: valuesFromProps,
 		className,
@@ -19,13 +19,42 @@ const NewItemForm = (props) => {
 	const [values, setValues] = useState({});
 
 	useEffect(() => {
-		setValues(valuesFromProps);
+		setValues({
+			availablePackaging: [30, 50, 100],
+			standartPackaging: 100,
+			packingUnit: {
+				label: 'кг',
+				value: 'kg',
+			},
+			standartPackagingPrice: {
+				amount: 0,
+				currency: {
+					label: 'бел. руб.',
+					value: 'byn',
+				},
+			},
+			...valuesFromProps,
+		});
 	}, [valuesFromProps]);
 
 	const onChange = key => (e) => {
-		const { value } = e.target;
+		let { value } = e.target;
+
+		if (key === 'standartPackagingPrice') {
+			value = {
+				amount: value,
+				currency: {
+					label: 'бел. руб.',
+					value: 'byn',
+				},
+			};
+		}
 
 		setValues(prevValues => ({ ...prevValues, [key]: value }));
+	};
+
+	const onSelect = key => (option) => {
+		setValues(prevValues => ({ ...prevValues, [key]: option }));
 	};
 
 	const onSubmit = () => {
@@ -44,6 +73,11 @@ const NewItemForm = (props) => {
 		>
 			{schema.map((element) => {
 				const { name, label, values: selectValues } = element;
+				let selectedValue = values[name];
+
+				if (name === 'standartPackagingPrice') {
+					selectedValue = values.standartPackagingPrice ? values.standartPackagingPrice.amount : 0;
+				}
 
 				if (selectValues && selectValues.length > 0) {
 					return (
@@ -51,9 +85,9 @@ const NewItemForm = (props) => {
 							key={name}
 							label={label}
 							name={name}
-							onChange={onChange(name)}
-							selectedValue={values[name]}
-							values={selectValues}
+							onChange={onSelect(name)}
+							selectedValue={selectedValue}
+							options={selectValues}
 						/>
 					);
 				}
@@ -62,7 +96,7 @@ const NewItemForm = (props) => {
 					<Input
 						label={label}
 						name={name}
-						value={values[name]}
+						value={selectedValue}
 						onChange={onChange(name)}
 						key={name}
 						className={`new-beverage-form__element new-beverage-form__element---${name}`}
@@ -85,7 +119,7 @@ const NewItemForm = (props) => {
 	);
 };
 
-NewItemForm.propTypes = {
+NewBeverageForm.propTypes = {
 	className: PropTypes.string,
 	onSubmit: PropTypes.func,
 	onReset: PropTypes.func,
@@ -94,7 +128,7 @@ NewItemForm.propTypes = {
 	buttonSubmit: PropTypes.object,
 	buttonReset: PropTypes.object,
 };
-NewItemForm.defaultProps = {
+NewBeverageForm.defaultProps = {
 	className: '',
 	onSubmit: () => {},
 	onReset: () => {},
@@ -104,4 +138,4 @@ NewItemForm.defaultProps = {
 	buttonReset: { visible: false },
 };
 
-export default NewItemForm;
+export default NewBeverageForm;
