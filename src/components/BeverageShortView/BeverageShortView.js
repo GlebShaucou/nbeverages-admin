@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -7,13 +7,13 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../Button';
 import Context from '../Context';
+import Select from '../Select';
 import * as constants from '../../constants';
 import * as utils from '../../utils';
 
 const BeverageShortView = (props) => {
 	const {
 		item,
-		onButtonClick,
 		buttonCaption,
 		buttonClassName,
 	} = props;
@@ -31,7 +31,24 @@ const BeverageShortView = (props) => {
 		currency,
 		quantityPerUnit,
 		_id: itemId,
+		availablePackaging,
+		packingUnit,
+		standartPackagingPrice,
 	} = item;
+	const { amount } = standartPackagingPrice;
+	const [selectedPackaging, setSelectedPackaging] = useState(100);
+	const [packagePrice, setPackagePrice] = useState(amount);
+
+	const onButtonClick = () => {
+		props.onButtonClick({
+			...item,
+			selectedPackaging,
+			packagePrice: {
+				...standartPackagingPrice,
+				amount: packagePrice,
+			},
+		});
+	};
 
 	return (
 		<Context.Consumer>
@@ -64,15 +81,25 @@ const BeverageShortView = (props) => {
 					</div>
 					<div className="beverage-short-view__footer">
 						<div className="bsv-footer__item bsv-footer__quantity">
-							<span className="bsv-footer__item-header">
-								<FormattedMessage
-									id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_BOXING}
-								/>
+							{/*<span className="bsv-footer__item-header">*/}
+							{/*	<FormattedMessage*/}
+							{/*		id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_BOXING}*/}
+							{/*	/>*/}
+							{/*</span>*/}
+							<Select
+								options={availablePackaging.map(option => ({ value: `${option}`, label: `${option}` }))}
+								selectedValue={{
+									value: selectedPackaging,
+									label: selectedPackaging,
+								}}
+								onChange={({ value }) => {
+									setPackagePrice((amount * +value) / 100);
+									setSelectedPackaging(+value);
+								}}
+							/>
+							<span>
+								{`  ${packingUnit.label}  `}
 							</span>
-							{/*<FormattedMessage*/}
-							{/*	id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}*/}
-							{/*	values={{ quantityPerUnit }}*/}
-							{/*/>*/}
 						</div>
 						<div className="bsv-footer__item bsv-footer__price">
 							<span className="bsv-footer__item-header">
@@ -80,7 +107,7 @@ const BeverageShortView = (props) => {
 									id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PRICE}
 								/>
 							</span>
-							{`${item.standartPackagingPrice.amount} ${item.standartPackagingPrice.currency.label}`}
+							{`${packagePrice} ${item.standartPackagingPrice.currency.label}`}
 						</div>
 						<div className="bsv-footer__item bsv-footer__buttons">
 							<FontAwesomeIcon icon="cart-plus" />

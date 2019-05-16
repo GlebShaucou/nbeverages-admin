@@ -137,3 +137,11 @@ export const updateOrder = ({ order }) => request({
 		body: { ...order },
 	},
 });
+
+export const getFilteredBeverages = query => request({
+	url: `${baseUri}filtered-beverages`,
+	params: {
+		method: 'POST',
+		body: { ...query },
+	}
+});

@@ -20,9 +20,11 @@ const Select = (props) => {
 
 	return (
 		<span className="custom-select">
-			<span className="custom-select__label">
-				{label}
-			</span>
+			{label && (
+				<span className="custom-select__label">
+					{label}
+				</span>
+			)}
 			<select
 				value={selectedValue.value}
 				name={name}

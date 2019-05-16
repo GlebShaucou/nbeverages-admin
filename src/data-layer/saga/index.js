@@ -146,14 +146,14 @@ const getAppliedFilters = state => state.beverages.appliedFilters;
 function* fetchFilteredBeverages() {
 	try {
 		const appliedFilters = yield select(getAppliedFilters);
-		debugger;
+
 		const query = appliedFilters
 			.reduce((q, { filterName, filter }) => ({
 				...q,
 				[filterName]: filter,
 			}), {});
 
-		const response = yield call(requests.getBeverages, { query });
+		const response = yield call(requests.getFilteredBeverages, { ...query });
 
 		yield put(beverageActions.fetchBeveragesSucceded(response));
 	} catch (error) {

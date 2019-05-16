@@ -26,7 +26,7 @@ const AdminPage = (props) => {
 
 	const onAddBeverage = (beverage) => {
 		const { addItem } = props;
-		console.log(beverage);
+
 		addItem(beverage);
 	};
 

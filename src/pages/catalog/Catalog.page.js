@@ -18,9 +18,7 @@ export default class CatalogPage extends Component {
 	onCatalogItemButtonClick = (item) => {
 		const { addItemToCart } = this.props;
 
-		return () => {
-			addItemToCart(item);
-		};
+		addItemToCart(item);
 	};
 
 	onChangeFilter = ({ filterName, filter }) => {
@@ -93,7 +91,7 @@ export default class CatalogPage extends Component {
 													id={constants.BUTTON_CAPTION_ADD}
 												/>
 											)}
-											onButtonClick={this.onCatalogItemButtonClick(item)}
+											onButtonClick={this.onCatalogItemButtonClick}
 										/>
 									</li>
 								))}

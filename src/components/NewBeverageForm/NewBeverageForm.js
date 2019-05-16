@@ -23,13 +23,13 @@ const NewBeverageForm = (props) => {
 			availablePackaging: [30, 50, 100],
 			standartPackaging: 100,
 			packingUnit: {
-				label: 'кг',
-				value: 'kg',
+				label: 'г',
+				value: 'g',
 			},
 			standartPackagingPrice: {
 				amount: 0,
 				currency: {
-					label: 'бел. руб.',
+					label: 'руб',
 					value: 'byn',
 				},
 			},

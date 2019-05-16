@@ -51,17 +51,29 @@ const initialState = {
 };
 
 const getFilters = (beverages) => {
+	const types = [];
+	const categories = [];
 	const type = new Set();
 	const category = new Set();
 
 	beverages.forEach((beverage) => {
-		type.add(beverage.type);
-		category.add(beverage.category);
+		const typeValue = beverage.type.value;
+		const categoryValue = beverage.category.value;
+
+		if (!type.has(typeValue)) {
+			type.add(typeValue);
+			types.push(beverage.type);
+		}
+
+		if (!category.has(categoryValue)) {
+			category.add(categoryValue);
+			categories.push(beverage.category);
+		}
 	});
 
 	return {
-		category: [...category],
-		type: [...type],
+		type: [...types],
+		category: [...categories],
 	};
 };
 
