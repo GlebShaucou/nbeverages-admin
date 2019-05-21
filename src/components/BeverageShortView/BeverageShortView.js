@@ -9,12 +9,10 @@ import Button from '../Button';
 import Context from '../Context';
 import Select from '../Select';
 import * as constants from '../../constants';
-import * as utils from '../../utils';
 
 const BeverageShortView = (props) => {
 	const {
 		item,
-		buttonCaption,
 		buttonClassName,
 	} = props;
 
@@ -27,9 +25,6 @@ const BeverageShortView = (props) => {
 		name,
 		type,
 		category,
-		price,
-		currency,
-		quantityPerUnit,
 		_id: itemId,
 		availablePackaging,
 		packingUnit,
@@ -81,11 +76,6 @@ const BeverageShortView = (props) => {
 					</div>
 					<div className="beverage-short-view__footer">
 						<div className="bsv-footer__item bsv-footer__quantity">
-							{/*<span className="bsv-footer__item-header">*/}
-							{/*	<FormattedMessage*/}
-							{/*		id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_BOXING}*/}
-							{/*	/>*/}
-							{/*</span>*/}
 							<Select
 								options={availablePackaging.map(option => ({ value: `${option}`, label: `${option}` }))}
 								selectedValue={{

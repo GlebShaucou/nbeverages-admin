@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '../../components/Button';
 import * as constants from '../../constants';
+import Select from '../../components/Select';
 
 const CatalogItemPage = (props) => {
 	const setDocumentTitle = () => {
@@ -13,21 +14,8 @@ const CatalogItemPage = (props) => {
 	};
 
 	useEffect(() => {
-		const { loadResources } = props;
-
-		loadResources();
-		setDocumentTitle();
-	}, []);
-
-	useEffect(() => {
 		setDocumentTitle();
 	}, [props.selectedItem]);
-
-	const onAddToCartClick = () => {
-		const { selectedItem, addItemToCart } = props;
-
-		addItemToCart(selectedItem);
-	};
 
 	const { selectedItem } = props;
 
@@ -41,11 +29,34 @@ const CatalogItemPage = (props) => {
 		type,
 		category,
 		description,
-		price,
-		currency,
-		quantityPerUnit,
+		standartPackagingPrice,
+		availablePackaging,
+		packingUnit
 		// _id: itemId,
 	} = selectedItem;
+	const { amount, currency } = standartPackagingPrice;
+	const [selectedPackaging, setSelectedPackaging] = useState(100);
+	const [packagePrice, setPackagePrice] = useState(amount);
+
+	useEffect(() => {
+		const { loadResources } = props;
+
+		loadResources();
+		setDocumentTitle();
+	}, []);
+
+	const onAddToCartClick = () => {
+		const { addItemToCart } = props;
+
+		addItemToCart({
+			...selectedItem,
+			selectedPackaging,
+			packagePrice: {
+				...standartPackagingPrice,
+				amount: packagePrice,
+			},
+		});
+	};
 
 	return (
 		<div className="page-component page-component--catalog-item">
@@ -57,24 +68,35 @@ const CatalogItemPage = (props) => {
 					{name}
 				</h2>
 				<div className="catalog-item__type">
-					{`${type} ${category}`}
+					{`${type.label} ${category.label}`}
 				</div>
 				<div className="catalog-item__amount">
 					<FormattedMessage
 						id={constants.CATALOG_ITEM_QUANTITY_PER_UNIT}
 					/>
-					<FormattedMessage
-						id={constants.BEVERAGE_SHORT_VIEW_QUANTITY_PER_UNIT}
-						values={{ quantityPerUnit }}
-					/>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<Select
+							options={availablePackaging.map(option => ({ value: `${option}`, label: `${option}` }))}
+							selectedValue={{
+								value: selectedPackaging,
+								label: selectedPackaging,
+							}}
+							onChange={({ value }) => {
+								setPackagePrice((amount * +value) / 100);
+								setSelectedPackaging(+value);
+							}}
+						/>
+						<span style={{ marginLeft: '10px' }}>
+							{`  ${packingUnit.label}  `}
+						</span>
+					</div>
 				</div>
 				<div className="catalog-item__price">
-					<FormattedMessage
-						id={constants.CATALOG_ITEM_PRICE}
-						className="catalog-item__price-header"
-					/>{' '}
+					<span style={{ fontWeight: '700', display: 'block' }}>
+						Стоимость
+					</span>
 					<span className="catalog-item__price-value">
-						{`${price} ${currency}`}
+						{`${packagePrice} ${currency.label}`}
 					</span>
 					<span className="catalog-item__button">
 						<Button
