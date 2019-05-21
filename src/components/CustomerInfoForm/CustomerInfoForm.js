@@ -33,6 +33,15 @@ const CustomerInfoForm = (props) => {
 		}));
 	};
 
+	const onSelectFormValue = name => (value) => {
+		setCustomer(prevCustomer => ({
+			...prevCustomer,
+			[name]: name === 'deliveryAddress'
+				? typeof value === 'string' ? value : value.label
+				: value,
+		}));
+	};
+
 	return (
 		<Context.Consumer>
 			{({ intl: { getTranslation } }) => (
@@ -58,9 +67,9 @@ const CustomerInfoForm = (props) => {
 								<FormattedMessage id={constants.SHOPPING_CART_PAYMENT_METHOD} />
 							)}
 							name="paymentMethod"
-							onChange={onChangeFormValue}
+							onChange={onSelectFormValue('paymentMethod')}
 							selectedValue={paymentMethod}
-							values={utils.getPaymentMethods(getTranslation)}
+							options={utils.getPaymentMethods(getTranslation)}
 						/>
 						<Input
 							type="tel"
@@ -86,22 +95,28 @@ const CustomerInfoForm = (props) => {
 								<FormattedMessage id={constants.SHOPPING_CART_DELIVERY_METHOD} />
 							)}
 							name="deliveryMethod"
-							onChange={onChangeFormValue}
+							onChange={onSelectFormValue('deliveryMethod')}
 							selectedValue={deliveryMethod}
-							values={utils.getDeliveryMethods(getTranslation)}
+							options={utils.getDeliveryMethods(getTranslation)}
 						/>
-						{deliveryMethod === 'pickup' && (
+						{deliveryMethod.value === 'pickup' && (
 							<Select
 								label={(
 									<FormattedMessage id={constants.SHOPPING_CART_SELECT_PICKUP_POINT} />
 								)}
 								name="deliveryAddress"
-								onChange={onChangeFormValue}
-								selectedValue={deliveryAddress}
-								values={utils.getPickupAddresses(getTranslation)}
+								onChange={onSelectFormValue('deliveryAddress')}
+								selectedValue={{
+									label: deliveryAddress,
+									value: deliveryAddress,
+								}}
+								options={utils.getPickupAddresses(getTranslation).map(val => ({
+									label: val,
+									value: val,
+								}))}
 							/>
 						)}
-						{deliveryMethod === 'delivery' && (
+						{deliveryMethod.value === 'delivery' && (
 							<Input
 								label={(
 									<FormattedMessage id={constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS} />

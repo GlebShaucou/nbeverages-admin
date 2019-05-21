@@ -35,7 +35,7 @@ const SelectedItems = (props) => {
 			{({ intl: { getTranslation } }) => (
 				<ul className="shopping-cart__items-list">
 					{items.map((item, index) => {
-						const { _id: itemId, quantity } = item;
+						const { _id: itemId, quantity, selectedPackaging, packingUnit, packagePrice } = item;
 
 						return (
 							<li className="shopping-cart__item" key={itemId}>
@@ -55,7 +55,7 @@ const SelectedItems = (props) => {
 											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_DESCRIPTION} />
 										</span>
 									)}
-									{`${utils.getStringTranslation(item.type, getTranslation)}, ${utils.getStringTranslation(item.category, getTranslation)}`}
+									{`${item.type.label}, ${item.category.label}`}
 								</span>
 								<span className="shopping-cart__item-prop shopping-cart__item-quantity-per-unit">
 									{index === 0 && (
@@ -63,12 +63,7 @@ const SelectedItems = (props) => {
 											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_QUANTITY_PER_UNIT} />
 										</span>
 									)}
-									<FormattedMessage
-										id={constants.SHOPPING_CART_ITEM_QUANTITY_PER_UNIT}
-										values={{
-											quantity: item.quantityPerUnit,
-										}}
-									/>
+									{`${selectedPackaging} ${packingUnit.label}`}
 								</span>
 								<span className="shopping-cart__item-prop shopping-cart__item-quantity">
 									{index === 0 && (
@@ -95,16 +90,15 @@ const SelectedItems = (props) => {
 											<FormattedMessage id={constants.SHOPPING_CART_PRODUCT_PRICE} />
 										</span>
 									)}
-									{`${item.price * quantity} ${utils.getStringTranslation(item.currency, getTranslation)}`}
+									{`${packagePrice.amount * quantity} ${packagePrice.currency.label}`}
 									{index === itemsLength - 1 && (
 										<span className="shopping-cart__total-price">
-											<FormattedMessage
-												id={constants.SHOPPING_CART_TOTAL_PRICE}
-												values={{
-													amount: totalPrice,
-													currency: utils.getStringTranslation(items[0].currency, getTranslation),
-												}}
-											/>
+											<span style={{ marginRight: '10px' }}>
+												Итого:
+											</span>
+											<span>
+												{`${totalPrice.amount} ${totalPrice.currency.label}`}
+											</span>
 										</span>
 									)}
 								</span>

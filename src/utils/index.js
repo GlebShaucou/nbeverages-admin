@@ -17,24 +17,7 @@ export const getDeliveryMethods = () => ([
 		label: 'Самовывоз',
 	},
 ]);
-export const getPickupAddresses = () => ([
-	{
-		value: '',
-		label: 'Выберите адрес',
-	},
-	{
-		value: 'Minsk, ave. Gazety Zvyazda, 37',
-		label: 'Minsk, ave. Gazety Zvyazda, 37',
-	},
-	{
-		value: 'Minsk, ave. Gazety Zvyazda, 35',
-		label: 'Minsk, ave. Gazety Zvyazda, 35',
-	},
-	{
-		value: 'Minsk, ave. Gazety Zvyazda, 33',
-		label: 'Minsk, ave. Gazety Zvyazda, 33',
-	},
-]);
+export const getPickupAddresses = () => ['Выберите способ адрес', 'Minsk, ave. Gazety Zvyazda, 37', 'Minsk, ave. Gazety Zvyazda, 35', 'Minsk, ave. Gazety Zvyazda, 33'];
 export const getPaymentMethods = () => ([
 	{
 		value: '',
@@ -66,7 +49,10 @@ export const generateOrderId = (length, orderId = []) => {
 
 export const getTotalPrice = ({
 	items,
-}) => items.reduce((total, { price, quantity }) => total + (+price * quantity), 0);
+}) => ({
+	amount: items.reduce((total, { packagePrice, quantity }) => total + (+packagePrice.amount * quantity), 0),
+	currency: items[0].packagePrice.currency,
+});
 
 export const getBeverageCategories = () => ([
 	{

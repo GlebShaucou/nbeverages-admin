@@ -31,9 +31,13 @@ export default class CartPage extends Component {
 
 		createOrder({
 			...customer,
+			date: new Date(),
+			status: {
+				value: 'new',
+				label: 'Новый',
+			},
 			items: cart.items,
-			totalAmount: this.getTotalPrice(),
-			currency: cart.items[0].currency,
+			totalPrice: this.getTotalPrice(),
 			orderId: utils.generateOrderId(7),
 		});
 	};

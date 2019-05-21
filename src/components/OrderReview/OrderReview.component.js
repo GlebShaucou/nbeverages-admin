@@ -28,10 +28,18 @@ const OrderReview = (props) => {
 					</tr>
 					<tr>
 						<th scope="row">
+							Дата
+						</th>
+						<td>
+							{order.date}
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
 							<FormattedMessage id={constants.ORDER_PAGE_ORDER_STATUS} />
 						</th>
 						<td>
-							{order.status}
+							{order.status.label}
 						</td>
 					</tr>
 					<tr>
@@ -63,7 +71,7 @@ const OrderReview = (props) => {
 							<FormattedMessage id={constants.ORDER_PAGE_DELIVERY_METHOD} />
 						</th>
 						<td>
-							{/*{utils.getTextForValue(order.deliveryMethod)}*/}
+							{(order.deliveryMethod.label)}
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +87,7 @@ const OrderReview = (props) => {
 							<FormattedMessage id={constants.ORDER_PAGE_PAYMENT_METHOD} />
 						</th>
 						<td>
-							{order.paymentMethod}
+							{order.paymentMethod.label}
 						</td>
 					</tr>
 				</tbody>

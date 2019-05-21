@@ -4,10 +4,9 @@ import { Table } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import {
-	Input, Button, SelectedItems, Context, OrderReview,
+	Input, Button, Context, OrderReview,
 } from '../../components';
 import * as constants from '../../constants';
-import * as utils from '../../utils';
 
 const OrderPage = (props) => {
 	const [orderId, setOrderId] = useState('');
