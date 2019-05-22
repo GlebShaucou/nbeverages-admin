@@ -15,7 +15,10 @@ const OrderItemPage = (props) => {
 	const { selectedItem } = props;
 	const [order, setOrder] = useState(selectedItem);
 
-	const orderStatusFromProps = selectedItem ? selectedItem.status : '';
+	const orderStatusFromProps = selectedItem ? selectedItem.status : {
+		value: 'new',
+		label: 'Новый',
+	};
 	const [orderStatus, setOrderStatus] = useState(orderStatusFromProps);
 
 	const setDocumentTitle = () => {
@@ -43,8 +46,8 @@ const OrderItemPage = (props) => {
 			status: orderStatus,
 		});
 	};
-	const onChangeOrderStatus = (e) => {
-		setOrderStatus(e.target.value);
+	const onChangeOrderStatus = (value) => {
+		setOrderStatus(value);
 	};
 	const onUpdateOrderStatus = () => {
 		onUpdateCustomer(order);
@@ -73,12 +76,16 @@ const OrderItemPage = (props) => {
 		},
 		{
 			value: 'inProgress',
-			label: 'Ожидает доставки и оплаты',
+			label: 'Принят в обработку',
 		},
 		{
-			value: 'done',
-			label: 'Доставлен и оплачен',
-		}
+			value: 'readyForPickup',
+			label: 'Готов к получению',
+		},
+		{
+			value: 'delivered',
+			label: 'Доставлен',
+		},
 	];
 
 	return (
@@ -90,7 +97,7 @@ const OrderItemPage = (props) => {
 				<Select
 					label="Статус заказа"
 					selectedValue={orderStatus}
-					values={statuses}
+					options={statuses}
 					onChange={onChangeOrderStatus}
 				/>
 				<Button

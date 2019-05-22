@@ -212,8 +212,14 @@ const AdminPage = (props) => {
 		const { orders } = props;
 		const tableConf = [
 			{
+				Header: 'Дата',
+				id: 'date',
+				accessor: order => new Date(order.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' }),
+			},
+			{
 				Header: 'Статус',
-				accessor: 'status',
+				id: 'status',
+				accessor: order => order.status.label,
 			},
 			{
 				Header: '№ заказа',
@@ -245,12 +251,13 @@ const AdminPage = (props) => {
 			},
 			{
 				Header: 'Способ оплаты',
-				accessor: 'paymentMethod',
+				id: 'paymentMethod',
+				accessor: order => order.paymentMethod.label,
 			},
 			{
 				Header: 'К оплате',
 				id: 'totalPrice',
-				accessor: order => `${order.totalAmount} ${order.currency}`,
+				accessor: order => `${order.totalPrice.amount} ${order.totalPrice.currency.label}`,
 			},
 		];
 
