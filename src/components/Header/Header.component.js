@@ -47,6 +47,16 @@ const Header = (props) => {
 			name: <FormattedMessage id={constants.NAVIGATION_LINK_CONTACT} />,
 			exact: true,
 		},
+		{
+			path: '/payment-details',
+			name: 'Оплата',
+			exact: true,
+		},
+		{
+			path: '/delivery-details',
+			name: 'Доставка',
+			exact: true,
+		},
 	];
 
 	return (

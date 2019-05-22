@@ -43,6 +43,16 @@ export default [
 		component: pages.CartPage,
 	},
 	{
+		path: '/payment-details',
+		exact: true,
+		component: pages.PaymentDetailsPage,
+	},
+	{
+		path: '/delivery-details',
+		exact: true,
+		component: pages.DeliveryDetailsPage,
+	},
+	{
 		path: constants.PAGE_REGISTRATION,
 		exact: true,
 		component: pages.RegistrationPage,

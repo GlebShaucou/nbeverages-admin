@@ -12,3 +12,5 @@ export { default as OrderPage } from './order';
 export { default as OrderItemPage } from './orderItem';
 export { default as RegistrationPage } from './registration';
 export { default as UserAccountPage } from './userAccount';
+export { default as PaymentDetailsPage } from './payment-details';
+export { default as DeliveryDetailsPage } from './delivery-details';
