@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Input } from '../../components';
+import { Input, Button } from '../../components';
 
 const ContactPage = () => {
 	useEffect(() => {
@@ -83,9 +83,7 @@ const ContactPage = () => {
 						<div>
 							Сообщение
 						</div>
-						<textarea rows="4" cols="50">
-
-						</textarea>
+						<textarea rows="10" cols="45" style={{ resize: 'none', fontSize: '1.8rem' }} />
 					</div>
 				</div>
 				<div className="info-section info-section--right">
@@ -107,6 +105,9 @@ const ContactPage = () => {
 						// value
 						onChange={() => {}}
 					/>
+					<div style={{ textAlign: 'right', padding: '20px 0' }}>
+						<Button caption="Отправить" />
+					</div>
 				</div>
 			</div>
 		</div>

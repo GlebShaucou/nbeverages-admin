@@ -13,6 +13,7 @@ import localStorage from '../localStorage';
 
 import * as utils from '../../utils';
 import * as constants from '../../constants';
+import {GET_USER_ORDERS} from "../actions/user.actions";
 
 const {
 	beverageActions,
@@ -201,6 +202,15 @@ const {
 	watchedActionType: userActions.USER_CREATE,
 });
 
+const {
+	watcherSagaGenerator: watchFetchUserOrders,
+} = makeRequestSaga({
+	request: requests.getUserOrders,
+	onSuccessAction: userActions.getUserOrdersSucceded,
+}, {
+	watchedActionType: userActions.GET_USER_ORDERS,
+});
+
 export default function* rootSaga() {
 	yield fork(watchFetchBeverages);
 	yield fork(watchDeleteBeverages);
@@ -221,4 +231,5 @@ export default function* rootSaga() {
 	yield fork(watchFetchOrders);
 	yield fork(watchFetchOrdersById);
 	yield fork(watchOrdersUpdate);
+	yield fork(watchFetchUserOrders);
 }

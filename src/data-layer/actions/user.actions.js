@@ -17,3 +17,9 @@ export const USER_CREATE_SUCCEDED = 'USER_CREATE_SUCCEDED';
 
 export const createUser = makeActionCreator(USER_CREATE, 'query');
 export const createUserSucceded = makeActionCreator(USER_CREATE_SUCCEDED, 'response');
+
+export const GET_USER_ORDERS = 'GET_USER_ORDERS';
+export const GET_USER_ORDERS_SUCCEDED = 'GET_USER_ORDERS_SUCCEDED';
+
+export const getUserOrders = makeActionCreator(GET_USER_ORDERS, 'query');
+export const getUserOrdersSucceded = makeActionCreator(GET_USER_ORDERS_SUCCEDED, 'response');

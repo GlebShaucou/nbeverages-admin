@@ -25,6 +25,12 @@ export default (state = userInitState, action) => {
 			...state,
 			message: 'success',
 		};
+	case userActions.GET_USER_ORDERS_SUCCEDED:
+		({ response } = action);
+		return {
+			...state,
+			orders: [...response.orders],
+		};
 	default:
 		return state;
 	}

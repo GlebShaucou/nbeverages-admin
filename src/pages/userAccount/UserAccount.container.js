@@ -11,10 +11,10 @@ const mapStateToProps = state => ({
 	...state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
-	// register: (user) => {
-	// 	dispatch(userActions.createUser(user));
-	// },
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	loadData: ({ customerEmail }) => {
+		dispatch(userActions.getUserOrders({ customerEmail }));
+	},
 });
 
 export default connect(

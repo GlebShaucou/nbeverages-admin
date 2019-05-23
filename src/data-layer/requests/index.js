@@ -145,3 +145,11 @@ export const getFilteredBeverages = query => request({
 		body: { ...query },
 	}
 });
+
+export const getUserOrders = query => request({
+	url: `${baseUri}user-orders`,
+	params: {
+		method: 'POST',
+		body: { ...query },
+	}
+});
