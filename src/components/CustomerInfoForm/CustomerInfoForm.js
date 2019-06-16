@@ -68,7 +68,7 @@ const CustomerInfoForm = (props) => {
 							)}
 							name="paymentMethod"
 							onChange={onSelectFormValue('paymentMethod')}
-							selectedValue={paymentMethod}
+							selectedValue={paymentMethod || { value: '' }}
 							options={utils.getPaymentMethods(getTranslation)}
 						/>
 						<Input
@@ -88,7 +88,7 @@ const CustomerInfoForm = (props) => {
 							)}
 							name="customerEmail"
 							onChange={onChangeFormValue}
-							value={customerEmail}
+							value={customerEmail || ''}
 						/>
 						<Select
 							label={(
@@ -96,10 +96,10 @@ const CustomerInfoForm = (props) => {
 							)}
 							name="deliveryMethod"
 							onChange={onSelectFormValue('deliveryMethod')}
-							selectedValue={deliveryMethod}
+							selectedValue={deliveryMethod || { value: '' }}
 							options={utils.getDeliveryMethods(getTranslation)}
 						/>
-						{deliveryMethod.value === 'pickup' && (
+						{deliveryMethod && deliveryMethod.value === 'pickup' && (
 							<Select
 								label={(
 									<FormattedMessage id={constants.SHOPPING_CART_SELECT_PICKUP_POINT} />
@@ -116,7 +116,7 @@ const CustomerInfoForm = (props) => {
 								}))}
 							/>
 						)}
-						{deliveryMethod.value === 'delivery' && (
+						{deliveryMethod && deliveryMethod.value === 'delivery' && (
 							<Input
 								label={(
 									<FormattedMessage id={constants.SHOPPING_CART_ENTER_DELIVERY_ADDRESS} />

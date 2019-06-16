@@ -252,12 +252,27 @@ const AdminPage = (props) => {
 			{
 				Header: 'Способ оплаты',
 				id: 'paymentMethod',
-				accessor: order => order.paymentMethod.label,
+				accessor: (order) => {
+					if (order.paymentMethod && order.paymentMethod.label) {
+						return order.paymentMethod.label;
+					}
+
+					return '';
+				},
 			},
 			{
 				Header: 'К оплате',
 				id: 'totalPrice',
-				accessor: order => `${order.totalPrice.amount} ${order.totalPrice.currency.label}`,
+				accessor: (order) => {
+					if (
+						order && order.totalPrice.amount
+						&& order.totalPrice.currency && order.totalPrice.currency.label
+					) {
+						return `${order.totalPrice.amount} ${order.totalPrice.currency.label}`;
+					}
+
+					return '';
+				},
 			},
 		];
 

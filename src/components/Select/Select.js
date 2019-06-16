@@ -26,13 +26,13 @@ const Select = (props) => {
 				</span>
 			)}
 			<select
-				value={selectedValue.value}
+				value={selectedValue ? selectedValue.value : ''}
 				name={name}
 				onChange={onOptionSelect}
 				className="custom-select__select"
 			>
 				{options.map((option) => {
-					const { value: optionValue, label: optionLabel } = option;
+					const { value: optionValue, label: optionLabel } = option || { value: '', label: '' };
 
 					return (
 						<option value={optionValue} key={optionValue}>
